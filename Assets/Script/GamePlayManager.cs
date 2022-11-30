@@ -23,8 +23,9 @@ public class GamePlayManager : MonoBehaviour
     Dictionary<int, Func<float, float>> createEnemyTimeFunc = new Dictionary<int, Func<float, float>>();
 
     //public event Action atk;
+    public GameObject iteamGround;
 
-
+    
 
     #region 初始化
     private void OnEnable()
@@ -35,7 +36,7 @@ public class GamePlayManager : MonoBehaviour
             instance = this;
             FuncInit();
 
-
+            EnemyGroundInit();
 
         }
         else
@@ -64,6 +65,27 @@ public class GamePlayManager : MonoBehaviour
             return ((float)(0.5 + (x / 10) % 2));
         });
     }
+
+    void EnemyGroundInit()
+    {
+        for(int i=0;i<2;i++)
+        {
+            GameObject tmp = new GameObject(enemyData[i].name + "物件池");
+
+
+            tmp.transform.SetParent(GamePlayManager.instance.iteamGround.transform);
+
+            for (int l = 0; l < 30; l++)
+            {
+                Instantiate(enemyData[i].enemyPerfab, tmp.transform);
+
+            }
+        }
+
+    }
+
+
+
     public void StartGameButton_Test()
     {
         timeCount_Coroutine = StartCoroutine(TimeCount());
@@ -99,23 +121,57 @@ public class GamePlayManager : MonoBehaviour
         
         while (Time.time-saveTime < 10)
         {
-            Instantiate(enemyData[enemyNo].enemyPerfab, roads[UnityEngine.Random.Range(0, 3)].transform);
+
+            //Instantiate(enemyData[enemyNo].enemyPerfab, roads[UnityEngine.Random.Range(0, 3)].transform);
+            var tmp = iteamGround.transform.Find(enemyData[enemyNo].name + "物件池");
+
+            if (tmp != null)
+            {
+                var enemyObj = tmp.transform.GetChild(0).gameObject;
+
+                enemyObj.transform.SetParent(roads[UnityEngine.Random.Range(0, 3)].transform);
+
+                enemyObj.SetActive(true);
+
+                //tmp.transform.GetChild(0)
+            }
+
+
             yield return new WaitForSeconds(tmpTime);
         }
 
     }
 
 
-    public void Attack(int atk)
+    public void EAttack(int atk)
     {
-        Debug.Log("傷害計算");
 
         player.tmpPlayerData.Hp -= atk;
         player.ResetPlayerHp();
 
     }
 
+    public void PAttackInit(SO_Iteam iteam)
+    {
 
+        if(player.mp>= iteam.Mp)
+        {
+            var tmp =iteamGround.transform.Find(iteam.IteamName + "物件池");
+            player.mp -= iteam.Mp;
+            player.ResetPlayerMp();
+
+            if (tmp!=null)
+            {
+                var iteamObj = tmp.transform.GetChild(0).gameObject;
+
+                iteamObj.transform.SetParent(player.transform.parent.transform);
+
+                iteamObj.SetActive(true);
+
+            }    
+            
+        }
+    }
 
     IEnumerator TimeCount()
     {
@@ -124,9 +180,10 @@ public class GamePlayManager : MonoBehaviour
         infoPanel.WaveText.text = "Wave " + Wave.ToString() + " / 3";
         infoPanel.TimeText.text = timecount_min.ToString() + " : " + timecount_sec.ToString("D2");
 
-        for(int i=0;i< enemyData.Length;i++)
+        // 生怪
+        for (int i = 0; i < enemyData.Length; i++)
         {
-            StartCoroutine(CreateEnemy(0,i));
+            StartCoroutine(CreateEnemy(0, i));
         }
 
         while (gameObject.activeSelf)
@@ -144,11 +201,12 @@ public class GamePlayManager : MonoBehaviour
             if (timecount_sec%10==0)
             {
                 Debug.Log(timecount_sec);
-                for (int i = 0; i < enemyData.Length; i++)
-                {
-                    StartCoroutine(CreateEnemy(0, i));
+                // 生怪
+                //for (int i = 0; i < enemyData.Length; i++)
+                //{
+                //    StartCoroutine(CreateEnemy(0, i));
 
-                }
+                //}
             }
 
 

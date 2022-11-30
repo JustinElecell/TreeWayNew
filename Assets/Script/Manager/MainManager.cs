@@ -13,6 +13,8 @@ public class MainManager : MonoBehaviour
         if(instance==null)
         {
             instance = this;
+            Application.targetFrameRate = 60;
+
         }
         else
         {

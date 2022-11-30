@@ -5,27 +5,40 @@ using UnityEngine.UI;
 
 public class IteamUI : MonoBehaviour
 {
-    public GameObject IteamObj;
-    public GameObject TargetObj;
+    public SO_Iteam iteamData;
 
-    public int Count = 0;
+    public GameObject IteamObj;
+
     Image IteamImage;
     Button IteanButton;
+    public Text SkillLimitText;
 
 
 
 
-    private void Awake()
+    private void Start()
     {
         RefreshUI();
         IteamImage = IteamObj.GetComponent<Image>();
         IteanButton = IteamObj.GetComponent<Button>();
 
+        IteamImage.sprite = iteamData.IteamImage;
+        SkillLimitText.text = iteamData.Mp.ToString();
+        GameObject tmp = new GameObject(iteamData.IteamName + "物件池");
+        tmp.transform.SetParent(GamePlayManager.instance.iteamGround.transform);
+
+        
+        for(int i=0;i<30;i++)
+        {
+            Instantiate(iteamData.IteamPerfab, tmp.transform);
+
+        }
+
         // IteamUI按鍵
         IteanButton.onClick.AddListener(() =>
         {
-
-
+            //刷出武器
+            GamePlayManager.instance.PAttackInit(iteamData);
 
         });
     }

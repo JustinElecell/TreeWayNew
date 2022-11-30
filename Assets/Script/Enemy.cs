@@ -11,6 +11,10 @@ public class Enemy : MonoBehaviour
     Coroutine AtkCoroutine;
     BoxCollider coll;
     float speed = 0;
+
+    int Hp;
+    int Hpmax;
+
     private void OnEnable()
     {
         coll = GetComponent<BoxCollider>();
@@ -18,6 +22,11 @@ public class Enemy : MonoBehaviour
         gameObject.transform.localPosition = tmpPos;
         speed = MainManager.instance.Rect.rect.size.x /so_data.speed;
 
+        var tmpHp = ((float)(20 * 1 + (1 - 1) * 0.1)) * (1 + (GamePlayManager.instance.Wave - 1)  *0.2)*(so_data.hp/100);
+        var tmpHpFloat=((float)tmpHp);
+        Hpmax = ((int)(Mathf.Round(tmpHpFloat)));
+
+        Hp = Hpmax;
     }
 
 
@@ -53,7 +62,7 @@ public class Enemy : MonoBehaviour
         {            
             // 攻擊
 
-            GamePlayManager.instance.Attack(so_data.atk);
+            GamePlayManager.instance.EAttack(so_data.atk);
 
             yield return new WaitForSeconds(so_data.atk_Interval);
         }

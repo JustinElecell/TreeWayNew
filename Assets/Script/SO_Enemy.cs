@@ -15,7 +15,8 @@ public class SO_Enemy : ScriptableObject
     public float mp;
     public float hp;
 
-    public int speed;
+
+    public float speed;
     public int atk;
     public float atk_Interval;
 

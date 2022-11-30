@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     public SO_Player playerDate;
     public SO_Player tmpPlayerData;
 
+    public float mp;
+    public float mpMax;
     public void Init()
     {
         var tmpPos =new Vector3(MainManager.instance.Rect.rect.size.x / 2, 0, 0);
@@ -21,7 +23,15 @@ public class Player : MonoBehaviour
         }
 
         ResetPlayerHp();
+
+
+        var tmpMp = playerDate.Mp * (1 + (tmpPlayerData.Level - 1) * 0.5);
+        //mpMax=
+        mpMax = ((int)(Mathf.Round(((float)(tmpMp)))));
+        mp = mpMax;
         ResetPlayerMp();
+
+        StartCoroutine(MpUpdate());
     }
 
 
@@ -29,16 +39,38 @@ public class Player : MonoBehaviour
     {
         GamePlayManager.instance.infoPanel.PlayerHpText.text = tmpPlayerData.Hp.ToString() + " / " + playerDate.Hp.ToString();
         float tmp = tmpPlayerData.Hp / playerDate.Hp;
-        Debug.Log(tmp);
         GamePlayManager.instance.infoPanel.PlayerHpImage.fillAmount = tmp;
     }
 
     public void ResetPlayerMp()
     {
-        GamePlayManager.instance.infoPanel.PlayerMpText.text = tmpPlayerData.Mp.ToString() + " / " + playerDate.Mp.ToString();
-        float tmp = tmpPlayerData.Mp / playerDate.Mp;
-        Debug.Log(tmp);
+        GamePlayManager.instance.infoPanel.PlayerMpText.text = mp.ToString() + " / " + mpMax.ToString();
+        float tmp = mp / mpMax;
         GamePlayManager.instance.infoPanel.PlayerMpImage.fillAmount = tmp;
 
+    }
+    IEnumerator MpUpdate()
+    {
+
+        while(this.gameObject.activeSelf)
+        {
+            if (mp < mpMax)
+            {
+                var tmpMpUp = (10 * (1 + 0)) * 1 + ((tmpPlayerData.Level - 1) * 0.2);
+                mp += ((float)(tmpMpUp));
+
+
+                if (mp > mpMax)
+                {
+                    mp = mpMax;
+                }
+
+                ResetPlayerMp();
+            }
+            yield return new WaitForSeconds(1);
+            
+
+
+        }
     }
 }

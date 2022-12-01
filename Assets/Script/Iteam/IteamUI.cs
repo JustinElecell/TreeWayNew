@@ -25,7 +25,7 @@ public class IteamUI : MonoBehaviour
         IteamImage.sprite = iteamData.IteamImage;
         SkillLimitText.text = iteamData.Mp.ToString();
         GameObject tmp = new GameObject(iteamData.IteamName + "物件池");
-        tmp.transform.SetParent(GamePlayManager.instance.iteamGround.transform);
+        tmp.transform.SetParent(GamePlayManager.instance.iteamGround_Player.transform);
 
         
         for(int i=0;i<30;i++)

@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cedb7b56564544945a3700fec1bb907e, type: 3}
-  m_Name: "\u7BAD\u77E2"
+  m_Name: "\u53F2\u840A\u59C6"
   m_EditorClassIdentifier: 
-  IteamName: "\u7BAD\u77E2"
+  IteamName: "\u53F2\u840A\u59C6"
   IteamString: 
-  IteamImage: {fileID: 21300000, guid: 6cdfefbfedb30884b91ea151226c130e, type: 3}
-  type: 0
-  Hp: 2
-  Mp: 3
-  Atk: 314.24
-  Speed: 1.6
-  IteamPerfab: {fileID: 905771132072046713, guid: 2efe037fd1174754c8d525bc2845f92d, type: 3}
+  IteamImage: {fileID: 1052521642, guid: e52feb4a5540fff49817f1f7eeb6869e, type: 3}
+  type: 2
+  Hp: 50
+  Mp: 5
+  Atk: 107.03
+  Atk_wait: 1
+  Speed: 10
+  IteamPerfab: {fileID: 8892595592438941920, guid: 3ecb8105192dd2344ac7a9342cfbed56, type: 3}

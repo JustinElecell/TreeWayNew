@@ -18,12 +18,13 @@ public class GamePlayManager : MonoBehaviour
     int timecount_min;
     Coroutine timeCount_Coroutine;
 
-    Player player;
+    public Player player;
 
     Dictionary<int, Func<float, float>> createEnemyTimeFunc = new Dictionary<int, Func<float, float>>();
 
     //public event Action atk;
-    public GameObject iteamGround;
+    public GameObject iteamGround_Player;
+    public GameObject iteamGround_Enemy;
 
     
 
@@ -73,7 +74,7 @@ public class GamePlayManager : MonoBehaviour
             GameObject tmp = new GameObject(enemyData[i].name + "物件池");
 
 
-            tmp.transform.SetParent(GamePlayManager.instance.iteamGround.transform);
+            tmp.transform.SetParent(GamePlayManager.instance.iteamGround_Enemy.transform);
 
             for (int l = 0; l < 30; l++)
             {
@@ -123,7 +124,7 @@ public class GamePlayManager : MonoBehaviour
         {
 
             //Instantiate(enemyData[enemyNo].enemyPerfab, roads[UnityEngine.Random.Range(0, 3)].transform);
-            var tmp = iteamGround.transform.Find(enemyData[enemyNo].name + "物件池");
+            var tmp = iteamGround_Enemy.transform.Find(enemyData[enemyNo].name + "物件池");
 
             if (tmp != null)
             {
@@ -156,7 +157,7 @@ public class GamePlayManager : MonoBehaviour
 
         if(player.mp>= iteam.Mp)
         {
-            var tmp =iteamGround.transform.Find(iteam.IteamName + "物件池");
+            var tmp =iteamGround_Player.transform.Find(iteam.IteamName + "物件池");
             player.mp -= iteam.Mp;
             player.ResetPlayerMp();
 
@@ -202,11 +203,11 @@ public class GamePlayManager : MonoBehaviour
             {
                 Debug.Log(timecount_sec);
                 // 生怪
-                //for (int i = 0; i < enemyData.Length; i++)
-                //{
-                //    StartCoroutine(CreateEnemy(0, i));
+                for (int i = 0; i < enemyData.Length; i++)
+                {
+                    StartCoroutine(CreateEnemy(0, i));
 
-                //}
+                }
             }
 
 

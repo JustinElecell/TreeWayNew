@@ -23,7 +23,8 @@ public class SO_Iteam : ScriptableObject
 
     public float Hp;
     public float Mp;
-    public int Atk;
+    public float Atk;
+    public float Atk_wait;
     public float Speed;
 
     public GameObject IteamPerfab;

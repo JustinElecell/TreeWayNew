@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerName: "\u89D2\u82721"
   Level: 1
-  Hp: 50
-  Mp: 100
-  Atk: 50
+  Hp: 200
+  Mp: 150
+  Atk: 10
   Def: 10
   Rec: 10

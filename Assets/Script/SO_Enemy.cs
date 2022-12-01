@@ -17,8 +17,8 @@ public class SO_Enemy : ScriptableObject
 
 
     public float speed;
-    public int atk;
-    public float atk_Interval;
+    public int Atk;
+    public float Atk_wait;
 
 
     public GameObject enemyPerfab;

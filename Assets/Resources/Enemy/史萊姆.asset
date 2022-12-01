@@ -17,8 +17,7 @@ MonoBehaviour:
   generationRate: 1.2
   mp: 0
   hp: 69.4
-  hpRate: 0
   speed: 4
-  atk: 12
-  atk_Interval: 0.8
+  Atk: 12
+  Atk_wait: 0.8
   enemyPerfab: {fileID: 8892595592438941920, guid: de6bb6104a300a344987d5897fac0942, type: 3}

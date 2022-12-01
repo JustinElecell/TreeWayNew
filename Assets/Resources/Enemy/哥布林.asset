@@ -18,6 +18,6 @@ MonoBehaviour:
   mp: 0
   hp: 100
   speed: 5
-  atk: 10
-  atk_Interval: 1
+  Atk: 10
+  Atk_wait: 1
   enemyPerfab: {fileID: 8892595592438941920, guid: c166b75a9fc85ec4abd295c6f5183c41, type: 3}

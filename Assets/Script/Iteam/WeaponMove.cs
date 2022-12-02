@@ -9,8 +9,7 @@ public class WeaponMove : MonoBehaviour
 
     float speed = 0;
     BoxCollider coll;
-    int Hp;
-    int Hpmax;
+
 
     private void OnEnable()
     {
@@ -21,18 +20,18 @@ public class WeaponMove : MonoBehaviour
         var tmpPos = new Vector3(MainManager.instance.Rect.rect.size.x / 2, 0, 0);
         gameObject.transform.localPosition = tmpPos;
         speed = MainManager.instance.Rect.rect.size.x / stetas.iteam.Speed;
-        
-        
-        Hpmax = ((int)(stetas.iteam.Hp));
 
-        Hp = Hpmax;
+
+        stetas.HpMax = ((int)(stetas.iteam.Hp));
+
+        stetas.Hp = stetas.HpMax;
     }
 
 
     private void Update()
     {
         //gameObject.transform.localPosition = Vector3.zero;
-        if (Hp <= 0)
+        if (stetas.Hp <= 0)
         {
             ReSet();
         }
@@ -71,7 +70,11 @@ public class WeaponMove : MonoBehaviour
 
                 break;
             case Stetas.Type.敵人:
-                Hp -= otherstetas.enemy.Atk;
+
+                otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam.Atk));
+                stetas.Hp -= otherstetas.enemy.Atk;
+
+                
 
                 break;
         }

@@ -115,7 +115,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stetas: {fileID: 1484016543206481666}
-  Hp: 0
+  TargetInvoked: {fileID: 0}
+  roadNo: 0
 --- !u!54 &4324936217463282977
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -148,6 +149,9 @@ MonoBehaviour:
   hpBar: {fileID: 1994114345937482626}
   iteam: {fileID: 0}
   enemy: {fileID: 11400000, guid: 55009f6a2075e3149b1766123471d583, type: 2}
+  Hp: 0
+  HpMax: 0
+  actionType: 0
 --- !u!1001 &3855410134033822306
 PrefabInstance:
   m_ObjectHideFlags: 0

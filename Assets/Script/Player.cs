@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     {
         var tmpPos =new Vector3(MainManager.instance.Rect.rect.size.x / 2, 0, 0);
 
-        gameObject.transform.SetParent(MainManager.instance.Rect.transform.GetChild(1).gameObject.transform);
+        gameObject.transform.SetParent(MainManager.instance.Rect.transform.GetChild(1).transform);
         gameObject.transform.localPosition = tmpPos;
 
         if (tmpPlayerData == null)

@@ -115,7 +115,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stetas: {fileID: 6035756948155505875}
-  Hp: 0
+  TargetInvoked: {fileID: 0}
+  roadNo: 0
 --- !u!54 &9219511143270431380
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -148,6 +149,9 @@ MonoBehaviour:
   hpBar: {fileID: 5842019749675973996}
   iteam: {fileID: 0}
   enemy: {fileID: 11400000, guid: b73e6c6f08d13db4d8ebeb002f7925ba, type: 2}
+  Hp: 0
+  HpMax: 0
+  actionType: 0
 --- !u!1001 &9168952237921893516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -233,7 +237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7628845304502049741, guid: fed9bdb3ac185004c8dc98af15618a82, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.6
+      value: -0.894
       objectReference: {fileID: 0}
     - target: {fileID: 7628845304502049741, guid: fed9bdb3ac185004c8dc98af15618a82, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

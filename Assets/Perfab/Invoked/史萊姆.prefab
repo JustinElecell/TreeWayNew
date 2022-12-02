@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8962770687340215891}
   m_Layer: 0
   m_Name: "\u53F2\u840A\u59C6"
-  m_TagString: Enemy
+  m_TagString: Invoked
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,6 +134,9 @@ MonoBehaviour:
   hpBar: {fileID: 1994114345937482626}
   iteam: {fileID: 11400000, guid: 7bda708d8bfdba242b73ca31ecc3cd5f, type: 2}
   enemy: {fileID: 0}
+  Hp: 0
+  HpMax: 0
+  actionType: 0
 --- !u!114 &8962770687340215891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stetas: {fileID: 1484016543206481666}
+  roadNo: 0
+  TargetEnemy: {fileID: 0}
 --- !u!1001 &3855410134033822306
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -176,6 +181,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3327508636633907680, guid: fed9bdb3ac185004c8dc98af15618a82, type: 3}
       propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3327508636633907680, guid: fed9bdb3ac185004c8dc98af15618a82, type: 3}
+      propertyPath: m_FillOrigin
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5327705535793047505, guid: fed9bdb3ac185004c8dc98af15618a82, type: 3}

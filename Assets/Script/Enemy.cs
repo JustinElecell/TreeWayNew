@@ -1,22 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class Enemy : MonoBehaviour
 {
 
     public Stetas stetas;
 
-    bool startAtkFlag =false;
-    Coroutine AtkCoroutine;
     BoxCollider coll;
     float speed = 0;
 
-    public float Hp;
-    float Hpmax;
 
-    bool canWalk = false;
 
+
+    Dictionary<Stetas.ActionType, Action> ActionTypeFunc = new Dictionary<Stetas.ActionType, Action>();
+
+    List<GameObject> InvokedList = new List<GameObject>();
+    public InvokedMove TargetInvoked;
+
+    public int roadNo;
+
+    float saveTime;
+    bool canAttack = true;
     private void OnEnable()
     {
 
@@ -27,45 +32,108 @@ public class Enemy : MonoBehaviour
 
         var tmpHp = ((float)(20 * 1 + (1 - 1) * 0.1)) * (1 + (GamePlayManager.instance.Wave - 1)  *0.2)*(stetas.enemy.hp/100);
         var tmpHpFloat=((float)tmpHp);
-        Hpmax = ((int)(Mathf.Round(tmpHpFloat)));
 
-        Hp = Hpmax;
-        canWalk = true;
+        roadNo = gameObject.transform.parent.transform.GetSiblingIndex() + 1;
+
+        stetas.HpMax = ((int)(Mathf.Round(tmpHpFloat)));
+        stetas.Hp = stetas.HpMax;
+        stetas.actionType = Stetas.ActionType.移動;
+        
+        stetas.hpBar.gameObject.SetActive(false);
+        stetas.hpBar.fillAmount = 1;
+        canAttack = true;
     }
 
 
+    private void Start()
+    {
+        FuncInit();
+    }
+
+    void FuncInit()
+    {
+        ActionTypeFunc.Add(Stetas.ActionType.移動, () => {
+            if (gameObject.transform.localPosition.x < MainManager.instance.Rect.rect.size.x / 2 - 150)
+            {
+                // 移動
+                var pos = gameObject.transform.localPosition;
+                pos.x += (speed * Time.fixedDeltaTime);
+                gameObject.transform.localPosition = pos;
+                
+            }
+        });
+
+        ActionTypeFunc.Add(Stetas.ActionType.攻擊, () => {
+
+
+            if (TargetInvoked != null)
+            {
+                if (!TargetInvoked.stetas.CheckIsAlive())
+                {
+                    if (InvokedList.Count <= 0)
+                    {
+                        stetas.actionType = Stetas.ActionType.移動;
+
+                    }
+                    else
+                    {
+                        TargetInvoked = null;
+                        if (FindFightInvoked())
+                        {
+
+
+                        }
+                        else
+                        {
+                            // 沒有戰鬥中敵人
+                            stetas.actionType = Stetas.ActionType.移動;
+                        }
+                    }
+                }
+
+                if(canAttack)
+                {
+                    TargetInvoked.stetas.TakeDamage(stetas.enemy.Atk);
+                    saveTime = Time.time;
+
+                    canAttack = false;
+                }
+                else
+                {
+                    if (Time.time - saveTime >= stetas.enemy.Atk_wait)
+                    {
+                        canAttack = true;
+                    }
+                }
+
+            }
+
+        });
+
+
+    }
+
+    bool FindFightInvoked()
+    {
+        if (GamePlayManager.instance.roads[roadNo - 1].transform.GetChild(1).transform.childCount > 0)
+        {
+            Debug.Log("測試"+ GamePlayManager.instance.roads[roadNo - 1].transform.GetChild(1).transform.GetChild(0).GetComponent<InvokedMove>());
+            TargetInvoked = GamePlayManager.instance.roads[roadNo - 1].transform.GetChild(1).transform.GetChild(0).GetComponent<InvokedMove>();
+
+            return true;
+        }
+        return false;
+
+
+    }
     private void Update()
     {
-        if (Hp <= 0)
+        if (stetas.Hp <= 0)
         {
             ReSet();
         }
 
-        if (gameObject.transform.localPosition.x < MainManager.instance.Rect.rect.size.x / 2-150)
-        {
-            // 移動
-            if(startAtkFlag)
-            {
-                StopCoroutine(AtkCoroutine);
-            }
-            if(canWalk)
-            {
-                var pos = gameObject.transform.localPosition;
-                pos.x += (speed * Time.fixedDeltaTime);
-                gameObject.transform.localPosition = pos;
-            }
-
-        }
-        else
-        {
-            
-            if(!startAtkFlag)
-            {
-                AtkCoroutine=StartCoroutine(Attack());
-                startAtkFlag = true;
-            }
-
-        }
+        ActionTypeFunc[stetas.actionType]();
     }
     
     void ReSet()
@@ -74,9 +142,7 @@ public class Enemy : MonoBehaviour
         var tmp = GamePlayManager.instance.iteamGround_Enemy.transform.Find(stetas.enemy.name + "物件池");
 
         gameObject.transform.SetParent(tmp.transform);
-        stetas.hpBar.enabled = false;
-        stetas.hpBar.fillAmount = 1;
-        canWalk = true;
+
 
     }
 
@@ -93,55 +159,31 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    int WeaponAtkChange(Stetas otherstetas)
-    {
-        return ((int)((GamePlayManager.instance.player.tmpPlayerData.Atk * (1 + 0) * (1 + 0)) * (otherstetas.iteam.Atk/100 * (1 + 0))));
-    }
+
     private void OnTriggerEnter(Collider other)
     {
-        
-        var otherstetas = other.gameObject.GetComponent<Stetas>();
-        switch (otherstetas.type)
+
+        if(other.gameObject.tag=="Invoked")
         {
-            case Stetas.Type.道具:
-                if(otherstetas.iteam.type==SO_Iteam.IteamType.召喚)
-                {
-                    canWalk = false;
-                }
+            var tmpObj = other.gameObject;
+            tmpObj.transform.SetParent(GamePlayManager.instance.roads[roadNo - 1].transform.GetChild(1).transform);
 
-                Debug.Log(WeaponAtkChange(otherstetas));
-                Hp -= WeaponAtkChange(otherstetas);
-  
+            InvokedList.Add(tmpObj);
+            saveTime = Time.time;
 
-                break;
-            case Stetas.Type.敵人:
-                break;
+            FindFightInvoked();
         }
 
-        if(stetas.hpBar!=null&&Hp!=Hpmax)
-        {
-            stetas.hpBar.gameObject.SetActive(true);
-            float tmp = Hp / Hpmax;
 
-            stetas.hpBar.fillAmount = tmp;
-
-        }
 
     }
 
-
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerExit(Collider other)
     {
-        var otherstetas = other.gameObject.GetComponent<Stetas>();
-
-        if (other==null|| otherstetas.iteam==null)
+        if (other.gameObject.tag == "Invoked")
         {
-            canWalk = true;
-
-            return;
-        }    
-
-
+            InvokedList.Remove(other.gameObject);
+        }
     }
 
 

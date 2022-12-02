@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class InvokedMove : MonoBehaviour
 {
     public Stetas stetas;
@@ -10,51 +10,133 @@ public class InvokedMove : MonoBehaviour
     BoxCollider coll;
     int Hp;
     int Hpmax;
-    bool canWalk = false;
 
-    Coroutine IEAttatk;
+    public int roadNo;
 
+    Dictionary<Stetas.ActionType, Action> ActionTypeFunc = new Dictionary<Stetas.ActionType, Action>();
+
+    public Enemy TargetEnemy;
+    List<GameObject> enemyList = new List<GameObject>();
+    float saveTime;
+    bool canAttack = true;
     private void OnEnable()
     {
 
         coll = GetComponent<BoxCollider>();
 
 
-        var tmpPos = new Vector3(MainManager.instance.Rect.rect.size.x / 2, 0, 0);
+        var tmpPos = new Vector3(MainManager.instance.Rect.rect.size.x / 2, 0+UnityEngine.Random.Range(-20,20), 0);
         gameObject.transform.localPosition = tmpPos;
         speed = MainManager.instance.Rect.rect.size.x / stetas.iteam.Speed;
 
+        roadNo = gameObject.transform.parent.transform.GetSiblingIndex() + 1;
+        stetas.HpMax = ((int)(stetas.iteam.Hp));
 
-        Hpmax = ((int)(stetas.iteam.Hp));
-
-        Hp = Hpmax;
-        canWalk = true;
+        stetas.Hp = stetas.HpMax;
+        stetas.actionType = Stetas.ActionType.移動;
+        canAttack = true;
     }
 
-
-    private void Update()
+    private void Start()
     {
-        if (Hp <= 0)
-        {
-            ReSet();
-        }
+        FuncInit();
+    }
 
-        if (gameObject.transform.localPosition.x > -MainManager.instance.Rect.rect.size.x / 2)
-        {
-            //移動
-            if(canWalk)
+    void FuncInit()
+    {
+        ActionTypeFunc.Add(Stetas.ActionType.移動, () => {
+            if (gameObject.transform.localPosition.x > -MainManager.instance.Rect.rect.size.x / 2)
             {
+                //移動
                 var pos = gameObject.transform.localPosition;
                 pos.x -= (speed * Time.deltaTime);
                 gameObject.transform.localPosition = pos;
             }
+            else
+            {
+                ReSet();
 
+            }
+
+
+        });
+
+        ActionTypeFunc.Add(Stetas.ActionType.攻擊, () => {
+
+
+
+            if (TargetEnemy != null)
+            {
+                if (!TargetEnemy.stetas.CheckIsAlive())
+                {
+                    if (enemyList.Count <= 0)
+                    {
+                        stetas.actionType = Stetas.ActionType.移動;
+
+                    }
+                    else
+                    {
+                        TargetEnemy = null;
+                        if (FindFightEnemy())
+                        {
+
+
+                        }
+                        else
+                        {
+                            // 沒有戰鬥中敵人
+                            stetas.actionType = Stetas.ActionType.移動;
+                        }
+                    }
+                }
+
+                if(canAttack)
+                {
+                    TargetEnemy.stetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam.Atk));
+                    saveTime = Time.time;
+                    canAttack = false;
+                }
+                else
+                {
+                    if (Time.time - saveTime >= stetas.iteam.Atk_wait)
+                    {
+                        canAttack = true;
+                    }
+                }
+
+
+            }
+            else
+            {
+                stetas.actionType = Stetas.ActionType.移動;
+
+            }
+        });
+
+
+    }    
+
+    bool FindFightEnemy()
+    {
+        if (GamePlayManager.instance.roads[roadNo - 1].transform.GetChild(0).transform.childCount > 0)
+        {
+            TargetEnemy = GamePlayManager.instance.roads[roadNo - 1].transform.GetChild(0).transform.GetChild(0).GetComponent<Enemy>();
+
+            return true;
         }
-        else
+        return false;
+
+        
+    }
+
+    private void Update()
+    {
+        if (stetas.Hp <= 0)
         {
             ReSet();
-
         }
+        
+        ActionTypeFunc[stetas.actionType]();
 
     }
 
@@ -64,7 +146,6 @@ public class InvokedMove : MonoBehaviour
         var tmp = GamePlayManager.instance.iteamGround_Player.transform.Find(stetas.iteam.IteamName + "物件池");
 
         gameObject.transform.SetParent(tmp.transform);
-        canWalk = true;
     }
 
     IEnumerator Attack(Collider other)
@@ -85,30 +166,48 @@ public class InvokedMove : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        var otherstetas = other.gameObject.GetComponent<Stetas>();
-        switch (otherstetas.type)
-        {
-            case Stetas.Type.道具:
-                break;
-            case Stetas.Type.敵人:
-                canWalk = false;
-                IEAttatk = StartCoroutine(Attack(other));
-                //Hp -= otherstetas.enemy.atk;
-                break;
-        }
 
+        if (other.gameObject.tag == "Enemy")
+        {
+            if(other.gameObject.GetComponent<Enemy>().stetas.actionType==Stetas.ActionType.移動)
+            {
+                var tmpObj = other.gameObject;
+                tmpObj.transform.SetParent(GamePlayManager.instance.roads[roadNo-1].transform.GetChild(0).transform);
+
+
+                var tmp = tmpObj.GetComponent<Enemy>();
+                tmp.stetas.actionType = Stetas.ActionType.攻擊;
+
+
+
+
+            }
+
+            enemyList.Add(other.gameObject);
+            stetas.actionType = Stetas.ActionType.攻擊;
+
+            saveTime = Time.time;
+            FindFightEnemy();
+
+
+        }
 
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerExit(Collider other)
     {
-        var otherstetas = other.gameObject.GetComponent<Stetas>();
-        if (other == null || otherstetas.enemy == null)
+        if (other.gameObject.tag == "Enemy")
         {
-            canWalk = true;
-            return;
+
+            enemyList.Remove(other.gameObject);
+
         }
 
+        if(enemyList.Count<=0)
+        {
+            stetas.actionType = Stetas.ActionType.移動;
+
+        }
     }
 
 }

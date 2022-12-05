@@ -7,21 +7,26 @@ public class Slime : BossInit
     private void Start()
     {
         FuncInit();
-        GameObject tmp = new GameObject(bullot1.IteamName + "物件池");
-
-        tmp.transform.SetParent(GamePlayManager.instance.iteamGround_Boss.transform);
-
-
-        for (int i = 0; i < 30; i++)
+        for(int r=0;r<bullot.Length;r++)
         {
-            Instantiate(bullot1.IteamPerfab, tmp.transform);
+            GameObject tmp = new GameObject(bullot[r].IteamName + "物件池");
 
+            tmp.transform.SetParent(GamePlayManager.instance.iteamGround_Boss.transform);
+
+
+            for (int i = 0; i < 30; i++)
+            {
+                Instantiate(bullot[r].IteamPerfab, tmp.transform);
+
+            }
         }
+
+
         StageFunc[Stage.CD]();
 
     }
 
-    public SO_Iteam bullot1;
+    public SO_Iteam[] bullot;
     public void FuncInit()
     {
         StageFunc.Add(Stage.隨機路線, () => {
@@ -49,10 +54,11 @@ public class Slime : BossInit
 
     IEnumerator IEAttack()
     {
-        yield return StartCoroutine(IEAttackType1(0.6f,5,2,2, bullot1));
-        yield return StartCoroutine(IEAttackType3(0.7f,7,2.1f,1, bullot1,1));
-        yield return StartCoroutine(IEAttackType3(0.7f,7,2.1f,1, bullot1,2));
-        yield return StartCoroutine(IEAttackType3(0.7f,7,2.1f,1, bullot1,3));
+        yield return StartCoroutine(IEAttackType1(0.6f, 5, 2, 2, bullot[0]));
+        yield return StartCoroutine(IEAttackType3(0.7f, 7, 2.1f, 1, bullot[0], 1));
+        yield return StartCoroutine(IEAttackType3(0.7f, 7, 2.1f, 1, bullot[0], 2));
+        yield return StartCoroutine(IEAttackType3(0.7f, 7, 2.1f, 1, bullot[0], 3));
+        yield return StartCoroutine(IEAttackType4(0.8f,2,5.73f,3, bullot[0], bullot[1]));
         StageFunc[Stage.CD]();
 
     }

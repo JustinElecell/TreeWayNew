@@ -55,23 +55,52 @@ public class BossInit : MonoBehaviour
                 list.Add(1);
                 list.Add(2);
                 list.Add(3);
-
                 for (int z=0;z<parameter;z++)
                 {
                     int no = UnityEngine.Random.Range(0, cnt);
-
-
 
                     // 發射子彈
                     BullotFire(iteam, list[no]);
                     list.RemoveAt(no);
                     cnt--;
                 }
+                yield return new WaitForSeconds(bullotWait);
+            }
+            yield return new WaitForSeconds(groundWait);
+        }
+    }
+    public IEnumerator IEAttackType4(float bullotWait, int bullotCnt, float groundWait, int count, SO_Iteam iteam, SO_Iteam iteam2)
+    {
+        //向自身所在路線發射主子彈，並向另外兩條路線同時發射指定編號子彈
+        for (int r = 0; r < count; r++)
+        {
+            for (int i = 0; i < bullotCnt; i++)
+            {
+                BullotFire(iteam);
+                
+                List<int> list = new List<int>();
+                int no = this.gameObject.transform.parent.transform.GetSiblingIndex();
+                list.Add(1);
+                list.Add(2);
+                list.Add(3);
+                list.RemoveAt(no);
+
+                for(int z=0;z<list.Count;z++)
+                {
+                    BullotFire(iteam2,list[z]);
+
+                }
+
 
                 yield return new WaitForSeconds(bullotWait);
             }
             yield return new WaitForSeconds(groundWait);
         }
+    }
+
+    float TimeChange(float timeRate)
+    {
+        return ((float)((5 * 1 + (GamePlayManager.instance.Wave - 1) * 0.2) * timeRate));
     }
 
     void BullotFire(SO_Iteam iteam)

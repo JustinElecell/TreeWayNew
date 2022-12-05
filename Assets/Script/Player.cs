@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public float mpMax;
     public void Init()
     {
-        var tmpPos =new Vector3(MainManager.instance.Rect.rect.size.x / 2, 0, 0);
+        var tmpPos =new Vector3((MainManager.instance.Rect.rect.size.x / 2), 0, 0);
 
         gameObject.transform.SetParent(MainManager.instance.Rect.transform.GetChild(1).transform);
         gameObject.transform.localPosition = tmpPos;

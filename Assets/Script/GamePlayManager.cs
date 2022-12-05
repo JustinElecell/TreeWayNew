@@ -25,7 +25,7 @@ public class GamePlayManager : MonoBehaviour
     //public event Action atk;
     public GameObject iteamGround_Player;
     public GameObject iteamGround_Enemy;
-
+    public GameObject iteamGround_Boss;
 
 
 

@@ -153,7 +153,7 @@ Transform:
   m_Children:
   - {fileID: 726727846}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &125581838
 GameObject:
@@ -1953,6 +1953,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u53F2\u840A\u59C6\u738B"
       objectReference: {fileID: 0}
+    - target: {fileID: 1001294664458405454, guid: 7eedcb24489636740be0bd5a10b28600, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854125816856466731, guid: 7eedcb24489636740be0bd5a10b28600, type: 3}
+      propertyPath: bullot1
+      value: 
+      objectReference: {fileID: 905771132072046713, guid: 30a6e11450c6c0e419ee86d49cc33888, type: 3}
+    - target: {fileID: 5790502892671748698, guid: 7eedcb24489636740be0bd5a10b28600, type: 3}
+      propertyPath: bullot1
+      value: 
+      objectReference: {fileID: 11400000, guid: d828e750c6095d747b481653eaed874d, type: 2}
     - target: {fileID: 6990778738461236807, guid: 7eedcb24489636740be0bd5a10b28600, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2009,7 +2021,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1854125816856466731, guid: 7eedcb24489636740be0bd5a10b28600, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7eedcb24489636740be0bd5a10b28600, type: 3}
 --- !u!4 &1168152374 stripped
 Transform:
@@ -2667,6 +2680,37 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: a1f2ec8e9dc4fd549abc2a88481a4bec, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
+--- !u!1 &1615730052
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1615730053}
+  m_Layer: 0
+  m_Name: "Boss\u7269\u4EF6\u6C60"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1615730053
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615730052}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1681843276
 GameObject:
   m_ObjectHideFlags: 0
@@ -3134,6 +3178,7 @@ MonoBehaviour:
   player: {fileID: 0}
   iteamGround_Player: {fileID: 173747630}
   iteamGround_Enemy: {fileID: 1234584248}
+  iteamGround_Boss: {fileID: 1615730052}
 --- !u!4 &2052413672
 Transform:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponMove : MonoBehaviour
+public class WeaponMove_Player : MonoBehaviour
 {
     
     public Stetas stetas;
@@ -10,16 +10,16 @@ public class WeaponMove : MonoBehaviour
     float speed = 0;
     BoxCollider coll;
 
-
     private void OnEnable()
     {
 
         coll = GetComponent<BoxCollider>();
 
 
-        var tmpPos = new Vector3(MainManager.instance.Rect.rect.size.x / 2, 0, 0);
-        gameObject.transform.localPosition = tmpPos;
-        speed = MainManager.instance.Rect.rect.size.x / stetas.iteam.Speed;
+            var tmpPos = new Vector3(MainManager.instance.Rect.rect.size.x / 2, 0, 0);
+            gameObject.transform.localPosition = tmpPos;
+            speed = MainManager.instance.Rect.rect.size.x / stetas.iteam.Speed;
+        
 
 
         stetas.HpMax = ((int)(stetas.iteam.Hp));
@@ -36,6 +36,7 @@ public class WeaponMove : MonoBehaviour
             ReSet();
         }
 
+
         if (gameObject.transform.localPosition.x > -MainManager.instance.Rect.rect.size.x / 2)
         {
             //移動
@@ -49,6 +50,9 @@ public class WeaponMove : MonoBehaviour
             ReSet();
 
         }
+        
+
+
 
     }
 

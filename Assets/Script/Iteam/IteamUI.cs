@@ -28,7 +28,7 @@ public class IteamUI : MonoBehaviour
         tmp.transform.SetParent(GamePlayManager.instance.iteamGround_Player.transform);
 
         
-        for(int i=0;i<30;i++)
+        for(int i=0;i<15;i++)
         {
             Instantiate(iteamData.IteamPerfab, tmp.transform);
 

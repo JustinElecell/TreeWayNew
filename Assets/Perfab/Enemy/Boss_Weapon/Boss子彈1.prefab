@@ -16,11 +16,11 @@ GameObject:
   - component: {fileID: 6278841092226617165}
   m_Layer: 0
   m_Name: "Boss\u5B50\u5F481"
-  m_TagString: Weapon
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &905771132072046715
 Transform:
   m_ObjectHideFlags: 0

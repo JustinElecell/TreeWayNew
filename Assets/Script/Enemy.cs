@@ -163,15 +163,23 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if(other.gameObject.tag=="Invoked")
+        if(other.gameObject.tag=="Player")
         {
-            var tmpObj = other.gameObject;
-            tmpObj.transform.SetParent(GamePlayManager.instance.roads[roadNo - 1].transform.GetChild(1).transform);
+            var otherstetas = other.gameObject.GetComponent<Stetas>();
+            switch (otherstetas.type)
+            {
+                case Stetas.Type.召喚:
+                    var tmpObj = other.gameObject;
+                    tmpObj.transform.SetParent(GamePlayManager.instance.roads[roadNo - 1].transform.GetChild(1).transform);
 
-            InvokedList.Add(tmpObj);
-            saveTime = Time.time;
+                    InvokedList.Add(tmpObj);
+                    saveTime = Time.time;
 
-            FindFightInvoked();
+                    FindFightInvoked();
+
+                    break;
+
+            }
         }
 
 
@@ -180,9 +188,19 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Invoked")
+
+
+        if (other.gameObject.tag == "Player")
         {
-            InvokedList.Remove(other.gameObject);
+            var otherstetas = other.gameObject.GetComponent<Stetas>();
+            switch (otherstetas.type)
+            {
+                case Stetas.Type.召喚:
+                    InvokedList.Remove(other.gameObject);
+
+                    break;
+
+            }
         }
     }
 

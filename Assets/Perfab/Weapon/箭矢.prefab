@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -7393734871878924060}
   m_Layer: 0
   m_Name: "\u7BAD\u77E2"
-  m_TagString: Weapon
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,7 +113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2827441df74adf45b3150bf7415c44d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 5120c3351e3886f45b40d958d7fe0e6c, type: 2}
   stetas: {fileID: -7817916187480188323}
 --- !u!114 &-7817916187480188323
 MonoBehaviour:
@@ -127,9 +126,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5beb67238503d64595858058637110b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
+  hpBar: {fileID: 0}
   iteam: {fileID: 11400000, guid: 5120c3351e3886f45b40d958d7fe0e6c, type: 2}
-  tmpIteam: {fileID: 0}
   enemy: {fileID: 0}
+  Hp: 0
+  HpMax: 0
+  actionType: 0
 --- !u!54 &-7393734871878924060
 Rigidbody:
   m_ObjectHideFlags: 0

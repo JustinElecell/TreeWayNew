@@ -8,7 +8,7 @@ public class GamePlayManager : MonoBehaviour
 
     public GameObject[] roads;
     public SO_Enemy[] enemyData;
-
+    public GameObject bossPerfab;
 
     public int Wave;
 
@@ -83,6 +83,7 @@ public class GamePlayManager : MonoBehaviour
 
             }
         }
+        
 
     }
 
@@ -129,13 +130,16 @@ public class GamePlayManager : MonoBehaviour
 
             if (tmp != null)
             {
-                var enemyObj = tmp.transform.GetChild(0).gameObject;
+                if(tmp.transform.childCount>0)
+                {
+                    var enemyObj = tmp.transform.GetChild(0).gameObject;
 
-                enemyObj.transform.SetParent(roads[UnityEngine.Random.Range(0, 3)].transform);
+                    enemyObj.transform.SetParent(roads[UnityEngine.Random.Range(0, 3)].transform);
 
-                enemyObj.SetActive(true);
+                    enemyObj.SetActive(true);
+                }
 
-                //tmp.transform.GetChild(0)
+
             }
 
 
@@ -195,7 +199,19 @@ public class GamePlayManager : MonoBehaviour
 
             if (timecount_sec >= 60)
             {
-                WaveUp();
+                if(Wave<3)
+                {
+                    WaveUp();
+
+                }
+                else
+                {
+                    bossPerfab.SetActive(true);
+
+
+                    infoPanel.WaveText.gameObject.SetActive(false);
+                    infoPanel.BossHpImage.gameObject.SetActive(true);
+                }
                 timecount_sec = 0;
                 timecount_min++;
             }

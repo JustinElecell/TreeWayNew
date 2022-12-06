@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5556588072280786885}
   m_Layer: 0
   m_Name: "\u788E\u77F3"
-  m_TagString: Weapon
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,8 +127,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  hpBar: {fileID: 0}
   iteam: {fileID: 11400000, guid: a1f2ec8e9dc4fd549abc2a88481a4bec, type: 2}
   enemy: {fileID: 0}
+  Hp: 0
+  HpMax: 0
+  actionType: 0
 --- !u!54 &5556588072280786885
 Rigidbody:
   m_ObjectHideFlags: 0

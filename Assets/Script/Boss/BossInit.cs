@@ -105,8 +105,7 @@ public class BossInit : MonoBehaviour
 
     void BullotFire(SO_Iteam iteam)
     {
-        var tmp = GamePlayManager.instance.iteamGround_Boss.transform.Find(iteam.IteamName + "物件池");
-        Debug.Log(iteam.IteamName + "物件池");
+        var tmp = GamePlayManager.instance.iteamGround_Enemy.transform.Find(iteam.IteamName + "物件池");
         if (tmp != null)
         {
             var iteamObj = tmp.transform.GetChild(0).gameObject;
@@ -121,13 +120,11 @@ public class BossInit : MonoBehaviour
             iteamObj.transform.localPosition = tmpPos;
 
         }
-        Debug.Log("發射子彈");
 
     }
     void BullotFire(SO_Iteam iteam,int no)
     {
-        var tmp = GamePlayManager.instance.iteamGround_Boss.transform.Find(iteam.IteamName + "物件池");
-        Debug.Log(iteam.IteamName + "物件池");
+        var tmp = GamePlayManager.instance.iteamGround_Enemy.transform.Find(iteam.IteamName + "物件池");
         if (tmp != null)
         {
             var iteamObj = tmp.transform.GetChild(0).gameObject;
@@ -142,7 +139,6 @@ public class BossInit : MonoBehaviour
             iteamObj.transform.localPosition = tmpPos;
 
         }
-        Debug.Log("發射子彈");
 
     }
 

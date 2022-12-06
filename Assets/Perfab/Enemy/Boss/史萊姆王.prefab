@@ -16,11 +16,11 @@ GameObject:
   - component: {fileID: 5790502892671748698}
   m_Layer: 0
   m_Name: "\u53F2\u840A\u59C6\u738B"
-  m_TagString: Boss
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6990778738461236807
 Transform:
   m_ObjectHideFlags: 0
@@ -136,6 +136,7 @@ MonoBehaviour:
   Hp: 0
   HpMax: 0
   actionType: 1
+  roadNo: 0
 --- !u!114 &5790502892671748698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,3 +150,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stetas: {fileID: 6153667271660164667}
+  bullot:
+  - {fileID: 11400000, guid: d828e750c6095d747b481653eaed874d, type: 2}
+  - {fileID: 11400000, guid: e036b64431b64874fa3a5f8c1f9d310e, type: 2}

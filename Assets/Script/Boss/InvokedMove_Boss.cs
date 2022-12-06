@@ -144,7 +144,7 @@ public class InvokedMove_Boss : MonoBehaviour
     void ReSet()
     {
         gameObject.SetActive(false);
-        var tmp = GamePlayManager.instance.iteamGround_Boss.transform.Find(stetas.iteam.IteamName + "物件池");
+        var tmp = GamePlayManager.instance.iteamGround_Enemy.transform.Find(stetas.iteam.IteamName + "物件池");
 
         gameObject.transform.SetParent(tmp.transform);
     }

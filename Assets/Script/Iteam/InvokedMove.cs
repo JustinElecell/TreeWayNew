@@ -11,12 +11,11 @@ public class InvokedMove : MonoBehaviour
     int Hp;
     int Hpmax;
 
-    public int roadNo;
 
     Dictionary<Stetas.ActionType, Action> ActionTypeFunc = new Dictionary<Stetas.ActionType, Action>();
 
-    public Enemy TargetEnemy;
-    List<GameObject> enemyList = new List<GameObject>();
+    public Stetas TargetStetas;
+    public List<GameObject> enemyList = new List<GameObject>();
     float saveTime;
     bool canAttack = true;
     private void OnEnable()
@@ -29,14 +28,22 @@ public class InvokedMove : MonoBehaviour
         gameObject.transform.localPosition = tmpPos;
         speed = MainManager.instance.Rect.rect.size.x / stetas.iteam.Speed;
 
-        roadNo = gameObject.transform.parent.transform.GetSiblingIndex() + 1;
+        stetas.roadNo = gameObject.transform.parent.transform.GetSiblingIndex() + 1;
         stetas.HpMax = ((int)(stetas.iteam.Hp));
 
         stetas.Hp = stetas.HpMax;
         stetas.actionType = Stetas.ActionType.移動;
         canAttack = true;
+
+        stetas.HpBarInit();
     }
 
+    private void OnDisable()
+    {
+        enemyList.Clear();
+
+
+    }
     private void Start()
     {
         FuncInit();
@@ -51,6 +58,8 @@ public class InvokedMove : MonoBehaviour
                 var pos = gameObject.transform.localPosition;
                 pos.x -= (speed * Time.deltaTime);
                 gameObject.transform.localPosition = pos;
+                canAttack = true;
+
             }
             else
             {
@@ -65,9 +74,9 @@ public class InvokedMove : MonoBehaviour
 
 
 
-            if (TargetEnemy != null)
+            if (TargetStetas != null)
             {
-                if (!TargetEnemy.stetas.CheckIsAlive())
+                if (!TargetStetas.CheckIsAlive())
                 {
                     if (enemyList.Count <= 0)
                     {
@@ -76,7 +85,7 @@ public class InvokedMove : MonoBehaviour
                     }
                     else
                     {
-                        TargetEnemy = null;
+                        TargetStetas = null;
                         if (FindFightEnemy())
                         {
 
@@ -90,9 +99,12 @@ public class InvokedMove : MonoBehaviour
                     }
                 }
 
-                if(canAttack)
+                if (canAttack)
                 {
-                    TargetEnemy.stetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam.Atk));
+                    if(TargetStetas!=null&&TargetStetas.gameObject.activeSelf)
+                    {
+                        TargetStetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam.Atk));
+                    }
                     saveTime = Time.time;
                     canAttack = false;
                 }
@@ -118,9 +130,9 @@ public class InvokedMove : MonoBehaviour
 
     bool FindFightEnemy()
     {
-        if (GamePlayManager.instance.roads[roadNo - 1].transform.GetChild(0).transform.childCount > 0)
+        if (GamePlayManager.instance.roads[stetas.roadNo - 1].transform.GetChild(0).transform.childCount > 0)
         {
-            TargetEnemy = GamePlayManager.instance.roads[roadNo - 1].transform.GetChild(0).transform.GetChild(0).GetComponent<Enemy>();
+            TargetStetas = GamePlayManager.instance.roads[stetas.roadNo - 1].transform.GetChild(0).transform.GetChild(0).GetComponent<Stetas>();
 
             return true;
         }
@@ -135,9 +147,11 @@ public class InvokedMove : MonoBehaviour
         {
             ReSet();
         }
-        
-        ActionTypeFunc[stetas.actionType]();
+        else
+        {
+            ActionTypeFunc[stetas.actionType]();
 
+        }
     }
 
     void ReSet()
@@ -169,25 +183,30 @@ public class InvokedMove : MonoBehaviour
 
         if (other.gameObject.tag == "Enemy")
         {
-            if(other.gameObject.GetComponent<Enemy>().stetas.actionType==Stetas.ActionType.移動)
+            var tmpStetas = other.gameObject.GetComponent<Stetas>();
+
+            if (tmpStetas.type == Stetas.Type.敵人|| tmpStetas.type == Stetas.Type.召喚)
             {
-                var tmpObj = other.gameObject;
-                tmpObj.transform.SetParent(GamePlayManager.instance.roads[roadNo-1].transform.GetChild(0).transform);
+                if (tmpStetas.actionType == Stetas.ActionType.移動)
+                {
+                    var tmpObj = other.gameObject;
+                    tmpObj.transform.SetParent(GamePlayManager.instance.roads[stetas.roadNo - 1].transform.GetChild(0).transform);
 
 
-                var tmp = tmpObj.GetComponent<Enemy>();
-                tmp.stetas.actionType = Stetas.ActionType.攻擊;
-
-
-
-
+                    var tmp = tmpObj.GetComponent<Stetas>();
+                    tmp.actionType = Stetas.ActionType.攻擊;
+                }
             }
+
+
 
             enemyList.Add(other.gameObject);
             stetas.actionType = Stetas.ActionType.攻擊;
 
+
             saveTime = Time.time;
             FindFightEnemy();
+
 
 
         }
@@ -203,7 +222,7 @@ public class InvokedMove : MonoBehaviour
 
         }
 
-        if(enemyList.Count<=0)
+        if (enemyList.Count <= 0)
         {
             stetas.actionType = Stetas.ActionType.移動;
 

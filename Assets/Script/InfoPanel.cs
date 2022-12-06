@@ -15,5 +15,7 @@ public class InfoPanel : MonoBehaviour
     public Image PlayerMpImage;
     public Text PlayerMpText;
 
+    public Image BossHpImage;
+    public Text BossHpText;
 
 }

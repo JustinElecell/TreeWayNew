@@ -8,7 +8,7 @@ public class Stetas : MonoBehaviour
     {
         道具,
         敵人,
-
+        召喚
     }
     public enum ActionType
     {
@@ -29,6 +29,7 @@ public class Stetas : MonoBehaviour
     public float Hp;
     public float HpMax;
     public ActionType actionType;
+    public int roadNo;
 
     public int WeaponAtkChange(float atk)
     {
@@ -61,6 +62,15 @@ public class Stetas : MonoBehaviour
                 hpBar.fillAmount = tmp;
             }
         }
+
+    }
+    public void HpBarInit()
+    {
+        float tmp = Hp / HpMax;
+
+        hpBar.fillAmount = tmp;
+
+        hpBar.gameObject.SetActive(false);
 
     }
 

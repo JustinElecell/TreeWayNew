@@ -10,6 +10,9 @@ public class WeaponMove_Player : MonoBehaviour
     float speed = 0;
     BoxCollider coll;
 
+    public List<GameObject> targetList = new List<GameObject>();
+    public int roadNo;
+
     private void OnEnable()
     {
 
@@ -19,7 +22,8 @@ public class WeaponMove_Player : MonoBehaviour
             var tmpPos = new Vector3(MainManager.instance.Rect.rect.size.x / 2, 0, 0);
             gameObject.transform.localPosition = tmpPos;
             speed = MainManager.instance.Rect.rect.size.x / stetas.iteam.Speed;
-        
+
+        roadNo = gameObject.transform.parent.transform.GetSiblingIndex() + 1;
 
 
         stetas.HpMax = ((int)(stetas.iteam.Hp));
@@ -27,6 +31,10 @@ public class WeaponMove_Player : MonoBehaviour
         stetas.Hp = stetas.HpMax;
     }
 
+    private void OnDisable()
+    {
+        targetList.Clear();
+    }
 
     private void Update()
     {
@@ -39,6 +47,8 @@ public class WeaponMove_Player : MonoBehaviour
 
         if (gameObject.transform.localPosition.x > -MainManager.instance.Rect.rect.size.x / 2)
         {
+
+
             //移動
 
             var pos = gameObject.transform.localPosition;
@@ -58,6 +68,7 @@ public class WeaponMove_Player : MonoBehaviour
 
     void ReSet()
     {
+
         gameObject.SetActive(false);
         var tmp = GamePlayManager.instance.iteamGround_Player.transform.Find(stetas.iteam.IteamName + "物件池");
 
@@ -66,24 +77,54 @@ public class WeaponMove_Player : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        var otherstetas = other.gameObject.GetComponent<Stetas>();
-        switch(otherstetas.type)
+        if (other.gameObject.tag == "Enemy")
         {
-            case Stetas.Type.道具:
+            var otherstetas = other.gameObject.GetComponent<Stetas>();
+            targetList.Add(other.gameObject);
 
 
-                break;
-            case Stetas.Type.敵人:
 
-                otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam.Atk));
-                stetas.Hp -= otherstetas.enemy.Atk;
-
-                
-
-                break;
         }
 
-        
+        for (int i = 0; i < targetList.Count; i++)
+        {
+            var otherstetas = targetList[i].GetComponent<Stetas>();
+            switch (otherstetas.type)
+            {
+                case Stetas.Type.道具:
+                    otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam.Atk));
+                    stetas.Hp -= otherstetas.iteam.Atk;
+
+                    break;
+                case Stetas.Type.敵人:
+
+                    otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam.Atk));
+                    stetas.Hp -= otherstetas.enemy.Atk;
+
+                    break;
+                case Stetas.Type.召喚:
+                    otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam.Atk));
+                    stetas.Hp -= otherstetas.iteam.Atk;
+                    break;
+            }
+            if(stetas.Hp<=0)
+            {
+                ReSet();
+            }
+        }
+
+
+
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            targetList.Remove(other.gameObject);
+
+        }
     }
 
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 public class GamePlayManager : MonoBehaviour
 {
     public static GamePlayManager instance;
@@ -21,14 +22,16 @@ public class GamePlayManager : MonoBehaviour
     public Player player;
 
     Dictionary<int, Func<float, float>> createEnemyTimeFunc = new Dictionary<int, Func<float, float>>();
-
     //public event Action atk;
     public GameObject iteamGround_Player;
     public GameObject iteamGround_Enemy;
     public GameObject iteamGround_Boss;
-
-
-
+    
+    [Header("測試用")]
+    public SO_Iteam Skill;
+    public Color White;
+    public Color Green;
+    public Image[] UI;
     #region 初始化
     private void OnEnable()
     {
@@ -40,6 +43,8 @@ public class GamePlayManager : MonoBehaviour
 
             EnemyGroundInit();
 
+            White = Color.white;
+            Green = Color.green;
         }
         else
         {
@@ -268,6 +273,31 @@ public class GamePlayManager : MonoBehaviour
         tmpPos.y = 0;
         player.gameObject.transform.localPosition = tmpPos;
 
+    }
+
+    public void SetSkill(int no)
+    {
+        if(Skill!=null)
+        {
+            SetPlayer(no);
+            if (player.mp >= Skill.Mp)
+            {
+                var tmp = iteamGround_Player.transform.Find(Skill.IteamName + "物件池");
+                player.mp -= Skill.Mp;
+                player.ResetPlayerMp();
+
+                if (tmp != null)
+                {
+                    var iteamObj = tmp.transform.GetChild(0).gameObject;
+
+                    iteamObj.transform.SetParent(player.transform.parent.transform);
+
+                    iteamObj.SetActive(true);
+
+                }
+
+            }
+        }
     }
 
 }

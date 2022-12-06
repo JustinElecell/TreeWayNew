@@ -38,8 +38,15 @@ public class IteamUI : MonoBehaviour
         IteanButton.onClick.AddListener(() =>
         {
             //刷出武器
-            GamePlayManager.instance.PAttackInit(iteamData);
+            //GamePlayManager.instance.PAttackInit(iteamData);
 
+            for(int i=0;i<GamePlayManager.instance.UI.Length;i++)
+            {
+                GamePlayManager.instance.UI[i].color = GamePlayManager.instance.White;
+            }
+
+            gameObject.GetComponent<Image>().color = GamePlayManager.instance.Green;
+            GamePlayManager.instance.Skill = iteamData;
         });
     }
 

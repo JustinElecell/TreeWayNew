@@ -1283,7 +1283,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2052413671}
         m_TargetAssemblyTypeName: GamePlayManager, Assembly-CSharp
-        m_MethodName: SetPlayer
+        m_MethodName: SetSkill
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2227,7 +2227,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2052413671}
         m_TargetAssemblyTypeName: GamePlayManager, Assembly-CSharp
-        m_MethodName: SetPlayer
+        m_MethodName: SetSkill
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2523,6 +2523,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1374269452}
     m_Modifications:
+    - target: {fileID: 4626165627330440498, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4626165627330440498, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4626165627330440498, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4626165628381358521, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4626165628381358521, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4626165628381358521, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4626165628501824854, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4626165628501824854, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4626165628501824854, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4626165628765873256, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2607,6 +2643,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4626165628765873257, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4626165628765873257, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4626165628765873257, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4626165628765873259, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
       propertyPath: m_Name
       value: IteamUI
@@ -2622,6 +2670,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4626165628765873256, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
   m_PrefabInstance: {fileID: 1411228668}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1411228671 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4626165628765873257, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
+  m_PrefabInstance: {fileID: 1411228668}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1455555731
 GameObject:
   m_ObjectHideFlags: 0
@@ -2946,6 +3005,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1681843276}
   m_CullTransparentMesh: 1
+--- !u!114 &1689645702 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4626165628765873257, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
+  m_PrefabInstance: {fileID: 1487883435}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1768993118
 GameObject:
   m_ObjectHideFlags: 0
@@ -3105,7 +3175,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2052413671}
         m_TargetAssemblyTypeName: GamePlayManager, Assembly-CSharp
-        m_MethodName: SetPlayer
+        m_MethodName: SetSkill
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3158,6 +3228,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4626165628765873256, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
   m_PrefabInstance: {fileID: 714825105}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1839837700 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4626165628765873257, guid: 08735fbfb7702a64a90fddc66fa5b6c4, type: 3}
+  m_PrefabInstance: {fileID: 714825105}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1864974484
 GameObject:
   m_ObjectHideFlags: 0
@@ -3337,6 +3418,13 @@ MonoBehaviour:
   iteamGround_Player: {fileID: 173747630}
   iteamGround_Enemy: {fileID: 1234584248}
   iteamGround_Boss: {fileID: 1615730052}
+  Skill: {fileID: 0}
+  White: {r: 0, g: 0, b: 0, a: 0}
+  Green: {r: 0, g: 0, b: 0, a: 0}
+  UI:
+  - {fileID: 1411228671}
+  - {fileID: 1689645702}
+  - {fileID: 1839837700}
 --- !u!4 &2052413672
 Transform:
   m_ObjectHideFlags: 0

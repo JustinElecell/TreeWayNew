@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class MainManager : MonoBehaviour
 {
@@ -14,7 +15,6 @@ public class MainManager : MonoBehaviour
         {
             instance = this;
             Application.targetFrameRate = 60;
-
         }
         else
         {
@@ -22,8 +22,6 @@ public class MainManager : MonoBehaviour
         }
     }
     public RectTransform Rect;
-
-
 
 
 

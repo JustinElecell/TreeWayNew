@@ -8,7 +8,8 @@ public class Stetas : MonoBehaviour
     {
         道具,
         敵人,
-        召喚
+        召喚,
+        Boss
     }
     public enum ActionType
     {
@@ -24,7 +25,7 @@ public class Stetas : MonoBehaviour
 
     [Header("敵人")]
     public SO_Enemy enemy;
-
+    public bool BossHpBarFlag;
     [Header("共通用")]
     public float Hp;
     public float HpMax;
@@ -63,6 +64,22 @@ public class Stetas : MonoBehaviour
             }
         }
 
+        if(GamePlayManager.instance.infoPanel.BossHpImage.gameObject.activeSelf&&BossHpBarFlag)
+        {
+            if (Hp != HpMax)
+            {
+                if(Hp<0)
+                {
+                    Hp = 0;
+                }
+                float tmp = Hp / HpMax;
+
+                GamePlayManager.instance.infoPanel.BossHpImage.fillAmount = tmp;
+
+                GamePlayManager.instance.infoPanel.BossHpText.text = Hp.ToString()+" / " + HpMax.ToString();
+            }
+        }
+
     }
     public void HpBarInit()
     {
@@ -71,6 +88,9 @@ public class Stetas : MonoBehaviour
         hpBar.fillAmount = tmp;
 
         hpBar.gameObject.SetActive(false);
+
+
+
 
     }
 

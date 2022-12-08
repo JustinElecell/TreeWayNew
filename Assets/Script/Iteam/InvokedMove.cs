@@ -132,9 +132,16 @@ public class InvokedMove : MonoBehaviour
     {
         if (GamePlayManager.instance.roads[stetas.roadNo - 1].transform.GetChild(0).transform.childCount > 0)
         {
-            TargetStetas = GamePlayManager.instance.roads[stetas.roadNo - 1].transform.GetChild(0).transform.GetChild(0).GetComponent<Stetas>();
+            var tmp = GamePlayManager.instance.roads[stetas.roadNo - 1].transform.GetChild(0).transform.GetChild(0).GetComponent<Stetas>();
+            foreach(var dataObj in enemyList)
+            {
+                if(dataObj==tmp.gameObject)
+                {
+                    TargetStetas = tmp;
+                    return true;
+                }
+            }
 
-            return true;
         }
         return false;
 
@@ -160,6 +167,8 @@ public class InvokedMove : MonoBehaviour
         var tmp = GamePlayManager.instance.iteamGround_Player.transform.Find(stetas.iteam.IteamName + "物件池");
 
         gameObject.transform.SetParent(tmp.transform);
+        TargetStetas = null;
+        enemyList.Clear();
     }
 
     IEnumerator Attack(Collider other)
@@ -217,7 +226,6 @@ public class InvokedMove : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-
             enemyList.Remove(other.gameObject);
 
         }

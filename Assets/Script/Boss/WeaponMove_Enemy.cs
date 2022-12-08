@@ -62,7 +62,7 @@ public class WeaponMove_Enemy : MonoBehaviour
             {
                 // 移動
                 var pos = gameObject.transform.localPosition;
-                pos.x += (speed * Time.fixedDeltaTime);
+                pos.x += (speed * Time.deltaTime);
                 gameObject.transform.localPosition = pos;
 
             }
@@ -70,7 +70,29 @@ public class WeaponMove_Enemy : MonoBehaviour
             {
                 if(stetas.type==Stetas.Type.道具)
                 {
+                    GamePlayManager.instance.player.tmpPlayerData.Hp -= stetas.iteam.Atk;
+                    GamePlayManager.instance.player.ResetPlayerHp();
+
                     ReSet();
+
+                }
+                else if(stetas.type == Stetas.Type.召喚)
+                {
+                    if (canAttack)
+                    {
+                        GamePlayManager.instance.player.tmpPlayerData.Hp -= stetas.iteam.Atk;
+                        GamePlayManager.instance.player.ResetPlayerHp();
+                        saveTime = Time.time;
+
+                        canAttack = false;
+                    }
+                    else
+                    {
+                        if (Time.time - saveTime >= stetas.enemy.Atk_wait)
+                        {
+                            canAttack = true;
+                        }
+                    }
 
                 }
             }
@@ -206,8 +228,17 @@ public class WeaponMove_Enemy : MonoBehaviour
     {
         if (GamePlayManager.instance.roads[stetas.roadNo - 1].transform.GetChild(1).transform.childCount > 0)
         {
-            TargetInvoked = GamePlayManager.instance.roads[stetas.roadNo - 1].transform.GetChild(1).transform.GetChild(0).GetComponent<Stetas>();
-            return true;
+            
+            var tmp  = GamePlayManager.instance.roads[stetas.roadNo - 1].transform.GetChild(0).transform.GetChild(0).GetComponent<Stetas>();
+
+            foreach (var dataObj in InvokedList)
+            {
+                if (dataObj == tmp.gameObject)
+                {
+                    TargetInvoked = tmp;
+                    return true;
+                }
+            }
         }
         return false;
     }

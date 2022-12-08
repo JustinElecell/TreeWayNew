@@ -37,9 +37,21 @@ public class Player : MonoBehaviour
 
     public void ResetPlayerHp()
     {
+        if(tmpPlayerData.Hp<0)
+        {
+            tmpPlayerData.Hp = 0;
+        }
         GamePlayManager.instance.infoPanel.PlayerHpText.text = tmpPlayerData.Hp.ToString() + " / " + playerDate.Hp.ToString();
         float tmp = tmpPlayerData.Hp / playerDate.Hp;
         GamePlayManager.instance.infoPanel.PlayerHpImage.fillAmount = tmp;
+
+        if (tmpPlayerData.Hp <= 0)
+        {
+            GamePlayManager.instance.Pause();
+            //StopAllCoroutines();
+            GamePlayManager.instance.GameOver.SetActive(true);
+
+        }
     }
 
     public void ResetPlayerMp()

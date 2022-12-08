@@ -57,9 +57,27 @@ public class Enemy : MonoBehaviour
             {
                 // 移動
                 var pos = gameObject.transform.localPosition;
-                pos.x += (speed * Time.fixedDeltaTime);
+                pos.x += (speed * Time.deltaTime);
                 gameObject.transform.localPosition = pos;
                 
+            }
+            else
+            {
+                if (canAttack)
+                {
+                    GamePlayManager.instance.player.tmpPlayerData.Hp -= stetas.enemy.Atk;
+                    GamePlayManager.instance.player.ResetPlayerHp();
+                    saveTime = Time.time;
+
+                    canAttack = false;
+                }
+                else
+                {
+                    if (Time.time - saveTime >= stetas.enemy.Atk_wait)
+                    {
+                        canAttack = true;
+                    }
+                }
             }
         });
 
@@ -93,10 +111,14 @@ public class Enemy : MonoBehaviour
 
                 if(canAttack)
                 {
-                    TargetInvoked.stetas.TakeDamage(stetas.enemy.Atk);
-                    saveTime = Time.time;
+                    if(TargetInvoked.gameObject.activeSelf)
+                    {
+                        TargetInvoked.stetas.TakeDamage(stetas.enemy.Atk);
+                        saveTime = Time.time;
 
-                    canAttack = false;
+                        canAttack = false;
+                    }
+
                 }
                 else
                 {

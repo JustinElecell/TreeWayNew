@@ -14,7 +14,7 @@ public class MainManager : MonoBehaviour
         if(instance==null)
         {
             instance = this;
-            Application.targetFrameRate = 60;
+            Application.targetFrameRate = 120;
         }
         else
         {
@@ -23,6 +23,7 @@ public class MainManager : MonoBehaviour
     }
     public RectTransform Rect;
 
+    public int TargetCharaterNo=1;
 
 
 }

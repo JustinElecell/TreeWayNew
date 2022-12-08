@@ -25,11 +25,27 @@ public class Slime : BossInit
     private void OnEnable()
     {
         StageFunc[Stage.隨機路線]();
+        var tmpHp = ((float)(20 * 1 + (1 - 1) * 0.1)) * (1 + (GamePlayManager.instance.Wave - 1) * 0.2) * (stetas.enemy.hp / 100);
+        var tmpHpFloat = ((float)tmpHp);
+        stetas.HpMax = ((int)(Mathf.Round(tmpHpFloat)));
+        stetas.Hp = stetas.HpMax;
     }
 
 
 
     public SO_Iteam[] bullot;
+
+    private void Update()
+    {
+
+        if (stetas.Hp <= 0)
+        {
+            GamePlayManager.instance.Pause();
+            //StopAllCoroutines();
+
+            GamePlayManager.instance.GameOver.SetActive(true);
+        }
+    }
     public void FuncInit()
     {
         StageFunc.Add(Stage.隨機路線, () => {

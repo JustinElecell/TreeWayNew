@@ -52,7 +52,7 @@ public class WeaponMove_Player : MonoBehaviour
             //移動
 
             var pos = gameObject.transform.localPosition;
-            pos.x -= (speed * Time.fixedDeltaTime);
+            pos.x -= (speed * Time.deltaTime);
             gameObject.transform.localPosition = pos;
         }
         else

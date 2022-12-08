@@ -9,6 +9,7 @@ public class CharaterPanel : MonoBehaviour
     public Button charaterButtonPerfab;
     List<List<string>> charaterLists;
 
+    int charaterNo=1;
     [Header("內容設定")]
     public Text Name;
     public Text Level;
@@ -17,13 +18,14 @@ public class CharaterPanel : MonoBehaviour
     public Text ATK;
     public Text REC;
     
+    
     public Text Lv1;
     public Text Lv2;
     public Text Lv3;
     public Text Lv4;
     public Text Lv5;
 
-
+    public Button TargetCharaterButton;
 
 
     private void Start()
@@ -39,11 +41,17 @@ public class CharaterPanel : MonoBehaviour
             tmp.onClick.AddListener(() => {
 
                 SetCharaterText(no);
-
+                charaterNo = no;
 
             });
         }
+        TargetCharaterButton.onClick.AddListener(() => {
+
+            MainManager.instance.TargetCharaterNo = charaterNo;
+       
+        });
         SetCharaterText(1);
+        charaterNo = 1;
 
 
 

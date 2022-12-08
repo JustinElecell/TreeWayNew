@@ -32,6 +32,8 @@ public class GamePlayManager : MonoBehaviour
     public Color White;
     public Color Green;
     public Image[] UI;
+    public GameObject GameOver;
+
     #region 初始化
     private void OnEnable()
     {
@@ -45,6 +47,13 @@ public class GamePlayManager : MonoBehaviour
 
             White = Color.white;
             Green = Color.green;
+            timeCount_Coroutine = StartCoroutine(TimeCount());
+            if (FindPlayer())
+            {
+                player.Init();
+
+            }
+            Time.timeScale = 1;
         }
         else
         {
@@ -298,6 +307,14 @@ public class GamePlayManager : MonoBehaviour
 
             }
         }
+    }
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+    }
+    public void unPause()
+    {
+        Time.timeScale = 1f;
     }
 
 }

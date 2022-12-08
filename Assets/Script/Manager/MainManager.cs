@@ -25,5 +25,5 @@ public class MainManager : MonoBehaviour
 
     public int TargetCharaterNo=1;
 
-
+    public SO_Iteam[] Iteams;
 }

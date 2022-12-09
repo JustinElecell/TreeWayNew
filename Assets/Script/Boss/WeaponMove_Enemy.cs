@@ -25,7 +25,7 @@ public class WeaponMove_Enemy : MonoBehaviour
         coll = GetComponent<BoxCollider>();
 
 
-            speed = MainManager.instance.Rect.rect.size.x / stetas.iteam.Speed;
+            speed = GamePlayManager.instance.Rect.rect.size.x / stetas.iteam.Speed;
 
         switch (stetas.type)
         {
@@ -58,7 +58,7 @@ public class WeaponMove_Enemy : MonoBehaviour
     void FuncInit()
     {
         ActionTypeFunc.Add(Stetas.ActionType.移動, () => {
-            if (gameObject.transform.localPosition.x < MainManager.instance.Rect.rect.size.x / 2 - 150)
+            if (gameObject.transform.localPosition.x < GamePlayManager.instance.Rect.rect.size.x / 2 - 150)
             {
                 // 移動
                 var pos = gameObject.transform.localPosition;
@@ -70,7 +70,7 @@ public class WeaponMove_Enemy : MonoBehaviour
             {
                 if(stetas.type==Stetas.Type.道具)
                 {
-                    GamePlayManager.instance.player.tmpPlayerData.Hp -= stetas.iteam.Atk;
+                    GamePlayManager.instance.player.stetas.Hp -= stetas.iteam.Atk;
                     GamePlayManager.instance.player.ResetPlayerHp();
 
                     ReSet();
@@ -80,7 +80,7 @@ public class WeaponMove_Enemy : MonoBehaviour
                 {
                     if (canAttack)
                     {
-                        GamePlayManager.instance.player.tmpPlayerData.Hp -= stetas.iteam.Atk;
+                        GamePlayManager.instance.player.stetas.Hp -= stetas.iteam.Atk;
                         GamePlayManager.instance.player.ResetPlayerHp();
                         saveTime = Time.time;
 

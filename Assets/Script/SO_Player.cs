@@ -10,10 +10,11 @@ public class SO_Player : ScriptableObject
     public int Level;
     public float Hp;
     public float Mp;
+    public float MpUp;
     public int Atk;
     public int Def;
     public int Rec;
 
-
+    public int Overfulfil;
 
 }

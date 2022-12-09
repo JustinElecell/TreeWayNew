@@ -24,9 +24,9 @@ public class InvokedMove : MonoBehaviour
         coll = GetComponent<BoxCollider>();
 
 
-        var tmpPos = new Vector3(MainManager.instance.Rect.rect.size.x / 2, 0+UnityEngine.Random.Range(-20,20), 0);
+        var tmpPos = new Vector3(GamePlayManager.instance.Rect.rect.size.x / 2, 0+UnityEngine.Random.Range(-20,20), 0);
         gameObject.transform.localPosition = tmpPos;
-        speed = MainManager.instance.Rect.rect.size.x / stetas.iteam.Speed;
+        speed = GamePlayManager.instance.Rect.rect.size.x / stetas.iteam.Speed;
 
         stetas.roadNo = gameObject.transform.parent.transform.GetSiblingIndex() + 1;
         stetas.HpMax = ((int)(stetas.iteam.Hp));
@@ -52,7 +52,7 @@ public class InvokedMove : MonoBehaviour
     void FuncInit()
     {
         ActionTypeFunc.Add(Stetas.ActionType.移動, () => {
-            if (gameObject.transform.localPosition.x > -MainManager.instance.Rect.rect.size.x / 2)
+            if (gameObject.transform.localPosition.x > -GamePlayManager.instance.Rect.rect.size.x / 2)
             {
                 //移動
                 var pos = gameObject.transform.localPosition;

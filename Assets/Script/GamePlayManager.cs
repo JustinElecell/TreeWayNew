@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GamePlayManager : MonoBehaviour
 {
     public static GamePlayManager instance;
+    public RectTransform Rect;
 
     public GameObject[] roads;
     public SO_Enemy[] enemyData;
@@ -91,7 +92,7 @@ public class GamePlayManager : MonoBehaviour
 
             tmp.transform.SetParent(GamePlayManager.instance.iteamGround_Enemy.transform);
 
-            for (int l = 0; l < 30; l++)
+            for (int l = 0; l < 60; l++)
             {
                 Instantiate(enemyData[i].enemyPerfab, tmp.transform);
 
@@ -124,7 +125,7 @@ public class GamePlayManager : MonoBehaviour
     IEnumerator CreateEnemy(int time,int enemyNo)
     {
         float saveTime = Time.time;
-        var enemyCountInit = ((int)(5 * 1 + (Wave - 1) * 0.2));
+        var enemyCountInit = ((int)( 1 + (Wave - 1) * 0.2));
 
         int tmpRange = UnityEngine.Random.Range(0, 6);
 
@@ -134,8 +135,11 @@ public class GamePlayManager : MonoBehaviour
             tmpRange = UnityEngine.Random.Range(0, 6);
         }
 
-        float tmpTime = ((float)(enemyCountInit*0.5* enemyData[enemyNo].generationRate* (createEnemyTimeFunc[tmpRange](time))));
-        
+        //  2 * 該怪物出現率調整比 ( 怪物列表設定 ) * 該怪物出現量調整比 ( 關卡比例設定，如A怪70%/B怪30% ) * ( 1 + ( 當前波次編號 - 1  ) * 0.2 )
+        float tmpTime =((float)(2* enemyData[enemyNo].generationRate*0.5* enemyCountInit));
+
+        tmpTime = 1 / tmpTime;
+
         while (Time.time-saveTime < 10)
         {
 
@@ -166,7 +170,7 @@ public class GamePlayManager : MonoBehaviour
     public void EAttack(int atk)
     {
 
-        player.tmpPlayerData.Hp -= atk;
+        player.stetas.Hp -= atk;
         player.ResetPlayerHp();
 
     }
@@ -297,11 +301,15 @@ public class GamePlayManager : MonoBehaviour
 
                 if (tmp != null)
                 {
-                    var iteamObj = tmp.transform.GetChild(0).gameObject;
+                    if(tmp.transform.childCount>0)
+                    {
+                        var iteamObj = tmp.transform.GetChild(0).gameObject;
 
-                    iteamObj.transform.SetParent(player.transform.parent.transform);
+                        iteamObj.transform.SetParent(player.transform.parent.transform);
 
-                    iteamObj.SetActive(true);
+                        iteamObj.SetActive(true);
+
+                    }
 
                 }
 

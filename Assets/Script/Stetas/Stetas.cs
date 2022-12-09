@@ -19,6 +19,9 @@ public class Stetas : MonoBehaviour
 
     public Type type;
     public Image hpBar;
+    [Header("玩家")]
+    public SO_Player player;
+
 
     [Header("道具")]
     public SO_Iteam iteam;
@@ -34,7 +37,7 @@ public class Stetas : MonoBehaviour
 
     public int WeaponAtkChange(float atk)
     {
-        return ((int)((GamePlayManager.instance.player.tmpPlayerData.Atk * (1 + 0) * (1 + 0)) * (atk / 100 * (1 + 0))));
+        return ((int)((GamePlayManager.instance.player.stetas.player.Atk * (1 + 0) * (1 + 0)) * (atk / 100 * (1 + 0))));
     }
 
     //false:死    true:還活著

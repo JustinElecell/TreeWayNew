@@ -26,12 +26,16 @@ public class Enemy : MonoBehaviour
     {
 
         coll = GetComponent<BoxCollider>();
-        var tmpPos = new Vector3(-MainManager.instance.Rect.rect.size.x / 2, 0, 0);
+        var tmpPos = new Vector3(-GamePlayManager.instance.Rect.rect.size.x / 2, 0, 0);
         gameObject.transform.localPosition = tmpPos;
-        speed = MainManager.instance.Rect.rect.size.x / stetas.enemy.speed;
+        speed = GamePlayManager.instance.Rect.rect.size.x / stetas.enemy.speed;
 
-        var tmpHp = ((float)(20 * 1 + (1 - 1) * 0.1)) * (1 + (GamePlayManager.instance.Wave - 1)  *0.2)*(stetas.enemy.hp/100);
-        var tmpHpFloat=((float)tmpHp);
+        //var tmpHp = ((float)(20 * 1 + (1 - 1) * 0.1)) * (1 + (GamePlayManager.instance.Wave - 1)  *0.2)*(stetas.enemy.hp/100);
+
+        //roundup( ( 50 * ( 1 + ( ( 關卡編號 - 1 ) *0.1 ) ) ) * 該怪物血量調整比 * ( 1 + ( ( 當前波次編號 - 1 ) * 0.25 ) ) )
+        var tmpHp = (50 * (1 + ((1 - 1) * 0.1))) *(stetas.enemy.hp/100)* (1 + ((GamePlayManager.instance.Wave - 1) * 0.25));
+
+        var tmpHpFloat =((float)tmpHp);
 
         roadNo = gameObject.transform.parent.transform.GetSiblingIndex() + 1;
 
@@ -53,7 +57,7 @@ public class Enemy : MonoBehaviour
     void FuncInit()
     {
         ActionTypeFunc.Add(Stetas.ActionType.移動, () => {
-            if (gameObject.transform.localPosition.x < MainManager.instance.Rect.rect.size.x / 2 - 150)
+            if (gameObject.transform.localPosition.x < GamePlayManager.instance.Rect.rect.size.x / 2 - 150)
             {
                 // 移動
                 var pos = gameObject.transform.localPosition;
@@ -65,7 +69,7 @@ public class Enemy : MonoBehaviour
             {
                 if (canAttack)
                 {
-                    GamePlayManager.instance.player.tmpPlayerData.Hp -= stetas.enemy.Atk;
+                    GamePlayManager.instance.player.stetas.Hp -= stetas.enemy.Atk;
                     GamePlayManager.instance.player.ResetPlayerHp();
                     saveTime = Time.time;
 
@@ -111,7 +115,7 @@ public class Enemy : MonoBehaviour
 
                 if(canAttack)
                 {
-                    if(TargetInvoked.gameObject.activeSelf)
+                    if(TargetInvoked!=null&&TargetInvoked.gameObject.activeSelf)
                     {
                         TargetInvoked.stetas.TakeDamage(stetas.enemy.Atk);
                         saveTime = Time.time;

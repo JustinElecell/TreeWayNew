@@ -7,7 +7,6 @@ public class MainManager : MonoBehaviour
 {
     public static MainManager instance;
 
-    public  GamePlayManager gamePlayManager;
 
     private void Awake()
     {
@@ -21,9 +20,8 @@ public class MainManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-    public RectTransform Rect;
 
-    public int TargetCharaterNo=1;
+    public List<string> TargetCharater;
 
     public SO_Iteam[] Iteams;
 }

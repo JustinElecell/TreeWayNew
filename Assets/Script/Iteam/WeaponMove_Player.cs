@@ -19,9 +19,9 @@ public class WeaponMove_Player : MonoBehaviour
         coll = GetComponent<BoxCollider>();
 
 
-            var tmpPos = new Vector3(MainManager.instance.Rect.rect.size.x / 2, 0, 0);
+            var tmpPos = new Vector3(GamePlayManager.instance.Rect.rect.size.x / 2, 0, 0);
             gameObject.transform.localPosition = tmpPos;
-            speed = MainManager.instance.Rect.rect.size.x / stetas.iteam.Speed;
+            speed = GamePlayManager.instance.Rect.rect.size.x / stetas.iteam.Speed;
 
         roadNo = gameObject.transform.parent.transform.GetSiblingIndex() + 1;
 
@@ -45,7 +45,7 @@ public class WeaponMove_Player : MonoBehaviour
         }
 
 
-        if (gameObject.transform.localPosition.x > -MainManager.instance.Rect.rect.size.x / 2)
+        if (gameObject.transform.localPosition.x > -GamePlayManager.instance.Rect.rect.size.x / 2)
         {
 
 

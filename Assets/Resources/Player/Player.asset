@@ -16,6 +16,8 @@ MonoBehaviour:
   Level: 1
   Hp: 200
   Mp: 150
+  MpUp: 10
   Atk: 10
   Def: 10
   Rec: 10
+  Overfulfil: 0

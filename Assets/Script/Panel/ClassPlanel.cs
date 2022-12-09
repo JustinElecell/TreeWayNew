@@ -10,10 +10,8 @@ public class ClassPlanel : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("測試");
 
         EnterButton.onClick.AddListener(() => {
-            Debug.Log("測試");
 
             StartCoroutine(LoadScene());
         
@@ -24,7 +22,6 @@ public class ClassPlanel : MonoBehaviour
 
     IEnumerator LoadScene()
     {
-        Debug.Log("測試");
 
         var async = SceneManager.LoadSceneAsync("GamePlay");
 

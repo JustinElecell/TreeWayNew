@@ -52,7 +52,7 @@ public class Slime : BossInit
 
             RandomRoad(this.gameObject);
 
-            var tmpPos = new Vector3(-MainManager.instance.Rect.rect.size.x / 2+200, 0, 0);
+            var tmpPos = new Vector3(-GamePlayManager.instance.Rect.rect.size.x / 2+200, 0, 0);
 
             gameObject.transform.localPosition = tmpPos;
 

@@ -17,8 +17,9 @@ public class CharaterPanel : MonoBehaviour
     public Text MP;
     public Text ATK;
     public Text REC;
-    
-    
+    public Image image;
+
+
     public Text Lv1;
     public Text Lv2;
     public Text Lv3;
@@ -27,17 +28,20 @@ public class CharaterPanel : MonoBehaviour
 
     public Button TargetCharaterButton;
 
-
     private void Start()
     {
         charaterLists = ReadCsv.MyReadCSV.Read("Csv/Charater");
+
         Debug.Log(charaterLists.Count);  
         
         for(int i=1;i<charaterLists.Count;i++)
         {
+
             int no = i;
 
             var tmp = Instantiate(charaterButtonPerfab, createrTran);
+
+            tmp.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Image/Charater/" + no.ToString());
             tmp.onClick.AddListener(() => {
 
                 SetCharaterText(no);
@@ -46,16 +50,16 @@ public class CharaterPanel : MonoBehaviour
             });
         }
         TargetCharaterButton.onClick.AddListener(() => {
-
-            MainManager.instance.TargetCharaterNo = charaterNo;
+            MainManager.instance.TargetCharater = charaterLists[charaterNo];
        
         });
         SetCharaterText(1);
         charaterNo = 1;
-
+        MainManager.instance.TargetCharater = charaterLists[1];
 
 
     }
+
 
 
     public void SetCharaterText(int No)
@@ -67,6 +71,7 @@ public class CharaterPanel : MonoBehaviour
         ATK.text = charaterLists[No][5];
         REC.text = charaterLists[No][4];
 
+        image.sprite = Resources.Load<Sprite>("Image/Charater/" + No.ToString());
         Lv1.text = "Lv1: " + charaterLists[No][9];
         Lv2.text = "Lv2: " + charaterLists[No][13];
         Lv3.text = "Lv3: " + charaterLists[No][17];

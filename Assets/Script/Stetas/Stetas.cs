@@ -37,7 +37,9 @@ public class Stetas : MonoBehaviour
 
     public int WeaponAtkChange(float atk)
     {
-        return ((int)((GamePlayManager.instance.player.stetas.player.Atk * (1 + 0) * (1 + 0)) * (atk / 100 * (1 + 0))));
+        //( roundup ( ( 玩家基礎攻擊力 * ( 1 + 突破次數 * 突破時攻擊力加成比例 ) * (1+其餘攻擊力buff%) ) * ( 武器傷害 * ( 1 + 武器傷害Buff % ) ) ) ) * ( if ( 觸發翻倍=ture , 2 , 1 ) ) 
+        //突破次數 * 突破時攻擊力加成比例已經在遊戲開始時，在Player.cs初始化算在stetas.player.Atk內了
+        return ((int)((GamePlayManager.instance.player.stetas.player.Atk  * (1 + 0)) * (atk / 100 * (1 + 0))));
     }
 
     //false:死    true:還活著

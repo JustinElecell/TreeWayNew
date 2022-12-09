@@ -48,9 +48,12 @@ TagManager:
   - name: BG
     uniqueID: 2647853373
     locked: 0
-  - name: UI
+  - name: UI-Down
     uniqueID: 233663153
     locked: 0
   - name: Game
     uniqueID: 22681323
+    locked: 0
+  - name: UI-Up
+    uniqueID: 1988597547
     locked: 0

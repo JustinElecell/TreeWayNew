@@ -16,6 +16,8 @@ public class GamePlayManager : MonoBehaviour
 
 
     public InfoPanel infoPanel;
+    public SkillPanel skillPanel;
+
     int timecount_sec;
     int timecount_min;
     Coroutine timeCount_Coroutine;
@@ -34,6 +36,16 @@ public class GamePlayManager : MonoBehaviour
     public Color Green;
     public Image[] UI;
     public GameObject GameOver;
+
+    public List<List<string>> BuffList;
+    
+
+    public Button BuffButton;
+
+    [Header("Skill管理")]
+    public SkillManager skillManager;
+
+
 
     #region 初始化
     private void OnEnable()
@@ -55,12 +67,61 @@ public class GamePlayManager : MonoBehaviour
 
             }
             Time.timeScale = 1;
+            BuffInit();
+
         }
         else
         {
             Destroy(this.gameObject);
         }
     }
+
+    void BuffInit()
+    {
+
+        BuffList = ReadCsv.MyReadCSV.Read("Csv/Buff");
+        skillManager.SetAllSkill(BuffList);
+
+        //for(int i=1;i<BuffList.Count;i++)
+        //{
+        //    Debug.Log(BuffList[i][0]);
+        //}
+        BuffButton.onClick.AddListener(() =>
+        {
+            if(player.stetas.Hp<=0)
+            {
+                return;
+            }
+
+            if (player.mp >= 80)
+            {
+
+                for(int i=0;i<3;i++)
+                {
+                    skillPanel.SkillSet(skillManager.GetSkill());
+
+                }
+                player.mp -= 80;
+
+                player.ResetPlayerMp();
+                skillPanel.gameObject.SetActive(true);
+                Time.timeScale = 0;
+            }
+
+
+
+
+        });
+    }
+
+
+    void LotteryBuff()
+    {
+
+    }
+
+
+
     void FuncInit()
     {
         createEnemyTimeFunc.Add(0, (x) => {
@@ -324,5 +385,7 @@ public class GamePlayManager : MonoBehaviour
     {
         Time.timeScale = 1f;
     }
+
+
 
 }

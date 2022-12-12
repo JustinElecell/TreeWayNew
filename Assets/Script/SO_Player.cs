@@ -16,5 +16,5 @@ public class SO_Player : ScriptableObject
     public int Rec;
 
     public int Overfulfil;
-
+    public float AtkUp;
 }

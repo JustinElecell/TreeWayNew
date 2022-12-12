@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class IteamUI : MonoBehaviour
 {
     public SO_Iteam iteamData;
-
+    public SO_Iteam tmpIteamData;
     public GameObject IteamObj;
 
     Image IteamImage;
@@ -18,6 +18,11 @@ public class IteamUI : MonoBehaviour
 
     private void Start()
     {
+        if(tmpIteamData!=null)
+        {
+            iteamData = Instantiate(tmpIteamData);
+
+        }
         RefreshUI();
         IteamImage = IteamObj.GetComponent<Image>();
         IteanButton = IteamObj.GetComponent<Button>();

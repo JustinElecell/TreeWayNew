@@ -42,6 +42,8 @@ public class GamePlayManager : MonoBehaviour
 
     public Button BuffButton;
 
+    public IteamUI[] SkillButtonLists;
+
     [Header("Skill管理")]
     public SkillManager skillManager;
 
@@ -88,6 +90,21 @@ public class GamePlayManager : MonoBehaviour
         //}
         BuffButton.onClick.AddListener(() =>
         {
+            if(MainManager.instance.TestFlag)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    skillPanel.SkillSet(skillManager.GetSkill());
+
+                }
+                player.mp -= 80;
+
+                player.ResetPlayerMp();
+                skillPanel.gameObject.SetActive(true);
+                Time.timeScale = 0;
+                return;
+            }
+
             if(player.stetas.Hp<=0)
             {
                 return;
@@ -365,7 +382,7 @@ public class GamePlayManager : MonoBehaviour
                     if(tmp.transform.childCount>0)
                     {
                         var iteamObj = tmp.transform.GetChild(0).gameObject;
-
+                        iteamObj.GetComponent<Stetas>().iteam = Skill;
                         iteamObj.transform.SetParent(player.transform.parent.transform);
 
                         iteamObj.SetActive(true);

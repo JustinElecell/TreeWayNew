@@ -16,9 +16,11 @@ MonoBehaviour:
   IteamString: 
   IteamImage: {fileID: 1052521642, guid: e52feb4a5540fff49817f1f7eeb6869e, type: 3}
   type: 2
+  attributesType: 100
   Hp: 50
   Mp: 5
   Atk: 107.03
   Atk_wait: 1
   Speed: 10
+  atkUp: 0
   IteamPerfab: {fileID: 8892595592438941920, guid: 3ecb8105192dd2344ac7a9342cfbed56, type: 3}

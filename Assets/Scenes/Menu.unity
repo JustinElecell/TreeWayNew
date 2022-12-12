@@ -7220,6 +7220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e48026407f43942950c9a43ae0cdeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TestFlag: 1
   TargetCharater: []
   Iteams: []
 --- !u!4 &1244313858

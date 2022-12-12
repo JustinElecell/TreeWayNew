@@ -21,6 +21,7 @@ public class MainManager : MonoBehaviour
         }
     }
 
+    public bool TestFlag;
     public List<string> TargetCharater;
 
     public SO_Iteam[] Iteams;

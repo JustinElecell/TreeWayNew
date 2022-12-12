@@ -35,13 +35,20 @@ public class Stetas : MonoBehaviour
     public ActionType actionType;
     public int roadNo;
 
-    public int WeaponAtkChange(float atk)
+    //public int WeaponAtkChange(float atk)
+    //{
+    //    //( roundup ( ( 玩家基礎攻擊力 * ( 1 + 突破次數 * 突破時攻擊力加成比例 ) * (1+其餘攻擊力buff%) ) * ( 武器傷害 * ( 1 + 武器傷害Buff % ) ) ) ) * ( if ( 觸發翻倍=ture , 2 , 1 ) ) 
+    //    //突破次數 * 突破時攻擊力加成比例已經在遊戲開始時，在Player.cs初始化算在stetas.player.Atk內了
+    //    return ((int)((GamePlayManager.instance.player.stetas.player.Atk  * (1 + GamePlayManager.instance.skillManager.stetasUp.atk/100)) * (atk / 100 * (1 + iteam.atkUp/100))));
+    //}
+
+    public int WeaponAtkChange(SO_Iteam data)
     {
         //( roundup ( ( 玩家基礎攻擊力 * ( 1 + 突破次數 * 突破時攻擊力加成比例 ) * (1+其餘攻擊力buff%) ) * ( 武器傷害 * ( 1 + 武器傷害Buff % ) ) ) ) * ( if ( 觸發翻倍=ture , 2 , 1 ) ) 
         //突破次數 * 突破時攻擊力加成比例已經在遊戲開始時，在Player.cs初始化算在stetas.player.Atk內了
-        return ((int)((GamePlayManager.instance.player.stetas.player.Atk  * (1 + 0)) * (atk / 100 * (1 + 0))));
+        Debug.Log(data.atkUp);
+        return ((int)((GamePlayManager.instance.player.stetas.player.Atk * (1 + GamePlayManager.instance.player.stetas.player.AtkUp/100)) * (data.Atk / 100 * (1 + data.atkUp / 100))));
     }
-
     //false:死    true:還活著
 
     public bool CheckIsAlive()

@@ -73,6 +73,7 @@ public class WeaponMove_Player : MonoBehaviour
         var tmp = GamePlayManager.instance.iteamGround_Player.transform.Find(stetas.iteam.IteamName + "物件池");
 
         gameObject.transform.SetParent(tmp.transform);
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -92,18 +93,18 @@ public class WeaponMove_Player : MonoBehaviour
             switch (otherstetas.type)
             {
                 case Stetas.Type.道具:
-                    otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam.Atk));
+                    otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
                     stetas.Hp -= otherstetas.iteam.Atk;
 
                     break;
                 case Stetas.Type.敵人:
 
-                    otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam.Atk));
+                    otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
                     stetas.Hp -= otherstetas.enemy.Atk;
 
                     break;
                 case Stetas.Type.召喚:
-                    otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam.Atk));
+                    otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
                     stetas.Hp -= otherstetas.iteam.Atk;
                     break;
             }

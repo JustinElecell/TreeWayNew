@@ -15,6 +15,8 @@ public class SkillPanel : MonoBehaviour
         tmp.onClick.AddListener(() => {
             Time.timeScale = 1;
             GamePlayManager.instance.skillPanel.gameObject.SetActive(false);
+            skill.action();
+
             for(int i=0;i<GamePlayManager.instance.skillPanel.transform.childCount;i++)
             {
                 Destroy(GamePlayManager.instance.skillPanel.transform.GetChild(i).gameObject);

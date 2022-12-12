@@ -66,9 +66,14 @@ public class Player : MonoBehaviour
 
         if (stetas.Hp <= 0)
         {
-            GamePlayManager.instance.Pause();
             //StopAllCoroutines();
-            GamePlayManager.instance.GameOver.SetActive(true);
+            if(!MainManager.instance.TestFlag)
+            {
+                GamePlayManager.instance.Pause();
+
+                GamePlayManager.instance.GameOver.SetActive(true);
+
+            }
 
         }
     }

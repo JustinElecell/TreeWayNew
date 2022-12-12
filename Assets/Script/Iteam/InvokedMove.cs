@@ -18,11 +18,12 @@ public class InvokedMove : MonoBehaviour
     public List<GameObject> enemyList = new List<GameObject>();
     float saveTime;
     bool canAttack = true;
+
+    
     private void OnEnable()
     {
 
         coll = GetComponent<BoxCollider>();
-
 
         var tmpPos = new Vector3(GamePlayManager.instance.Rect.rect.size.x / 2, 0+UnityEngine.Random.Range(-20,20), 0);
         gameObject.transform.localPosition = tmpPos;
@@ -46,6 +47,7 @@ public class InvokedMove : MonoBehaviour
     }
     private void Start()
     {
+
         FuncInit();
     }
 
@@ -103,7 +105,7 @@ public class InvokedMove : MonoBehaviour
                 {
                     if(TargetStetas!=null&&TargetStetas.gameObject.activeSelf)
                     {
-                        TargetStetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam.Atk));
+                        TargetStetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
                     }
                     saveTime = Time.time;
                     canAttack = false;

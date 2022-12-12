@@ -9,5 +9,5 @@ public class SkillData
     public string skillEffect;
 
     public int maxLevel;
-
+    public int Weight;
 }

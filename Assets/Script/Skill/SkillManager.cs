@@ -20,6 +20,10 @@ public class SkillManager : MonoBehaviour
     private void Awake()
     {
         SkillInit();
+
+        weightDict.Add(1, 60);
+        weightDict.Add(2, 20);
+        weightDict.Add(3, 20);
     }
     void SkillInit()
     {
@@ -278,38 +282,26 @@ public class SkillManager : MonoBehaviour
 
         skills = new ISkill[skillLists.Count-1];
 
-
-
-
         for (int i=0;i< skills.Length;i++)
         {
             SkillData skillData=new SkillData();
             skillData.skillName = skillLists[i + 1][0];
             skillData.skillEffect = skillLists[i + 1][1];
+            skillData.Weight = int.Parse(skillLists[i + 1][4]);
 
-
-           
-            if(skillLists[i + 1][2]== "-")
+            if (skillLists[i + 1][2]== "-")
             {
                 skillData.maxLevel = 999;
-
             }
             else
             {
                 skillData.maxLevel = int.Parse(skillLists[i + 1][2]);
-
             }
-
             ISkill iSkill = new ISkill();
-
             iSkill.action = SkillFunc[skillData.skillName];
-
-
             skills[i] = iSkill;
             skills[i].data = skillData;
-
         }
-
     }
 
     public ISkill GetSkill()
@@ -317,4 +309,73 @@ public class SkillManager : MonoBehaviour
         return skills[UnityEngine.Random.Range(0, skills.Length)];
     }
 
+    //權重
+    private Dictionary<int, int> weightDict = new Dictionary<int, int>();
+
+    private int GetTotalWeight()
+    {
+        int totalWeight = 0;
+        foreach (var weight in weightDict.Values)
+        {
+            totalWeight += weight;
+        }
+        return totalWeight;
+    }
+
+    private int GetRanId()
+    {
+        int ranNum = UnityEngine.Random.Range(0, GetTotalWeight() + 1);
+        int counter = 0;
+        foreach (var temp in weightDict)
+        {
+            counter += temp.Value;
+            if (ranNum <= counter)
+            {
+                Debug.Log("隨機數：" + ranNum + ",隨機id：" + temp.Key);
+                return temp.Key;
+            }
+        }
+        Debug.LogError("沒有隨機到，隨機數為1：" + ranNum);
+        return 1;
+    }
+
+    public List<ISkill> GetSkillLists()
+    {
+        List<ISkill> tmpskillLists=new List<ISkill>();
+
+        List<ISkill> skillLists=new List<ISkill>();
+
+        skillLists.Clear();
+
+        // 技能數量小於3時，無限抽取
+        while (skillLists.Count < 3)
+        {
+            tmpskillLists.Clear();
+            // 抽取權重值
+            var tmpID = GetRanId();
+            // 將符合權重值的技能追加進暫時清單
+            foreach(var tmpdata in skills)
+            {
+                if (tmpdata.data.Weight== tmpID)
+                {
+                    tmpskillLists.Add(tmpdata);
+                    // 檢查已抽過技能有抽過就從待選名單刪除，確保可抽選清單內都是沒有已抽過內容
+                    foreach (var data in skillLists)
+                    {
+                        if (data.data.skillName == tmpdata.data.skillName)
+                        {
+                            tmpskillLists.Remove(tmpdata);
+                        }
+                    }
+                }
+            }
+
+            // 暫時清單不為零時，隨機抽取清單中一份技能加進真正抽取內容
+            if (tmpskillLists.Count>0)
+            {
+                skillLists.Add(tmpskillLists[UnityEngine.Random.Range(0, tmpskillLists.Count-1)]);
+            }
+        }
+        return skillLists;
+    }
 }

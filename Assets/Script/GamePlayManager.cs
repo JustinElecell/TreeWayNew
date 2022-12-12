@@ -34,7 +34,6 @@ public class GamePlayManager : MonoBehaviour
     public SO_Iteam Skill;
     public Color White;
     public Color Green;
-    public Image[] UI;
     public GameObject GameOver;
 
     public List<List<string>> BuffList;
@@ -92,11 +91,13 @@ public class GamePlayManager : MonoBehaviour
         {
             if(MainManager.instance.TestFlag)
             {
-                for (int i = 0; i < 3; i++)
-                {
-                    skillPanel.SkillSet(skillManager.GetSkill());
+                //for (int i = 0; i < 3; i++)
+                //{
+                //    skillPanel.SkillSet(skillManager.GetSkills());
 
-                }
+                //}
+                skillPanel.SkillSet(skillManager.GetSkillLists());
+
                 player.mp -= 80;
 
                 player.ResetPlayerMp();
@@ -113,11 +114,11 @@ public class GamePlayManager : MonoBehaviour
             if (player.mp >= 80)
             {
 
-                for(int i=0;i<3;i++)
-                {
-                    skillPanel.SkillSet(skillManager.GetSkill());
+                //for(int i=0;i<3;i++)
+                //{
+                //    skillPanel.SkillSet(skillManager.GetSkill());
 
-                }
+                //}
                 player.mp -= 80;
 
                 player.ResetPlayerMp();

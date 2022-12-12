@@ -45,9 +45,9 @@ public class IteamUI : MonoBehaviour
             //刷出武器
             //GamePlayManager.instance.PAttackInit(iteamData);
 
-            for(int i=0;i<GamePlayManager.instance.UI.Length;i++)
+            for(int i=0;i<GamePlayManager.instance.SkillButtonLists.Length;i++)
             {
-                GamePlayManager.instance.UI[i].color = GamePlayManager.instance.White;
+                GamePlayManager.instance.SkillButtonLists[i].gameObject.GetComponent<Image>().color = GamePlayManager.instance.White;
             }
 
             gameObject.GetComponent<Image>().color = GamePlayManager.instance.Green;

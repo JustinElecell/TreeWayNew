@@ -16,18 +16,32 @@ public class IteamUI : MonoBehaviour
 
 
 
-    private void Start()
+    public  void Init(SO_Iteam data)
     {
-        if(tmpIteamData!=null)
+        tmpIteamData = data;
+
+        if (tmpIteamData!=null)
         {
             iteamData = Instantiate(tmpIteamData);
 
         }
+
         RefreshUI();
         IteamImage = IteamObj.GetComponent<Image>();
         IteanButton = IteamObj.GetComponent<Button>();
 
+        if(iteamData!=null)
+        {
         IteamImage.sprite = iteamData.IteamImage;
+            this.gameObject.SetActive(true);
+        }
+        else
+        {
+            this.gameObject.SetActive(false);
+            return;
+        }
+
+
         SkillLimitText.text = iteamData.Mp.ToString();
         GameObject tmp = new GameObject(iteamData.IteamName + "物件池");
         tmp.transform.SetParent(GamePlayManager.instance.iteamGround_Player.transform);

@@ -25,6 +25,11 @@ public class IteamPanel : MonoBehaviour
     public Text SPD;
     public Text Special;
     public Color color;
+    public Image image;
+
+    public Button ChangeButton;
+
+    SO_Iteam targetIteam;
     private void Start()
     {
         Debug.Log("Init");
@@ -39,7 +44,7 @@ public class IteamPanel : MonoBehaviour
                 for(int r=0;r< Panels.Length;r++)
                 {
                     Panels[r].gameObject.transform.parent.transform.parent.gameObject.SetActive(false);
-                    Buttons[r].gameObject.GetComponent<Image>().color = color;
+                    Buttons[r].gameObject.GetComponent<Image>().color = Color.white;
                 }
                 Panels[no].gameObject.transform.parent.transform.parent.gameObject.SetActive(true);
                 Buttons[no].gameObject.GetComponent<Image>().color = color;
@@ -55,16 +60,17 @@ public class IteamPanel : MonoBehaviour
                 case "武具":
                     var tmp = Instantiate(IteamsObjButton, Panels[0]);
                     int no = i;
+
+                    var data = Resources.Load<SO_Iteam>("Iteam/Weapon/" + IteamLists[no][0]);
+                    tmp.gameObject.GetComponent<Image>().sprite = data.IteamImage;
+
                     tmp.onClick.AddListener(() => {
                         
-                        for(int r=0;r< Panels[0].childCount;r++)
-                        {
-                            Panels[0].GetChild(r).gameObject.GetComponent<Image>().color = Color.white;
-                        }
+
 
                         Debug.Log(IteamLists[no][0]);
-                        tmp.gameObject.GetComponent<Image>().color = color;
                         SetText(no);
+
 
 
                     });
@@ -74,12 +80,8 @@ public class IteamPanel : MonoBehaviour
                     var tmp_M = Instantiate(IteamsObjButton, Panels[1]);
                     int no_M = i;
                     tmp_M.onClick.AddListener(() => {
-                        for (int r = 0; r < Panels[1].childCount; r++)
-                        {
-                            Panels[1].GetChild(r).gameObject.GetComponent<Image>().color = Color.white;
-                        }
+
                         Debug.Log(IteamLists[no_M][0]);
-                        tmp_M.gameObject.GetComponent<Image>().color = color;
 
                         SetText(no_M);
 
@@ -90,13 +92,9 @@ public class IteamPanel : MonoBehaviour
                     var tmp_I = Instantiate(IteamsObjButton, Panels[2]);
                     int no_I = i;
                     tmp_I.onClick.AddListener(() => {
-                        for (int r = 0; r < Panels[2].childCount; r++)
-                        {
-                            Panels[2].GetChild(r).gameObject.GetComponent<Image>().color = Color.white;
-                        }
+
                         Debug.Log(IteamLists[no_I][0]);
                         SetText(no_I);
-                        tmp_I.gameObject.GetComponent<Image>().color = color;
 
 
                     });
@@ -107,6 +105,14 @@ public class IteamPanel : MonoBehaviour
         SetText(1);
         Buttons[0].gameObject.GetComponent<Image>().color = color;
         Panels[0].GetChild(0).GetComponent<Image>().color = color;
+
+        ChangeButton.onClick.AddListener(() => {
+
+            Debug.Log(targetIteam);
+            //var tmp = Resources.Load<SO_Iteam>("Iteam/Weapon/" + IteamLists[no][0]);
+            MainManager.instance.skillIteams[MainManager.instance.targetSkillNo] = targetIteam;
+            MainManager.instance.TargetSkillButton[MainManager.instance.targetSkillNo].gameObject.GetComponent<Image>().sprite = targetIteam.IteamImage;
+        });
     }
 
     void SetText(int no)
@@ -118,7 +124,27 @@ public class IteamPanel : MonoBehaviour
         SPD.text = IteamLists[no][10];
         Special.text = IteamLists[no][12];
 
+        switch (IteamLists[no][2])
+        {
+            case "武具":
+                targetIteam = Resources.Load<SO_Iteam>("Iteam/Weapon/" + IteamLists[no][0]);
+                break;
+            case "魔法":
 
+                break;
+            case "召喚":
+                targetIteam = Resources.Load<SO_Iteam>("Iteam/Invoked/" + IteamLists[no][0]);
+
+                break;
+        }
+
+        Debug.Log(targetIteam);
+
+        if (targetIteam != null)
+        {
+            image.sprite = targetIteam.IteamImage;
+
+        }
 
 
     }

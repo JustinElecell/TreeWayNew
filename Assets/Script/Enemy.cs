@@ -32,8 +32,8 @@ public class Enemy : MonoBehaviour
 
         //var tmpHp = ((float)(20 * 1 + (1 - 1) * 0.1)) * (1 + (GamePlayManager.instance.Wave - 1)  *0.2)*(stetas.enemy.hp/100);
 
-        //roundup( ( 50 * ( 1 + ( ( 關卡編號 - 1 ) *0.1 ) ) ) * 該怪物血量調整比 * ( 1 + ( ( 當前波次編號 - 1 ) * 0.25 ) ) )
-        var tmpHp = (50 * (1 + ((1 - 1) * 0.1))) *(stetas.enemy.hp/100)* (1 + ((GamePlayManager.instance.Wave - 1) * 0.25));
+        //roundup((80 * (1 + ((關卡編號 - 1) * 0.1))) * 該怪物血量調整比 * (1 + ((當前波次編號 - 1) * 0.25)))
+        var tmpHp = (80 * (1 + ((1 - 1) * 0.1))) *(stetas.enemy.hp/100)* (1 + ((GamePlayManager.instance.Wave - 1) * 0.25));
 
         var tmpHpFloat =((float)tmpHp);
 
@@ -169,7 +169,7 @@ public class Enemy : MonoBehaviour
 
         gameObject.transform.SetParent(tmp.transform);
 
-
+        InvokedList.Clear();
     }
 
     IEnumerator Attack()

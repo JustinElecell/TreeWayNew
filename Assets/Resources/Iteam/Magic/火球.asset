@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cedb7b56564544945a3700fec1bb907e, type: 3}
+  m_Name: "\u706B\u7403"
+  m_EditorClassIdentifier: 
+  IteamName: "\u4E09\u53C9\u621F"
+  IteamString: 
+  IteamImage: {fileID: 21300000, guid: e2219e712ce289740b1adf6f1f5447a5, type: 3}
+  type: 0
+  attributesType: 1
+  Hp: 33
+  Mp: 33
+  Atk: 643.93
+  Atk_wait: 0
+  Speed: 3
+  atkUp: 0
+  IteamPerfab: {fileID: 905771132072046713, guid: 31ca9d21c7feed4449e653a8fedb0b91, type: 3}

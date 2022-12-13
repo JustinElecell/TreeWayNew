@@ -1,0 +1,1224 @@
+fileFormatVersion: 2
+guid: 3b9bd5db5ea51644faf28ea8b7ffe345
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_0
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 1169
+        width: 131
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ad9cba976c1d8546bb5d1e0c1c42c74
+      internalID: 2135398541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_1
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 1177
+        width: 123
+        height: 223
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcaea92ac7eabef4691a2c6267505476
+      internalID: 602232621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_2
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 1186
+        width: 136
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e92faefc5f2d624e954cd91bd22fbca
+      internalID: -1587620245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_3
+      rect:
+        serializedVersion: 2
+        x: 968
+        y: 1194
+        width: 128
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74399b1c9bfc37a468fbf824b882b495
+      internalID: -1133644537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_4
+      rect:
+        serializedVersion: 2
+        x: 1277
+        y: 1196
+        width: 129
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c97c117336e2b224a99ba4abb3b39e88
+      internalID: -1210819778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_5
+      rect:
+        serializedVersion: 2
+        x: 1651
+        y: 1131
+        width: 210
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 984d447c5d436184a89027bcf7656595
+      internalID: -1852279075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_6
+      rect:
+        serializedVersion: 2
+        x: 1961
+        y: 1135
+        width: 206
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ec4453c48cebab49853bbb2c3ca367c
+      internalID: 1944559853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_7
+      rect:
+        serializedVersion: 2
+        x: 2265
+        y: 1145
+        width: 189
+        height: 257
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef88a1456ee14cb478f4ab7d1b4e6bdf
+      internalID: 958573034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_8
+      rect:
+        serializedVersion: 2
+        x: 2538
+        y: 1173
+        width: 135
+        height: 223
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaec71eb67681ab4e9b7966b3235b78d
+      internalID: -1479605071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_9
+      rect:
+        serializedVersion: 2
+        x: 2846
+        y: 1171
+        width: 131
+        height: 225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d26942c46d7db4a44acca5f753cca0a9
+      internalID: 1773772798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_10
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 888
+        width: 131
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76f92a4501e45a74690270711653c2a4
+      internalID: 255638148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_11
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 884
+        width: 130
+        height: 219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cb8c29fa26792c4385466e2ae9571c8
+      internalID: 1552027148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_12
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 882
+        width: 129
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b677732276a717a40a6329dd125b31d0
+      internalID: -2065032055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_13
+      rect:
+        serializedVersion: 2
+        x: 975
+        y: 880
+        width: 129
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fb86418396672c42aff10c628a95881
+      internalID: -758767920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_14
+      rect:
+        serializedVersion: 2
+        x: 1294
+        y: 879
+        width: 129
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a9dd82cff4157c4197fc373e945c326
+      internalID: -380950962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_15
+      rect:
+        serializedVersion: 2
+        x: 1623
+        y: 901
+        width: 204
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75eeda4cca790e54e8c8bdfaf2e5ec93
+      internalID: -230622658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_16
+      rect:
+        serializedVersion: 2
+        x: 1944
+        y: 884
+        width: 204
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 028d1a4d7941bdc41b8f6ccf9f4f877e
+      internalID: -2058463925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_17
+      rect:
+        serializedVersion: 2
+        x: 2263
+        y: 867
+        width: 202
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c1746ebd8e376e42a1dcb2d291d5afd
+      internalID: -370958987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_18
+      rect:
+        serializedVersion: 2
+        x: 2574
+        y: 867
+        width: 204
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5de33c4dc24013c4cbd93bf425d59136
+      internalID: 1017129459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_19
+      rect:
+        serializedVersion: 2
+        x: 2884
+        y: 867
+        width: 204
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a02e258812f5ce14da74a11a8026d795
+      internalID: 1465614186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_20
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 605
+        width: 131
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c88571e36a1e8146a62fb610d3d01ae
+      internalID: 247401651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_21
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 616
+        width: 124
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be95b7a9eb9d878428bc8e67c53895e3
+      internalID: -1096854833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_22
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 618
+        width: 123
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0468537ce5188d04691e54fb6cf20031
+      internalID: 331523094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_23
+      rect:
+        serializedVersion: 2
+        x: 983
+        y: 618
+        width: 124
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 084098b50631abb488e6d52cd6965100
+      internalID: -97598299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_24
+      rect:
+        serializedVersion: 2
+        x: 1264
+        y: 609
+        width: 155
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ef2d113f4cf4074889e6cbcc869a8d5
+      internalID: 974270057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_25
+      rect:
+        serializedVersion: 2
+        x: 1604
+        y: 605
+        width: 130
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bddae19db48c7e047aaaea8d0d9d3990
+      internalID: -27042217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_26
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 324
+        width: 131
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0227fa16631b73449a00052a51888e88
+      internalID: 1599766366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_27
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 320
+        width: 125
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8df59d85774b7d47a12da1ccae8fe92
+      internalID: -184352880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_28
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 318
+        width: 122
+        height: 234
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6bbaca34706a46409517faa6eb5be70
+      internalID: -1264413744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_29
+      rect:
+        serializedVersion: 2
+        x: 986
+        y: 318
+        width: 125
+        height: 232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9f392810863458418034762345660db
+      internalID: 1328378985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_30
+      rect:
+        serializedVersion: 2
+        x: 1298
+        y: 318
+        width: 125
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf3a2eb92b9614d4292d5de9a40b842e
+      internalID: 257739566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_31
+      rect:
+        serializedVersion: 2
+        x: 1611
+        y: 318
+        width: 123
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21c742f48806fa049b0207fa888bd76f
+      internalID: 1129064815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_32
+      rect:
+        serializedVersion: 2
+        x: 1923
+        y: 320
+        width: 121
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e267c9ee07e41b0489ac0f50d3d2577e
+      internalID: -122687293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_33
+      rect:
+        serializedVersion: 2
+        x: 2233
+        y: 324
+        width: 123
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e3a62d4fb589e443b1123e93ab73961
+      internalID: -337252797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_34
+      rect:
+        serializedVersion: 2
+        x: 2544
+        y: 325
+        width: 123
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7b74f0cf4694bf49a5c180833c469dd
+      internalID: 2061473667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_35
+      rect:
+        serializedVersion: 2
+        x: 2833
+        y: 329
+        width: 144
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ec9385b768bbb34ab4a8e78cfdeda48
+      internalID: 1917574079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_36
+      rect:
+        serializedVersion: 2
+        x: 3131
+        y: 329
+        width: 157
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fc682a6b1a296749873a5a57c0ced3e
+      internalID: 1420857539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_37
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 329
+        width: 144
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2c689b920ace03489e343d839c71a96
+      internalID: 1453651647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_38
+      rect:
+        serializedVersion: 2
+        x: 3769
+        y: 329
+        width: 142
+        height: 214
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62ca8221a7c70ab4a97fc79cb145a0c8
+      internalID: 17738397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_39
+      rect:
+        serializedVersion: 2
+        x: 4085
+        y: 326
+        width: 136
+        height: 217
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc5f27205a3ae2b40a828155ab0c585d
+      internalID: -430326026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_40
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 50
+        width: 132
+        height: 223
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4924e2632caeff54d91f7d0db4368075
+      internalID: 1791269436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_41
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 48
+        width: 127
+        height: 225
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 750c4d991320d784b8ec345181ee801b
+      internalID: -556811427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_42
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 46
+        width: 130
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 978f08a83e888ad41a471b6a797b1ed3
+      internalID: 2119994484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_43
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 48
+        width: 129
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c48acdcb3f59ac4e813ef8cbd2ac6f0
+      internalID: 596680028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_44
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 52
+        width: 129
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2243cb2d0ea16c64193ff0a0881428dc
+      internalID: 1964696367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_45
+      rect:
+        serializedVersion: 2
+        x: 1589
+        y: 56
+        width: 151
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05a9ad3c739176b4ab128053a2cf5ee3
+      internalID: -2050587289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_46
+      rect:
+        serializedVersion: 2
+        x: 1885
+        y: 59
+        width: 167
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a81e524d94b188d40a187b9b2a7383da
+      internalID: 1608174593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_47
+      rect:
+        serializedVersion: 2
+        x: 2212
+        y: 59
+        width: 151
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cf82b1e3edbbe44091f905e1ddac4b6
+      internalID: 666086074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monster_100_Hamy Alsapphire_48
+      rect:
+        serializedVersion: 2
+        x: 2529
+        y: 54
+        width: 144
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28c6a6acf58828a488f66871623131d3
+      internalID: 1097952723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Monster_100_Hamy Alsapphire_23: -97598299
+      Monster_100_Hamy Alsapphire_44: 1964696367
+      Monster_100_Hamy Alsapphire_41: -556811427
+      Monster_100_Hamy Alsapphire_9: 1773772798
+      Monster_100_Hamy Alsapphire_10: 255638148
+      Monster_100_Hamy Alsapphire_16: -2058463925
+      Monster_100_Hamy Alsapphire_28: -1264413744
+      Monster_100_Hamy Alsapphire_29: 1328378985
+      Monster_100_Hamy Alsapphire_4: -1210819778
+      Monster_100_Hamy Alsapphire_22: 331523094
+      Monster_100_Hamy Alsapphire_45: -2050587289
+      Monster_100_Hamy Alsapphire_3: -1133644537
+      Monster_100_Hamy Alsapphire_33: -337252797
+      Monster_100_Hamy Alsapphire_40: 1791269436
+      Monster_100_Hamy Alsapphire_42: 2119994484
+      Monster_100_Hamy Alsapphire_39: -430326026
+      Monster_100_Hamy Alsapphire_13: -758767920
+      Monster_100_Hamy Alsapphire_0: 2135398541
+      Monster_100_Hamy Alsapphire_8: -1479605071
+      Monster_100_Hamy Alsapphire_11: 1552027148
+      Monster_100_Hamy Alsapphire_6: 1944559853
+      Monster_100_Hamy Alsapphire_15: -230622658
+      Monster_100_Hamy Alsapphire_20: 247401651
+      Monster_100_Hamy Alsapphire_32: -122687293
+      Monster_100_Hamy Alsapphire_34: 2061473667
+      Monster_100_Hamy Alsapphire_47: 666086074
+      Monster_100_Hamy Alsapphire_36: 1420857539
+      Monster_100_Hamy Alsapphire_1: 602232621
+      Monster_100_Hamy Alsapphire_30: 257739566
+      Monster_100_Hamy Alsapphire_21: -1096854833
+      Monster_100_Hamy Alsapphire_24: 974270057
+      Monster_100_Hamy Alsapphire_25: -27042217
+      Monster_100_Hamy Alsapphire_19: 1465614186
+      Monster_100_Hamy Alsapphire_46: 1608174593
+      Monster_100_Hamy Alsapphire_43: 596680028
+      Monster_100_Hamy Alsapphire_2: -1587620245
+      Monster_100_Hamy Alsapphire_38: 17738397
+      Monster_100_Hamy Alsapphire_18: 1017129459
+      Monster_100_Hamy Alsapphire_37: 1453651647
+      Monster_100_Hamy Alsapphire_35: 1917574079
+      Monster_100_Hamy Alsapphire_26: 1599766366
+      Monster_100_Hamy Alsapphire_14: -380950962
+      Monster_100_Hamy Alsapphire_5: -1852279075
+      Monster_100_Hamy Alsapphire_17: -370958987
+      Monster_100_Hamy Alsapphire_7: 958573034
+      Monster_100_Hamy Alsapphire_27: -184352880
+      Monster_100_Hamy Alsapphire_31: 1129064815
+      Monster_100_Hamy Alsapphire_12: -2065032055
+      Monster_100_Hamy Alsapphire_48: 1097952723
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

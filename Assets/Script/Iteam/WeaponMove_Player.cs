@@ -73,7 +73,7 @@ public class WeaponMove_Player : MonoBehaviour
         var tmp = GamePlayManager.instance.iteamGround_Player.transform.Find(stetas.iteam.IteamName + "物件池");
 
         gameObject.transform.SetParent(tmp.transform);
-
+        targetList.Clear();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -87,31 +87,36 @@ public class WeaponMove_Player : MonoBehaviour
 
         }
 
-        for (int i = 0; i < targetList.Count; i++)
+        for (int i = targetList.Count-1; i >= 0; i--)
         {
-            var otherstetas = targetList[i].GetComponent<Stetas>();
-            switch (otherstetas.type)
+            if(targetList.Count> 0)
             {
-                case Stetas.Type.道具:
-                    otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
-                    stetas.Hp -= otherstetas.iteam.Atk;
+                var otherstetas = targetList[i].GetComponent<Stetas>();
+                switch (otherstetas.type)
+                {
+                    case Stetas.Type.道具:
+                        otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
+                        stetas.Hp -= otherstetas.iteam.Atk;
 
-                    break;
-                case Stetas.Type.敵人:
+                        break;
+                    case Stetas.Type.敵人:
+                        Debug.Log(otherstetas.name);
+                        otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
+                        stetas.Hp -= otherstetas.enemy.Atk;
 
-                    otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
-                    stetas.Hp -= otherstetas.enemy.Atk;
-
-                    break;
-                case Stetas.Type.召喚:
-                    otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
-                    stetas.Hp -= otherstetas.iteam.Atk;
-                    break;
+                        break;
+                    case Stetas.Type.召喚:
+                        otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
+                        stetas.Hp -= otherstetas.iteam.Atk;
+                        break;
+                }
+                if (stetas.Hp <= 0)
+                {
+                    ReSet();
+                }
             }
-            if(stetas.Hp<=0)
-            {
-                ReSet();
-            }
+            
+
         }
 
 

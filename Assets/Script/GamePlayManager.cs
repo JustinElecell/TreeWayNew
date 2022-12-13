@@ -47,7 +47,13 @@ public class GamePlayManager : MonoBehaviour
     public SkillManager skillManager;
 
 
-
+    private void Start()
+    {
+        for(int i=0;i< SkillButtonLists.Length;i++)
+        {
+            SkillButtonLists[i].Init(MainManager.instance.skillIteams[i]);
+        }
+    }
     #region 初始化
     private void OnEnable()
     {
@@ -133,10 +139,6 @@ public class GamePlayManager : MonoBehaviour
     }
 
 
-    void LotteryBuff()
-    {
-
-    }
 
 
 
@@ -214,8 +216,8 @@ public class GamePlayManager : MonoBehaviour
             tmpRange = UnityEngine.Random.Range(0, 6);
         }
 
-        //  2 * 該怪物出現率調整比 ( 怪物列表設定 ) * 該怪物出現量調整比 ( 關卡比例設定，如A怪70%/B怪30% ) * ( 1 + ( 當前波次編號 - 1  ) * 0.2 )
-        float tmpTime =((float)(2* enemyData[enemyNo].generationRate*0.5* enemyCountInit));
+        //  1 * 該怪物出現率調整比 ( 怪物列表設定 ) * 該怪物出現量調整比 ( 關卡比例設定，如A怪70%/B怪30% ) * ( 1 + ( 當前波次編號 - 1  ) * 0.2 )
+        float tmpTime =((float)(1* enemyData[enemyNo].generationRate*0.5* enemyCountInit));
 
         tmpTime = 1 / tmpTime;
 

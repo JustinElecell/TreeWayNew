@@ -79,6 +79,9 @@ public class IteamPanel : MonoBehaviour
 
                     var tmp_M = Instantiate(IteamsObjButton, Panels[1]);
                     int no_M = i;
+                    var data_M = Resources.Load<SO_Iteam>("Iteam/Magic/" + IteamLists[no_M][0]);
+                    tmp_M.gameObject.GetComponent<Image>().sprite = data_M.IteamImage;
+
                     tmp_M.onClick.AddListener(() => {
 
                         Debug.Log(IteamLists[no_M][0]);
@@ -130,6 +133,7 @@ public class IteamPanel : MonoBehaviour
                 targetIteam = Resources.Load<SO_Iteam>("Iteam/Weapon/" + IteamLists[no][0]);
                 break;
             case "魔法":
+                targetIteam = Resources.Load<SO_Iteam>("Iteam/Magic/" + IteamLists[no][0]);
 
                 break;
             case "召喚":

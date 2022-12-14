@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cedb7b56564544945a3700fec1bb907e, type: 3}
   m_Name: "\u6FC0\u96FB"
   m_EditorClassIdentifier: 
-  IteamName: "\u4E09\u53C9\u621F"
+  IteamName: "\u6FC0\u96FB"
   IteamString: 
-  IteamImage: {fileID: 21300000, guid: e2219e712ce289740b1adf6f1f5447a5, type: 3}
-  type: 0
-  attributesType: 1
-  Hp: 33
-  Mp: 33
-  Atk: 643.93
+  IteamImage: {fileID: 21300000, guid: ce1f3a985d1fa0f4f82a2ec1a0a22332, type: 3}
+  type: 1
+  attributesType: 5
+  Hp: 1
+  Mp: 85
+  Atk: 1025.35
   Atk_wait: 0
-  Speed: 3
+  Speed: 0.7
   atkUp: 0
-  IteamPerfab: {fileID: 905771132072046713, guid: 31ca9d21c7feed4449e653a8fedb0b91, type: 3}
+  IteamPerfab: {fileID: 905771132072046713, guid: 70e6efc88ddda2345aaf0a650c68da29, type: 3}

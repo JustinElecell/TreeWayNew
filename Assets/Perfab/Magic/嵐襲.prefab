@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 22681323
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e2219e712ce289740b1adf6f1f5447a5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fb0102705b7b3fc4ea81ac03bf40ab1f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
   type: 0
   hpBar: {fileID: 0}
   player: {fileID: 0}
-  iteam: {fileID: 11400000, guid: 18d5634c6a8142a4a9dd252fbb612b88, type: 2}
+  iteam: {fileID: 11400000, guid: 2abfd184a2c0b3b4c930b56d0ff1f6a9, type: 2}
   enemy: {fileID: 0}
   BossHpBarFlag: 0
   Hp: 0

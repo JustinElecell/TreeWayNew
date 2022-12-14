@@ -131,7 +131,7 @@ MonoBehaviour:
   type: 0
   hpBar: {fileID: 0}
   player: {fileID: 0}
-  iteam: {fileID: 11400000, guid: 18d5634c6a8142a4a9dd252fbb612b88, type: 2}
+  iteam: {fileID: 11400000, guid: 13bf948ab93e54c4ea6739e81217aea4, type: 2}
   enemy: {fileID: 0}
   BossHpBarFlag: 0
   Hp: 0

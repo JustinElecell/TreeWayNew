@@ -4871,13 +4871,16 @@ MonoBehaviour:
   hpBar: {fileID: 0}
   player: {fileID: 0}
   iteam: {fileID: 0}
-  test: {fileID: 0}
+  Skill: {fileID: 0}
   enemy: {fileID: 0}
   BossHpBarFlag: 0
+  CantMoveCount: 0
+  repelMax: 1
   Hp: 0
   HpMax: 0
   actionType: 0
   roadNo: 0
+  saveTime: 0
 --- !u!1 &747626370
 GameObject:
   m_ObjectHideFlags: 0
@@ -5350,13 +5353,16 @@ MonoBehaviour:
   hpBar: {fileID: 0}
   player: {fileID: 0}
   iteam: {fileID: 0}
-  test: {fileID: 0}
+  Skill: {fileID: 0}
   enemy: {fileID: 0}
   BossHpBarFlag: 0
+  CantMoveCount: 0
+  repelMax: 1
   Hp: 0
   HpMax: 0
   actionType: 0
   roadNo: 0
+  saveTime: 0
 --- !u!1 &840309252
 GameObject:
   m_ObjectHideFlags: 0
@@ -5617,13 +5623,16 @@ MonoBehaviour:
   hpBar: {fileID: 0}
   player: {fileID: 0}
   iteam: {fileID: 0}
-  test: {fileID: 0}
+  Skill: {fileID: 0}
   enemy: {fileID: 0}
   BossHpBarFlag: 0
+  CantMoveCount: 0
+  repelMax: 1
   Hp: 0
   HpMax: 0
   actionType: 0
   roadNo: 0
+  saveTime: 0
 --- !u!1 &891382033
 GameObject:
   m_ObjectHideFlags: 0
@@ -7575,13 +7584,16 @@ MonoBehaviour:
   hpBar: {fileID: 0}
   player: {fileID: 0}
   iteam: {fileID: 0}
-  test: {fileID: 0}
+  Skill: {fileID: 0}
   enemy: {fileID: 0}
   BossHpBarFlag: 0
+  CantMoveCount: 0
+  repelMax: 1
   Hp: 0
   HpMax: 0
   actionType: 0
   roadNo: 0
+  saveTime: 0
 --- !u!1 &1324598500
 GameObject:
   m_ObjectHideFlags: 0
@@ -8821,13 +8833,16 @@ MonoBehaviour:
   hpBar: {fileID: 0}
   player: {fileID: 0}
   iteam: {fileID: 0}
-  test: {fileID: 0}
+  Skill: {fileID: 0}
   enemy: {fileID: 0}
   BossHpBarFlag: 0
+  CantMoveCount: 0
+  repelMax: 1
   Hp: 0
   HpMax: 0
   actionType: 0
   roadNo: 0
+  saveTime: 0
 --- !u!1 &1578978891
 GameObject:
   m_ObjectHideFlags: 0

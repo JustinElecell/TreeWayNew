@@ -15,8 +15,10 @@ public class Stetas : MonoBehaviour
     {
         攻擊,
         移動,
-        不能動作
+        不能動作,
+        技能時
     }
+
 
     public Type type;
     public Image hpBar;
@@ -32,6 +34,7 @@ public class Stetas : MonoBehaviour
     public bool BossHpBarFlag;
 
     public float CantMoveCount;
+    public float repelMax=1f;
 
     [Header("共通用")]
     public float Hp;

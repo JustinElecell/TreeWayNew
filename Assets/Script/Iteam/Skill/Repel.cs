@@ -30,6 +30,7 @@ public class Repel : IteamSkillBase
 
         obj.GetComponent<Stetas>().CantMoveCount = 0.05f;
         obj.GetComponent<Stetas>().saveTime = Time.time;
+        obj.GetComponent<Stetas>().repelMax = Max;
         obj.GetComponent<Stetas>().actionType = Stetas.ActionType.不能動作;
         objList.Add(obj);
         for (int i = 0; i < 5; i++)

@@ -92,8 +92,9 @@ public class Player : MonoBehaviour
         {
             if (mp < mpMax)
             {
-                //MP恢復率(每秒回復多少MP)=( 10 * ( 1 + Buff合計 ) ) * ( 1 + ( 當前等級 - 1  ) * 0.2 )
-                var tmpMpUp = (stetas.player.MpUp * (1 + 0)) * 1 + ((stetas.player.Level - 1) * 0.2);
+                //(角色REC(魔力回復速度) * (1 + Buff合計)) * (1 + (當前等級 - 1) * 0.2)              ※此處當前等級意旨「關卡內透過消耗MP抽取Buff的次數，初始值為0」
+
+                var tmpMpUp = (stetas.player.MpUp * (1 + 0)) * (1 + (GamePlayManager.instance.buffCount) * 0.2);
                 mp += ((float)(tmpMpUp));
 
 

@@ -18,8 +18,8 @@ MonoBehaviour:
   type: 1
   attributesType: 2
   Hp: 150
-  Mp: 120
-  Atk: 890.17
+  Mp: 1
+  Atk: 400
   Atk_wait: 0
   Speed: 10
   atkUp: 0

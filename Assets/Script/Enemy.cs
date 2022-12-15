@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     public Stetas stetas;
 
     BoxCollider coll;
-    float speed = 0;
+    float speed,speedMax = 0;
 
 
 
@@ -28,9 +28,7 @@ public class Enemy : MonoBehaviour
         coll = GetComponent<BoxCollider>();
         var tmpPos = new Vector3(-GamePlayManager.instance.Rect.rect.size.x / 2, 0, 0);
         gameObject.transform.localPosition = tmpPos;
-        speed = GamePlayManager.instance.Rect.rect.size.x / stetas.enemy.speed;
-
-        //var tmpHp = ((float)(20 * 1 + (1 - 1) * 0.1)) * (1 + (GamePlayManager.instance.Wave - 1)  *0.2)*(stetas.enemy.hp/100);
+        speedMax = GamePlayManager.instance.Rect.rect.size.x / stetas.enemy.speed;
 
         //roundup((80 * (1 + ((關卡編號 - 1) * 0.1))) * 該怪物血量調整比 * (1 + ((當前波次編號 - 1) * 0.25)))
         var tmpHp = (80 * (1 + ((1 - 1) * 0.1))) *(stetas.enemy.hp/100)* (1 + ((GamePlayManager.instance.Wave - 1) * 0.25));
@@ -46,9 +44,36 @@ public class Enemy : MonoBehaviour
         stetas.hpBar.gameObject.SetActive(false);
         stetas.hpBar.fillAmount = 1;
         canAttack = true;
+        StartCoroutine(RunSpeedUp());
     }
 
+    IEnumerator RunSpeedUp()
+    {
+        while(this.gameObject.activeSelf)
+        {
+            if(stetas.actionType== Stetas.ActionType.移動&&speed==0)
+            {
+                var tmp = speedMax - speed;
+                for(int i=0;i<5;i++)
+                {
+                    
+                    speed += tmp / 5;
+                    yield return new WaitForSeconds(1f / 5);
+                }
+            }
+            else
+            {
+                
+                if(speed>speedMax)
+                {
+                    speed = speedMax;
+                }
+                yield return new WaitForSeconds(0.05f+(stetas.repelMax-2)*0.02f);
 
+            }
+
+        }
+    }
     private void Start()
     {
         FuncInit();
@@ -59,6 +84,7 @@ public class Enemy : MonoBehaviour
         ActionTypeFunc.Add(Stetas.ActionType.移動, () => {
             if (gameObject.transform.localPosition.x < GamePlayManager.instance.Rect.rect.size.x / 2 - 150)
             {
+
                 // 移動
                 var pos = gameObject.transform.localPosition;
                 pos.x += (speed * Time.deltaTime);
@@ -94,6 +120,8 @@ public class Enemy : MonoBehaviour
                 {
                     if (InvokedList.Count <= 0)
                     {
+                        speed = 0;
+
                         stetas.actionType = Stetas.ActionType.移動;
 
                     }
@@ -108,6 +136,8 @@ public class Enemy : MonoBehaviour
                         else
                         {
                             // 沒有戰鬥中敵人
+                            speed = 0;
+
                             stetas.actionType = Stetas.ActionType.移動;
                         }
                     }
@@ -140,6 +170,8 @@ public class Enemy : MonoBehaviour
 
             if (Time.time -stetas.saveTime >= stetas.CantMoveCount)
             {
+                speed = 0;
+
                 stetas.actionType = Stetas.ActionType.移動;
             }
         });

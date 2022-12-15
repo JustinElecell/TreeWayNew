@@ -29,7 +29,12 @@ public class GamePlayManager : MonoBehaviour
     public GameObject iteamGround_Player;
     public GameObject iteamGround_Enemy;
     public GameObject iteamGround_Boss;
-    
+
+
+    [Header("Buff用")]
+    public int buffCount=1;
+    public GameObject BuffPanel;
+
     [Header("測試用")]
     public SO_Iteam Skill;
     public Color White;
@@ -100,6 +105,7 @@ public class GamePlayManager : MonoBehaviour
                 player.ResetPlayerMp();
                 skillPanel.gameObject.SetActive(true);
                 Time.timeScale = 0;
+                BuffUp();
                 return;
             }
 
@@ -117,6 +123,8 @@ public class GamePlayManager : MonoBehaviour
                 player.ResetPlayerMp();
                 skillPanel.gameObject.SetActive(true);
                 Time.timeScale = 0;
+                BuffUp();
+
             }
         });
     }
@@ -276,7 +284,6 @@ public class GamePlayManager : MonoBehaviour
 
             if (timecount_sec%10==0)
             {
-                Debug.Log(timecount_sec);
                 // 生怪
                 for (int i = 0; i < enemyData.Length; i++)
                 {
@@ -362,6 +369,14 @@ public class GamePlayManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-
+    public void BuffUp()
+    {
+        buffCount++;
+        if(buffCount>0)
+        {
+            BuffPanel.transform.GetChild(1).gameObject.GetComponent<Text>().text = "+" + buffCount.ToString();
+            BuffPanel.gameObject.SetActive(true);
+        }
+    }
 
 }

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class WeaponMove_Player : MonoBehaviour
 {
     
@@ -12,7 +12,38 @@ public class WeaponMove_Player : MonoBehaviour
 
     public List<GameObject> targetList = new List<GameObject>();
     public int roadNo;
+    Dictionary<Stetas.ActionType, Action> ActionTypeFunc = new Dictionary<Stetas.ActionType, Action>();
 
+    private void Start()
+    {
+        FuncInit();
+    }
+    void FuncInit()
+    {
+        ActionTypeFunc.Add(Stetas.ActionType.移動, () => {
+            if (gameObject.transform.localPosition.x > -GamePlayManager.instance.Rect.rect.size.x / 2)
+            {
+
+
+                //移動
+
+                var pos = gameObject.transform.localPosition;
+                pos.x -= (speed * Time.deltaTime);
+                gameObject.transform.localPosition = pos;
+            }
+            else
+            {
+                ReSet();
+
+            }
+        });
+
+
+        ActionTypeFunc.Add(Stetas.ActionType.技能時, () => {
+
+        });
+
+    }
     private void OnEnable()
     {
 
@@ -31,6 +62,8 @@ public class WeaponMove_Player : MonoBehaviour
         stetas.Hp = stetas.HpMax;
         this.gameObject.GetComponent<SpriteRenderer>().enabled = true;
         this.gameObject.GetComponent<BoxCollider>().enabled = true;
+        stetas.actionType = Stetas.ActionType.移動;
+
     }
 
     private void OnDisable()
@@ -46,22 +79,8 @@ public class WeaponMove_Player : MonoBehaviour
             ReSet();
         }
 
+        ActionTypeFunc[stetas.actionType]();
 
-        if (gameObject.transform.localPosition.x > -GamePlayManager.instance.Rect.rect.size.x / 2)
-        {
-
-
-            //移動
-
-            var pos = gameObject.transform.localPosition;
-            pos.x -= (speed * Time.deltaTime);
-            gameObject.transform.localPosition = pos;
-        }
-        else
-        {
-            ReSet();
-
-        }
         
 
 
@@ -116,6 +135,8 @@ public class WeaponMove_Player : MonoBehaviour
                         
                         if(stetas.Skill!=null&&stetas.Skill.enabled==true)
                         {
+                            Debug.Log(other.gameObject);
+
                             stetas.Skill.SkillEffect(other.gameObject);
                         }
 

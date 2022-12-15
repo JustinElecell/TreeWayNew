@@ -142,7 +142,6 @@ public class IteamPanel : MonoBehaviour
                 break;
         }
 
-        Debug.Log(targetIteam);
 
         if (targetIteam != null)
         {

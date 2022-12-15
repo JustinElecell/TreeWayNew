@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -7074866054735285325}
   - component: {fileID: -7817916187480188323}
   - component: {fileID: 5556588072280786885}
+  - component: {fileID: 8857637248160724052}
   m_Layer: 0
   m_Name: "\u98A8\u66B4"
   m_TagString: Player
@@ -132,12 +133,15 @@ MonoBehaviour:
   hpBar: {fileID: 0}
   player: {fileID: 0}
   iteam: {fileID: 11400000, guid: 0ccbe44b3fcdf1744b8e446d5dda1c4e, type: 2}
+  Skill: {fileID: 8857637248160724052}
   enemy: {fileID: 0}
   BossHpBarFlag: 0
+  CantMoveCount: 0
   Hp: 0
   HpMax: 0
   actionType: 0
   roadNo: 0
+  saveTime: 0
 --- !u!54 &5556588072280786885
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -154,3 +158,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8857637248160724052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905771132072046713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9c112569b6b3f44e9c88e6826b034ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stetas: {fileID: -7817916187480188323}
+  Max: 5

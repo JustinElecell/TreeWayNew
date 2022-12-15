@@ -89,19 +89,10 @@ public class GamePlayManager : MonoBehaviour
         BuffList = ReadCsv.MyReadCSV.Read("Csv/Buff");
         skillManager.SetAllSkill(BuffList);
 
-        //for(int i=1;i<BuffList.Count;i++)
-        //{
-        //    Debug.Log(BuffList[i][0]);
-        //}
         BuffButton.onClick.AddListener(() =>
         {
             if(MainManager.instance.TestFlag)
             {
-                //for (int i = 0; i < 3; i++)
-                //{
-                //    skillPanel.SkillSet(skillManager.GetSkills());
-
-                //}
                 skillPanel.SkillSet(skillManager.GetSkillLists());
 
                 player.mp -= 80;
@@ -119,28 +110,16 @@ public class GamePlayManager : MonoBehaviour
 
             if (player.mp >= 80)
             {
+                skillPanel.SkillSet(skillManager.GetSkillLists());
 
-                //for(int i=0;i<3;i++)
-                //{
-                //    skillPanel.SkillSet(skillManager.GetSkill());
-
-                //}
                 player.mp -= 80;
 
                 player.ResetPlayerMp();
                 skillPanel.gameObject.SetActive(true);
                 Time.timeScale = 0;
             }
-
-
-
-
         });
     }
-
-
-
-
 
     void FuncInit()
     {
@@ -176,14 +155,11 @@ public class GamePlayManager : MonoBehaviour
             for (int l = 0; l < 60; l++)
             {
                 Instantiate(enemyData[i].enemyPerfab, tmp.transform);
-
             }
         }
         
 
     }
-
-
 
     public void StartGameButton_Test()
     {
@@ -191,13 +167,11 @@ public class GamePlayManager : MonoBehaviour
         if (FindPlayer())
         {
             player.Init();
-
         }
     }
     private void OnDisable()
     {
         StopCoroutine(timeCount_Coroutine);
-
         Wave = 1;
     }
     #endregion
@@ -223,10 +197,8 @@ public class GamePlayManager : MonoBehaviour
 
         while (Time.time-saveTime < 10)
         {
-
             //Instantiate(enemyData[enemyNo].enemyPerfab, roads[UnityEngine.Random.Range(0, 3)].transform);
             var tmp = iteamGround_Enemy.transform.Find(enemyData[enemyNo].name + "物件池");
-
             if (tmp != null)
             {
                 if(tmp.transform.childCount>0)
@@ -237,23 +209,15 @@ public class GamePlayManager : MonoBehaviour
 
                     enemyObj.SetActive(true);
                 }
-
-
             }
-
-
             yield return new WaitForSeconds(tmpTime);
         }
-
     }
-
 
     public void EAttack(int atk)
     {
-
         player.stetas.Hp -= atk;
         player.ResetPlayerHp();
-
     }
 
     public void PAttackInit(SO_Iteam iteam)
@@ -290,24 +254,19 @@ public class GamePlayManager : MonoBehaviour
         {
             StartCoroutine(CreateEnemy(0, i));
         }
-
         while (gameObject.activeSelf)
         {
             yield return new WaitForSeconds(1);
             timecount_sec++;
-
             if (timecount_sec >= 60)
             {
                 if(Wave<3)
                 {
                     WaveUp();
-
                 }
                 else
                 {
                     bossPerfab.SetActive(true);
-
-
                     infoPanel.WaveText.gameObject.SetActive(false);
                     infoPanel.BossHpImage.gameObject.SetActive(true);
                 }
@@ -322,14 +281,9 @@ public class GamePlayManager : MonoBehaviour
                 for (int i = 0; i < enemyData.Length; i++)
                 {
                     StartCoroutine(CreateEnemy(0, i));
-
                 }
             }
-
-
-
             infoPanel.TimeText.text = timecount_min.ToString() + " : " + timecount_sec.ToString("D2");
-
         }
     }
 
@@ -339,9 +293,6 @@ public class GamePlayManager : MonoBehaviour
         Wave++;
         infoPanel.WaveText.text = "Wave " + Wave.ToString() + " / 3";
     }
-
-
-
 
     public bool FindPlayer()
     {
@@ -387,7 +338,11 @@ public class GamePlayManager : MonoBehaviour
                         var iteamObj = tmp.transform.GetChild(0).gameObject;
                         iteamObj.GetComponent<Stetas>().iteam = Skill;
                         iteamObj.transform.SetParent(player.transform.parent.transform);
-
+                        iteamObj.GetComponent<Stetas>().roadNo = iteamObj.transform.parent.transform.GetSiblingIndex() + 1;
+                        if (iteamObj.GetComponent<Stetas>().Skill!=null)
+                        {
+                            iteamObj.GetComponent<Stetas>().Skill.enabled = true;
+                        }
                         iteamObj.SetActive(true);
 
                     }
@@ -397,6 +352,7 @@ public class GamePlayManager : MonoBehaviour
             }
         }
     }
+
     public void Pause()
     {
         Time.timeScale = 0f;

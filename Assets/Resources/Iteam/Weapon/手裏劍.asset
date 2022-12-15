@@ -24,3 +24,4 @@ MonoBehaviour:
   Speed: 2
   atkUp: 0
   IteamPerfab: {fileID: 905771132072046713, guid: e1b12aaddf3edab48a1253b7a6f3c6de, type: 3}
+  skillType: 1

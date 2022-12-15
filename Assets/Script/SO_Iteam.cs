@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 [CreateAssetMenu(fileName = "New Data", menuName = "Iteam State/Data")]
 
 
@@ -23,8 +23,10 @@ public class SO_Iteam : ScriptableObject
         水,
         風,
         雷,
-        No=100
+        No= 100
     }
+
+
     public string IteamName = "";
     public string IteamString = "";
     public Sprite IteamImage;

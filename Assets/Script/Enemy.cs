@@ -135,7 +135,14 @@ public class Enemy : MonoBehaviour
             }
 
         });
+        ActionTypeFunc.Add(Stetas.ActionType.不能動作, () => {
 
+
+            if (Time.time -stetas.saveTime >= stetas.CantMoveCount)
+            {
+                stetas.actionType = Stetas.ActionType.移動;
+            }
+        });
 
     }
 
@@ -158,8 +165,11 @@ public class Enemy : MonoBehaviour
         {
             ReSet();
         }
+        
 
         ActionTypeFunc[stetas.actionType]();
+        
+
     }
     
     void ReSet()

@@ -4871,6 +4871,7 @@ MonoBehaviour:
   hpBar: {fileID: 0}
   player: {fileID: 0}
   iteam: {fileID: 0}
+  test: {fileID: 0}
   enemy: {fileID: 0}
   BossHpBarFlag: 0
   Hp: 0
@@ -5349,6 +5350,7 @@ MonoBehaviour:
   hpBar: {fileID: 0}
   player: {fileID: 0}
   iteam: {fileID: 0}
+  test: {fileID: 0}
   enemy: {fileID: 0}
   BossHpBarFlag: 0
   Hp: 0
@@ -5615,6 +5617,7 @@ MonoBehaviour:
   hpBar: {fileID: 0}
   player: {fileID: 0}
   iteam: {fileID: 0}
+  test: {fileID: 0}
   enemy: {fileID: 0}
   BossHpBarFlag: 0
   Hp: 0
@@ -7572,6 +7575,7 @@ MonoBehaviour:
   hpBar: {fileID: 0}
   player: {fileID: 0}
   iteam: {fileID: 0}
+  test: {fileID: 0}
   enemy: {fileID: 0}
   BossHpBarFlag: 0
   Hp: 0
@@ -8817,6 +8821,7 @@ MonoBehaviour:
   hpBar: {fileID: 0}
   player: {fileID: 0}
   iteam: {fileID: 0}
+  test: {fileID: 0}
   enemy: {fileID: 0}
   BossHpBarFlag: 0
   Hp: 0

@@ -14,7 +14,8 @@ public class Stetas : MonoBehaviour
     public enum ActionType
     {
         攻擊,
-        移動
+        移動,
+        不能動作
     }
 
     public Type type;
@@ -25,15 +26,19 @@ public class Stetas : MonoBehaviour
 
     [Header("道具")]
     public SO_Iteam iteam;
-
+    public IteamSkillBase Skill;
     [Header("敵人")]
     public SO_Enemy enemy;
     public bool BossHpBarFlag;
+
+    public float CantMoveCount;
+
     [Header("共通用")]
     public float Hp;
     public float HpMax;
     public ActionType actionType;
     public int roadNo;
+    public float saveTime;
 
     //public int WeaponAtkChange(float atk)
     //{

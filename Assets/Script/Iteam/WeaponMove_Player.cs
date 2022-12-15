@@ -29,6 +29,8 @@ public class WeaponMove_Player : MonoBehaviour
         stetas.HpMax = ((int)(stetas.iteam.Hp));
 
         stetas.Hp = stetas.HpMax;
+        this.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        this.gameObject.GetComponent<BoxCollider>().enabled = true;
     }
 
     private void OnDisable()
@@ -68,12 +70,21 @@ public class WeaponMove_Player : MonoBehaviour
 
     void ReSet()
     {
+        if(stetas.Skill.enabled==true)
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            this.gameObject.GetComponent<BoxCollider>().enabled = false;
+        }
+        else
+        {
+            gameObject.SetActive(false);
+            var tmp = GamePlayManager.instance.iteamGround_Player.transform.Find(stetas.iteam.IteamName + "物件池");
 
-        gameObject.SetActive(false);
-        var tmp = GamePlayManager.instance.iteamGround_Player.transform.Find(stetas.iteam.IteamName + "物件池");
+            gameObject.transform.SetParent(tmp.transform);
+            targetList.Clear();
+            stetas.Skill.enabled = false;
+        }
 
-        gameObject.transform.SetParent(tmp.transform);
-        targetList.Clear();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -100,9 +111,13 @@ public class WeaponMove_Player : MonoBehaviour
 
                         break;
                     case Stetas.Type.敵人:
-                        Debug.Log(otherstetas.name);
                         otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
                         stetas.Hp -= otherstetas.enemy.Atk;
+                        
+                        if(stetas.Skill!=null&&stetas.Skill.enabled==true)
+                        {
+                            stetas.Skill.SkillEffect(other.gameObject);
+                        }
 
                         break;
                     case Stetas.Type.召喚:

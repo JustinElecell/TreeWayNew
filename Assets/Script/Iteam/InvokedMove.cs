@@ -6,7 +6,8 @@ public class InvokedMove : MonoBehaviour
 {
     public Stetas stetas;
 
-    float speed = 0;
+    float speed, speedMax = 0;
+    float speedUp;
     BoxCollider coll;
     int Hp;
     int Hpmax;
@@ -19,7 +20,15 @@ public class InvokedMove : MonoBehaviour
     float saveTime;
     bool canAttack = true;
 
-    
+    float speedSaveTime;
+    public void ResetSpeedSaveTime()
+    {
+        speedSaveTime = Time.time;
+    }
+    public void ReSetSpeed()
+    {
+        speed = 0;
+    }
     private void OnEnable()
     {
 
@@ -27,7 +36,12 @@ public class InvokedMove : MonoBehaviour
 
         var tmpPos = new Vector3(GamePlayManager.instance.Rect.rect.size.x / 2, 0+UnityEngine.Random.Range(-20,20), 0);
         gameObject.transform.localPosition = tmpPos;
-        speed = GamePlayManager.instance.Rect.rect.size.x / stetas.iteam.Speed;
+
+        speedMax = GamePlayManager.instance.Rect.rect.size.x / stetas.iteam.Speed;
+
+        speed = 0;
+        speedUp = speedMax - speed;
+        ResetSpeedSaveTime();
 
         stetas.roadNo = gameObject.transform.parent.transform.GetSiblingIndex() + 1;
         stetas.HpMax = ((int)(stetas.iteam.Hp));
@@ -54,8 +68,25 @@ public class InvokedMove : MonoBehaviour
     void FuncInit()
     {
         ActionTypeFunc.Add(Stetas.ActionType.移動, () => {
+
+
+
             if (gameObject.transform.localPosition.x > -GamePlayManager.instance.Rect.rect.size.x / 2)
             {
+                if(speed < speedMax)
+                {
+                    if(Time.time-speedSaveTime>1f/5)
+                    {
+                        speed += speedUp / 5;
+                        ResetSpeedSaveTime();
+                    }
+                }
+                else
+                {
+                    speed = speedMax;
+                }
+
+
                 //移動
                 var pos = gameObject.transform.localPosition;
                 pos.x -= (speed * Time.deltaTime);
@@ -75,8 +106,6 @@ public class InvokedMove : MonoBehaviour
         ActionTypeFunc.Add(Stetas.ActionType.攻擊, () => {
 
 
-
-
             if (TargetStetas != null)
             {
                 if (!TargetStetas.CheckIsAlive())
@@ -84,6 +113,7 @@ public class InvokedMove : MonoBehaviour
                     if (enemyList.Count <= 0)
                     {
                         stetas.actionType = Stetas.ActionType.移動;
+                        ResetSpeedSaveTime();
 
                     }
                     else
@@ -98,6 +128,7 @@ public class InvokedMove : MonoBehaviour
                         {
                             // 沒有戰鬥中敵人
                             stetas.actionType = Stetas.ActionType.移動;
+                            ResetSpeedSaveTime();
                         }
                     }
                 }
@@ -111,6 +142,7 @@ public class InvokedMove : MonoBehaviour
                         if (stetas.Skill != null && stetas.Skill.enabled == true&& TargetStetas.type != Stetas.Type.Boss)
                         {
                             stetas.Skill.SkillEffect(TargetStetas.gameObject);
+                            return;
                         }
 
                         TargetStetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
@@ -135,7 +167,6 @@ public class InvokedMove : MonoBehaviour
             else
             {
                 stetas.actionType = Stetas.ActionType.移動;
-
             }
         });
 
@@ -227,11 +258,11 @@ public class InvokedMove : MonoBehaviour
 
 
             enemyList.Add(other.gameObject);
-            stetas.actionType = Stetas.ActionType.攻擊;
-
-
-            saveTime = Time.time;
             FindFightEnemy();
+
+
+            stetas.actionType = Stetas.ActionType.攻擊;
+            saveTime = Time.time;
 
 
 
@@ -247,11 +278,7 @@ public class InvokedMove : MonoBehaviour
 
         }
 
-        //if (enemyList.Count <= 0)
-        //{
-        //    stetas.actionType = Stetas.ActionType.移動;
 
-        //}
     }
 
 }

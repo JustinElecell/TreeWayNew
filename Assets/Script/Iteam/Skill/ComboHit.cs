@@ -20,7 +20,6 @@ public class ComboHit : IteamSkillBase
             saveTime = Time.time;
             StartCoroutine(IEComboHit());
 
-
             Action action = () => {
                 if (player.enemyList.Count > 0)
                 {

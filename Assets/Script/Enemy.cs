@@ -148,6 +148,10 @@ public class Enemy : MonoBehaviour
                     if(TargetInvoked!=null&&TargetInvoked.gameObject.activeSelf)
                     {
                         TargetInvoked.stetas.TakeDamage(stetas.enemy.Atk);
+                        
+                        
+
+
                         saveTime = Time.time;
 
                         canAttack = false;

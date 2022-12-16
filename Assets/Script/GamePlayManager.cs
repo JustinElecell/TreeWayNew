@@ -60,6 +60,50 @@ public class GamePlayManager : MonoBehaviour
         }
     }
     #region 初始化
+    public void CreateIteamInit(SO_Iteam iteam,Transform IteamGround)
+    {
+
+
+
+        var tmp = GameObject.Find(IteamGround .gameObject.name+ "/"+iteam.IteamName + "物件池");
+
+        if (tmp == null)
+        {
+            tmp = new GameObject(iteam.IteamName + "物件池");
+            tmp.transform.SetParent(IteamGround);
+
+        }
+
+        Instantiate(iteam.IteamPerfab, tmp.transform);
+
+    }
+    public GameObject SetIteam(SO_Iteam iteam,int no,bool skillFlag)
+    {
+        var tmp = iteamGround_Player.transform.Find(iteam.IteamName + "物件池");
+
+        if (tmp != null)
+        {
+            if (tmp.transform.childCount > 0)
+            {
+                var iteamObj = tmp.transform.GetChild(0).gameObject;
+                iteamObj.transform.SetParent(GamePlayManager.instance.roads[no-1].transform);
+
+                iteamObj.GetComponent<Stetas>().roadNo = iteamObj.transform.parent.transform.GetSiblingIndex() + 1;
+                if (iteamObj.GetComponent<Stetas>().Skill != null)
+                {
+                    iteamObj.GetComponent<Stetas>().Skill.enabled = skillFlag;
+                }
+
+                iteamObj.SetActive(true);
+
+                return iteamObj;
+            }
+
+        }
+        return null;
+    }
+
+
     private void OnEnable()
     {
 
@@ -332,6 +376,30 @@ public class GamePlayManager : MonoBehaviour
         if(Skill!=null)
         {
             SetPlayer(no);
+            if (MainManager.instance.TestFlag)
+            {
+                var tmp = iteamGround_Player.transform.Find(Skill.IteamName + "物件池");
+
+                if (tmp != null)
+                {
+                    if (tmp.transform.childCount > 0)
+                    {
+                        var iteamObj = tmp.transform.GetChild(0).gameObject;
+                        iteamObj.GetComponent<Stetas>().iteam = Skill;
+                        iteamObj.transform.SetParent(player.transform.parent.transform);
+                        iteamObj.GetComponent<Stetas>().roadNo = iteamObj.transform.parent.transform.GetSiblingIndex() + 1;
+                        if (iteamObj.GetComponent<Stetas>().Skill != null)
+                        {
+                            iteamObj.GetComponent<Stetas>().Skill.enabled = true;
+                        }
+                        iteamObj.SetActive(true);
+
+                    }
+
+                }
+                return;
+            }
+
             if (player.mp >= Skill.Mp)
             {
                 var tmp = iteamGround_Player.transform.Find(Skill.IteamName + "物件池");

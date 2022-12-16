@@ -133,13 +133,17 @@ MonoBehaviour:
   type: 2
   hpBar: {fileID: 1994114345937482626}
   player: {fileID: 0}
-  iteam: {fileID: 11400000, guid: 7bda708d8bfdba242b73ca31ecc3cd5f, type: 2}
+  iteam: {fileID: 11400000, guid: a1175ba4e1271f5459ced27846495c6c, type: 2}
+  Skill: {fileID: 0}
   enemy: {fileID: 0}
   BossHpBarFlag: 0
+  CantMoveCount: 0
+  repelMax: 1
   Hp: 0
   HpMax: 0
   actionType: 0
   roadNo: 0
+  saveTime: 0
 --- !u!114 &8962770687340215891
 MonoBehaviour:
   m_ObjectHideFlags: 0

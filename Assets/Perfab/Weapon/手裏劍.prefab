@@ -136,10 +136,13 @@ MonoBehaviour:
   Skill: {fileID: 6454193422736678790}
   enemy: {fileID: 0}
   BossHpBarFlag: 0
+  CantMoveCount: 0
+  repelMax: 1
   Hp: 0
   HpMax: 0
   actionType: 0
   roadNo: 0
+  saveTime: 0
 --- !u!114 &6454193422736678790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,8 +155,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f36a6b08ac94f49baef736a41ca15b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThrowMax: 1
   stetas: {fileID: -7817916187480188323}
+  skillAttackType: 0
+  needWait: 1
+  ThrowMax: 1
 --- !u!54 &5556588072280786885
 Rigidbody:
   m_ObjectHideFlags: 0

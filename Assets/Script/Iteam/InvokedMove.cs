@@ -12,7 +12,7 @@ public class InvokedMove : MonoBehaviour
     int Hpmax;
 
 
-    Dictionary<Stetas.ActionType, Action> ActionTypeFunc = new Dictionary<Stetas.ActionType, Action>();
+    public Dictionary<Stetas.ActionType, Action> ActionTypeFunc = new Dictionary<Stetas.ActionType, Action>();
 
     public Stetas TargetStetas;
     public List<GameObject> enemyList = new List<GameObject>();
@@ -76,6 +76,7 @@ public class InvokedMove : MonoBehaviour
 
 
 
+
             if (TargetStetas != null)
             {
                 if (!TargetStetas.CheckIsAlive())
@@ -103,12 +104,23 @@ public class InvokedMove : MonoBehaviour
 
                 if (canAttack)
                 {
-                    if(TargetStetas!=null&&TargetStetas.gameObject.activeSelf)
+
+
+                    if (TargetStetas!=null&&TargetStetas.gameObject.activeSelf)
                     {
+                        if (stetas.Skill != null && stetas.Skill.enabled == true&& TargetStetas.type != Stetas.Type.Boss)
+                        {
+                            stetas.Skill.SkillEffect(TargetStetas.gameObject);
+                        }
+
                         TargetStetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
                     }
                     saveTime = Time.time;
                     canAttack = false;
+                    if(TargetStetas.Hp<=0)
+                    {
+                        enemyList.Remove(TargetStetas.gameObject);
+                    }
                 }
                 else
                 {
@@ -127,7 +139,9 @@ public class InvokedMove : MonoBehaviour
             }
         });
 
+        ActionTypeFunc.Add(Stetas.ActionType.技能時, () => {
 
+        });
     }    
 
     bool FindFightEnemy()
@@ -137,6 +151,7 @@ public class InvokedMove : MonoBehaviour
             var tmp = GamePlayManager.instance.roads[stetas.roadNo - 1].transform.GetChild(0).transform.GetChild(0).GetComponent<Stetas>();
             foreach(var dataObj in enemyList)
             {
+
                 if(dataObj==tmp.gameObject)
                 {
                     TargetStetas = tmp;
@@ -232,11 +247,11 @@ public class InvokedMove : MonoBehaviour
 
         }
 
-        if (enemyList.Count <= 0)
-        {
-            stetas.actionType = Stetas.ActionType.移動;
+        //if (enemyList.Count <= 0)
+        //{
+        //    stetas.actionType = Stetas.ActionType.移動;
 
-        }
+        //}
     }
 
 }

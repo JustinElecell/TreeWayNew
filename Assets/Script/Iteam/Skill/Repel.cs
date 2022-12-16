@@ -6,6 +6,8 @@ public class Repel : IteamSkillBase
 {
 
     public float Max;
+    [Header("true:可持續擊退 false:不可持續擊退")]
+    public bool alwaysRepel;
     public override void SkillEffect(GameObject obj)
     {
         StartCoroutine(Effect(obj));
@@ -18,13 +20,17 @@ public class Repel : IteamSkillBase
     {
         var speed = GamePlayManager.instance.Rect.rect.size.x*(Max/100);
 
-        foreach(var data in objList)
+        if(!alwaysRepel)
         {
-            if(data.gameObject==obj)
+            foreach(var data in objList)
             {
-                goto Test;
+                if(data.gameObject==obj)
+                {
+                    goto Test;
+                }
             }
         }
+
 
 
 
@@ -32,7 +38,10 @@ public class Repel : IteamSkillBase
         obj.GetComponent<Stetas>().saveTime = Time.time;
         obj.GetComponent<Stetas>().repelMax = Max;
         obj.GetComponent<Stetas>().actionType = Stetas.ActionType.不能動作;
-        objList.Add(obj);
+        if(!alwaysRepel)
+        {
+            objList.Add(obj);
+        }
         for (int i = 0; i < 5; i++)
         {
             var pos = obj.transform.localPosition;

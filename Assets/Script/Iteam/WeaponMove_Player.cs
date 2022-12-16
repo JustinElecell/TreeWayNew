@@ -12,7 +12,7 @@ public class WeaponMove_Player : MonoBehaviour
 
     public List<GameObject> targetList = new List<GameObject>();
     public int roadNo;
-    Dictionary<Stetas.ActionType, Action> ActionTypeFunc = new Dictionary<Stetas.ActionType, Action>();
+    public Dictionary<Stetas.ActionType, Action> ActionTypeFunc = new Dictionary<Stetas.ActionType, Action>();
 
     private void Start()
     {
@@ -41,6 +41,8 @@ public class WeaponMove_Player : MonoBehaviour
 
         ActionTypeFunc.Add(Stetas.ActionType.技能時, () => {
 
+
+           
         });
 
     }
@@ -89,7 +91,8 @@ public class WeaponMove_Player : MonoBehaviour
 
     void ReSet()
     {
-        if(stetas.Skill.enabled==true)
+
+        if(stetas.Skill!=null&&stetas.Skill.enabled==true&&stetas.Skill.needWait)
         {
             this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
             this.gameObject.GetComponent<BoxCollider>().enabled = false;
@@ -101,20 +104,30 @@ public class WeaponMove_Player : MonoBehaviour
 
             gameObject.transform.SetParent(tmp.transform);
             targetList.Clear();
-            stetas.Skill.enabled = false;
+            
+            if (stetas.Skill != null)
+            {
+                stetas.Skill.enabled = false;
+
+            }
+
         }
 
     }
     private void OnTriggerEnter(Collider other)
     {
 
+
         if (other.gameObject.tag == "Enemy")
         {
             var otherstetas = other.gameObject.GetComponent<Stetas>();
             targetList.Add(other.gameObject);
 
+        }
 
-
+        if (stetas.actionType == Stetas.ActionType.技能時)
+        {
+            return;
         }
 
         for (int i = targetList.Count-1; i >= 0; i--)
@@ -133,7 +146,7 @@ public class WeaponMove_Player : MonoBehaviour
                         otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
                         stetas.Hp -= otherstetas.enemy.Atk;
                         
-                        if(stetas.Skill!=null&&stetas.Skill.enabled==true)
+                        if(stetas.Skill!=null&&stetas.Skill.enabled==true&& stetas.type != Stetas.Type.Boss)
                         {
                             Debug.Log(other.gameObject);
 
@@ -146,6 +159,12 @@ public class WeaponMove_Player : MonoBehaviour
                         stetas.Hp -= otherstetas.iteam.Atk;
                         break;
                 }
+                
+                if(otherstetas.Hp<=0)
+                {
+                    targetList.RemoveAt(i);
+                }
+
                 if (stetas.Hp <= 0)
                 {
                     ReSet();

@@ -1,48 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class FollowAttack : IteamSkillBase
 {
     public GameObject targetobj;
+
+
+    WeaponMove_Player player;
+    float saveTime;
     public override void SkillEffect(GameObject obj)
     {
+        player = this.gameObject.GetComponent<WeaponMove_Player>();
         targetobj = obj;
-        StartCoroutine(Effect(obj));
-        StartCoroutine(Target(obj));
-        this.gameObject.GetComponent<BoxCollider>().enabled = false;
+
         stetas.actionType = Stetas.ActionType.技能時;
+        saveTime = Time.time;
+        Action action = () => {
+
+            if(player.targetList.Count>0)
+            {
+
+                if (player.targetList[0] != null)
+                {
+                    var tmp = player.targetList[0].GetComponent<Stetas>();
+
+                    if (tmp.Hp <= 0)
+                    {
+                        player.targetList.RemoveAt(0);
+                        return;
+                    }
+                    this.gameObject.transform.localPosition = player.targetList[0].transform.localPosition;
+                    if(Time.time-saveTime>=0.1)
+                    {
+                        Debug.Log("攻擊");
+                        saveTime = Time.time;
+                        tmp.TakeDamage(stetas.WeaponAtkChange(stetas.iteam)/10);
+                        stetas.Hp -= tmp.enemy.Atk/10;
+
+
+                    }
+
+                }
+            }
+            else
+            {
+
+                stetas.actionType = Stetas.ActionType.移動;
+
+            }
+        };
+
+        player.ActionTypeFunc[Stetas.ActionType.技能時] = action;
     }
 
-    IEnumerator Effect(GameObject obj)
-    {
-        var tmp = obj.GetComponent<Stetas>();
-
-        while (tmp.Hp>0)
-        {
-
-            tmp.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
-
-            yield return new WaitForSeconds(1f);
-
-        }
-        stetas.actionType = Stetas.ActionType.移動;
-        this.gameObject.GetComponent<BoxCollider>().enabled = true;
-
-
-    }
-
-    IEnumerator Target(GameObject obj)
-    {
-        var tmp = obj.GetComponent<Stetas>();
-        while (tmp.Hp > 0)
-        {
-            this.gameObject.transform.localPosition=obj.transform.localPosition;
-            yield return new WaitForSeconds(0.02f);
-
-        }
-
-        stetas.actionType = Stetas.ActionType.移動;
-        this.gameObject.GetComponent<BoxCollider>().enabled = true;
-    }
 }

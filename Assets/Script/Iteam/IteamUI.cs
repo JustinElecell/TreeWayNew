@@ -43,14 +43,10 @@ public class IteamUI : MonoBehaviour
 
 
         SkillLimitText.text = iteamData.Mp.ToString();
-        GameObject tmp = new GameObject(iteamData.IteamName + "物件池");
-        tmp.transform.SetParent(GamePlayManager.instance.iteamGround_Player.transform);
 
-        
-        for(int i=0;i<30;i++)
+        for (int i = 0; i < 30; i++)
         {
-            Instantiate(iteamData.IteamPerfab, tmp.transform);
-
+            GamePlayManager.instance.CreateIteamInit(iteamData, GamePlayManager.instance.iteamGround_Player.transform);
         }
 
         // IteamUI按鍵

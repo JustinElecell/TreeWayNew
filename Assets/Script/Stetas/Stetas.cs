@@ -43,6 +43,7 @@ public class Stetas : MonoBehaviour
     public int roadNo;
     public float saveTime;
 
+    public float BuffAtkUp;
     //public int WeaponAtkChange(float atk)
     //{
     //    //( roundup ( ( 玩家基礎攻擊力 * ( 1 + 突破次數 * 突破時攻擊力加成比例 ) * (1+其餘攻擊力buff%) ) * ( 武器傷害 * ( 1 + 武器傷害Buff % ) ) ) ) * ( if ( 觸發翻倍=ture , 2 , 1 ) ) 
@@ -54,7 +55,7 @@ public class Stetas : MonoBehaviour
     {
         //( roundup ( ( 玩家基礎攻擊力 * ( 1 + 突破次數 * 突破時攻擊力加成比例 ) * (1+其餘攻擊力buff%) ) * ( 武器傷害 * ( 1 + 武器傷害Buff % ) ) ) ) * ( if ( 觸發翻倍=ture , 2 , 1 ) ) 
         //突破次數 * 突破時攻擊力加成比例已經在遊戲開始時，在Player.cs初始化算在stetas.player.Atk內了
-        return ((int)((GamePlayManager.instance.player.stetas.player.Atk * (1 + GamePlayManager.instance.player.stetas.player.AtkUp/100)) * (data.Atk / 100 * (1 + data.atkUp / 100))));
+        return ((int)((GamePlayManager.instance.player.stetas.player.Atk * (1 + GamePlayManager.instance.player.stetas.player.AtkUp/100)) * (data.Atk / 100 * (1 + data.atkUp / 100))))*((int)(1+BuffAtkUp/100));
     }
     //false:死    true:還活著
 
@@ -67,7 +68,7 @@ public class Stetas : MonoBehaviour
         return false;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         
         Hp -= damage;

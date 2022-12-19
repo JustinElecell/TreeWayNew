@@ -34,7 +34,9 @@ public class SO_Iteam : ScriptableObject
     public AttributesType attributesType;
 
     public float Hp;
+    public float BaseHp;
     public float Mp;
+    public float BaseMp;
     public float Atk;
     public float Atk_wait;
     public float Speed;

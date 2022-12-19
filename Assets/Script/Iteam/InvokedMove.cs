@@ -149,7 +149,7 @@ public class InvokedMove : MonoBehaviour
                     }
                     saveTime = Time.time;
                     canAttack = false;
-                    if(TargetStetas.Hp<=0)
+                    if(TargetStetas!=null&&TargetStetas.Hp<=0)
                     {
                         enemyList.Remove(TargetStetas.gameObject);
                     }
@@ -217,6 +217,8 @@ public class InvokedMove : MonoBehaviour
         gameObject.transform.SetParent(tmp.transform);
         TargetStetas = null;
         enemyList.Clear();
+        stetas.BuffAtkUp = 0;
+
     }
 
     IEnumerator Attack(Collider other)

@@ -353,11 +353,13 @@ MonoBehaviour:
   enemy: {fileID: 0}
   BossHpBarFlag: 0
   CantMoveCount: 0
+  repelMax: 1
   Hp: 0
   HpMax: 0
   actionType: 0
   roadNo: 0
   saveTime: 0
+  BuffAtkUp: 0
 --- !u!1 &143007915
 GameObject:
   m_ObjectHideFlags: 0
@@ -4316,6 +4318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3307274cd1c447949bdb3eca37bde961, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CheckCircle: {fileID: 7644948048708407388, guid: 1ee28041fd35734428d7b822bd91399b, type: 3}
 --- !u!1 &2033978293
 GameObject:
   m_ObjectHideFlags: 0
@@ -4509,6 +4512,7 @@ MonoBehaviour:
   - {fileID: 1341483245}
   - {fileID: 1318206187}
   skillManager: {fileID: 2027938344}
+  saveIteam: {fileID: 0}
 --- !u!4 &2052413672
 Transform:
   m_ObjectHideFlags: 0

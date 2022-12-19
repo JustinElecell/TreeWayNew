@@ -19,7 +19,12 @@ public class Repel : IteamSkillBase
     {
         if(!alwaysRepel)
         {
-            StartCoroutine(Effect(obj));
+            Debug.Log(obj.name);
+            //if(obj!=null)
+            {
+                StartCoroutine(Effect(obj));
+
+            }
         }
         else
         {
@@ -119,7 +124,7 @@ public class Repel : IteamSkillBase
         StartCoroutine(IERepel(obj));
 
     Test: Debug.Log("跳過");
-        return null;
+        yield return null;
 
     }
 

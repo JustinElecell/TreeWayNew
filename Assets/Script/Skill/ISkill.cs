@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System;
+
+[Serializable]
+
 public class ISkill
 {
+
     public int buffLevel;
     public SkillData data;
     //初始化，獲取對應BuffData,輸入至IBuff子類
@@ -31,6 +35,14 @@ public class ISkill
             return;
         }
         buffLevel++;
+    }
+    public bool CheckCanLevelUp()
+    {
+        if (buffLevel >= data.maxLevel)
+        {
+            return false;
+        }
+        return true;
     }
 
     ////獲取buff的data數據

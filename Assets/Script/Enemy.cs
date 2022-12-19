@@ -186,7 +186,6 @@ public class Enemy : MonoBehaviour
     {
         if (GamePlayManager.instance.roads[roadNo - 1].transform.GetChild(1).transform.childCount > 0)
         {
-            Debug.Log("測試"+ GamePlayManager.instance.roads[roadNo - 1].transform.GetChild(1).transform.GetChild(0).GetComponent<InvokedMove>());
             TargetInvoked = GamePlayManager.instance.roads[roadNo - 1].transform.GetChild(1).transform.GetChild(0).GetComponent<InvokedMove>();
 
             return true;

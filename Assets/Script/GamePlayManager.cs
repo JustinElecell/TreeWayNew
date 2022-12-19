@@ -50,7 +50,7 @@ public class GamePlayManager : MonoBehaviour
 
     [Header("Skill管理")]
     public SkillManager skillManager;
-
+    public SO_Iteam saveIteam;
 
     private void Start()
     {
@@ -60,10 +60,16 @@ public class GamePlayManager : MonoBehaviour
         }
     }
     #region 初始化
+
+    public void ResetAllIteamUI()
+    {
+        foreach(var data in SkillButtonLists)
+        {
+            data.RefreshUI();
+        }                    
+    }
     public void CreateIteamInit(SO_Iteam iteam,Transform IteamGround)
     {
-
-
 
         var tmp = GameObject.Find(IteamGround .gameObject.name+ "/"+iteam.IteamName + "物件池");
 
@@ -371,6 +377,9 @@ public class GamePlayManager : MonoBehaviour
 
     }
 
+    public event Func<Player,SO_Iteam,bool> testAction;
+    public event Action<SO_Iteam, SO_Iteam,Stetas> IteamATKUp;
+    public event Action<Stetas> CreatIteam_AddDeath;
     public void SetSkill(int no)
     {
         if(Skill!=null)
@@ -382,17 +391,37 @@ public class GamePlayManager : MonoBehaviour
 
                 if (tmp != null)
                 {
+
+
+                    if(testAction == null||!testAction.Invoke(player, Skill))
+                    {
+                        player.mp -= Skill.Mp;
+                        player.ResetPlayerMp();
+                    }
+
                     if (tmp.transform.childCount > 0)
                     {
+                        // 叫技能
+
                         var iteamObj = tmp.transform.GetChild(0).gameObject;
                         iteamObj.GetComponent<Stetas>().iteam = Skill;
+                        
+                        IteamATKUp?.Invoke(saveIteam, Skill, iteamObj.GetComponent<Stetas>());
+                        CreatIteam_AddDeath?.Invoke(iteamObj.GetComponent<Stetas>());
+
+
+                        saveIteam = Skill;
                         iteamObj.transform.SetParent(player.transform.parent.transform);
                         iteamObj.GetComponent<Stetas>().roadNo = iteamObj.transform.parent.transform.GetSiblingIndex() + 1;
+                            
                         if (iteamObj.GetComponent<Stetas>().Skill != null)
                         {
                             iteamObj.GetComponent<Stetas>().Skill.enabled = true;
                         }
                         iteamObj.SetActive(true);
+                        
+
+                        
 
                     }
 
@@ -403,8 +432,12 @@ public class GamePlayManager : MonoBehaviour
             if (player.mp >= Skill.Mp)
             {
                 var tmp = iteamGround_Player.transform.Find(Skill.IteamName + "物件池");
-                player.mp -= Skill.Mp;
-                player.ResetPlayerMp();
+                
+                if (!testAction.Invoke(player, Skill))
+                {
+                    player.mp -= Skill.Mp;
+                    player.ResetPlayerMp();
+                }
 
                 if (tmp != null)
                 {

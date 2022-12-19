@@ -52,7 +52,7 @@ public class WeaponMove_Player : MonoBehaviour
         coll = GetComponent<BoxCollider>();
 
 
-            var tmpPos = new Vector3(GamePlayManager.instance.Rect.rect.size.x / 2, 0, 0);
+        var tmpPos = new Vector3(GamePlayManager.instance.Rect.rect.size.x / 2, 0 + UnityEngine.Random.Range(-20, 20), 0);
             gameObject.transform.localPosition = tmpPos;
             speed = GamePlayManager.instance.Rect.rect.size.x / stetas.iteam.Speed;
 
@@ -65,6 +65,7 @@ public class WeaponMove_Player : MonoBehaviour
         this.gameObject.GetComponent<SpriteRenderer>().enabled = true;
         this.gameObject.GetComponent<BoxCollider>().enabled = true;
         stetas.actionType = Stetas.ActionType.移動;
+        targetList.Clear();
 
     }
 
@@ -103,8 +104,7 @@ public class WeaponMove_Player : MonoBehaviour
             var tmp = GamePlayManager.instance.iteamGround_Player.transform.Find(stetas.iteam.IteamName + "物件池");
 
             gameObject.transform.SetParent(tmp.transform);
-            targetList.Clear();
-            
+            stetas.BuffAtkUp = 0;
             if (stetas.Skill != null)
             {
                 stetas.Skill.enabled = false;
@@ -151,6 +151,8 @@ public class WeaponMove_Player : MonoBehaviour
                             Debug.Log(other.gameObject);
 
                             stetas.Skill.SkillEffect(other.gameObject);
+
+                            
                         }
 
                         break;

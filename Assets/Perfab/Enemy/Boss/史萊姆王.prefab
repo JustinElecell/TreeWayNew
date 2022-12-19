@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -7341195054284101038}
   - component: {fileID: 6153667271660164667}
   - component: {fileID: 5790502892671748698}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: "\u53F2\u840A\u59C6\u738B"
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -131,12 +131,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   hpBar: {fileID: 0}
+  player: {fileID: 0}
   iteam: {fileID: 0}
+  Skill: {fileID: 0}
   enemy: {fileID: 11400000, guid: ff3aa67a9f077b542bbd173556b712b9, type: 2}
+  BossHpBarFlag: 0
+  CantMoveCount: 0
+  repelMax: 1
   Hp: 0
   HpMax: 0
   actionType: 1
   roadNo: 0
+  saveTime: 0
+  BuffAtkUp: 0
 --- !u!114 &5790502892671748698
 MonoBehaviour:
   m_ObjectHideFlags: 0

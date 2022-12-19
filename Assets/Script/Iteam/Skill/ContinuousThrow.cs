@@ -34,7 +34,6 @@ public class ContinuousThrow : IteamSkillBase
                     var iteamObj = tmp.transform.GetChild(0).gameObject;
                     iteamObj.GetComponent<Stetas>().iteam = stetas.iteam;
                     iteamObj.transform.SetParent(GamePlayManager.instance.roads[stetas.roadNo-1].transform);
-                    Debug.Log("多丟一下");
 
                     iteamObj.SetActive(true);
                 }

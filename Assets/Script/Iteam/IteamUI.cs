@@ -26,13 +26,13 @@ public class IteamUI : MonoBehaviour
 
         }
 
-        RefreshUI();
         IteamImage = IteamObj.GetComponent<Image>();
         IteanButton = IteamObj.GetComponent<Button>();
 
-        if(iteamData!=null)
+
+        if (iteamData != null)
         {
-        IteamImage.sprite = iteamData.IteamImage;
+            IteamImage.sprite = iteamData.IteamImage;
             this.gameObject.SetActive(true);
         }
         else
@@ -40,6 +40,8 @@ public class IteamUI : MonoBehaviour
             this.gameObject.SetActive(false);
             return;
         }
+
+        RefreshUI();
 
 
         SkillLimitText.text = iteamData.Mp.ToString();
@@ -68,22 +70,10 @@ public class IteamUI : MonoBehaviour
 
     public void RefreshUI()
     {
-        //if (nowIteamData == null)
-        //{
-        //    IteamObj.SetActive(false);
-        //    TargetObj.SetActive(false);
-        //    CountText.gameObject.SetActive(false);
 
-        //    return;
-        //}
+        iteamData.Mp = Mathf.Round(iteamData.Mp);
+        SkillLimitText.text = iteamData.Mp.ToString();
 
-
-        //TargetObj.SetActive(false);
-        //CountText.gameObject.SetActive(true);
-        //CountText.text = "X" + nowIteamData.count.ToString();
-
-        //IteamObj.SetActive(true);
-        //IteamImage.sprite = nowIteamData.image;
 
     }
 }

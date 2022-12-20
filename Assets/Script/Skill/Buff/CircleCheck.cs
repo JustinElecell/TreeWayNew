@@ -21,7 +21,7 @@ public class CircleCheck : MonoBehaviour
         Debug.Log(lists.Count+" / "+ damage);
         foreach (var data in lists)
         {
-            data.GetComponent<Stetas>().TakeDamage(damage);
+            data.GetComponent<Stetas>().TakeDamage(damage, data.GetComponent<Stetas>().damageDown);
         }
 
         Destroy(this.gameObject);

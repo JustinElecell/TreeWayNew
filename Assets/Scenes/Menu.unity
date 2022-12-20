@@ -4882,6 +4882,7 @@ MonoBehaviour:
   roadNo: 0
   saveTime: 0
   BuffAtkUp: 0
+  Weight: 0
 --- !u!1 &747626370
 GameObject:
   m_ObjectHideFlags: 0
@@ -5365,6 +5366,7 @@ MonoBehaviour:
   roadNo: 0
   saveTime: 0
   BuffAtkUp: 0
+  Weight: 0
 --- !u!1 &840309252
 GameObject:
   m_ObjectHideFlags: 0
@@ -5636,6 +5638,7 @@ MonoBehaviour:
   roadNo: 0
   saveTime: 0
   BuffAtkUp: 0
+  Weight: 0
 --- !u!1 &891382033
 GameObject:
   m_ObjectHideFlags: 0
@@ -7598,6 +7601,7 @@ MonoBehaviour:
   roadNo: 0
   saveTime: 0
   BuffAtkUp: 0
+  Weight: 0
 --- !u!1 &1324598500
 GameObject:
   m_ObjectHideFlags: 0
@@ -8848,6 +8852,7 @@ MonoBehaviour:
   roadNo: 0
   saveTime: 0
   BuffAtkUp: 0
+  Weight: 0
 --- !u!1 &1578978891
 GameObject:
   m_ObjectHideFlags: 0

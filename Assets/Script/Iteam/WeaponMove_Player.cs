@@ -105,6 +105,8 @@ public class WeaponMove_Player : MonoBehaviour
 
             gameObject.transform.SetParent(tmp.transform);
             stetas.BuffAtkUp = 0;
+            stetas.iteam.temporaryAtkUp = 0;
+            stetas.damageDown = 0;
             if (stetas.Skill != null)
             {
                 stetas.Skill.enabled = false;
@@ -138,12 +140,12 @@ public class WeaponMove_Player : MonoBehaviour
                 switch (otherstetas.type)
                 {
                     case Stetas.Type.道具:
-                        otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
+                        otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam),otherstetas.damageDown);
                         stetas.Hp -= otherstetas.iteam.Atk;
 
                         break;
                     case Stetas.Type.敵人:
-                        otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
+                        otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam),otherstetas.damageDown);
                         stetas.Hp -= otherstetas.enemy.Atk;
                         
                         if(stetas.Skill!=null&&stetas.Skill.enabled==true)
@@ -157,7 +159,7 @@ public class WeaponMove_Player : MonoBehaviour
 
                         break;
                     case Stetas.Type.召喚:
-                        otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
+                        otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam),otherstetas.damageDown);
                         stetas.Hp -= otherstetas.iteam.Atk;
                         break;
                 }

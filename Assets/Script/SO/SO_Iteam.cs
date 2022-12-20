@@ -41,7 +41,7 @@ public class SO_Iteam : ScriptableObject
     public float Atk_wait;
     public float Speed;
     public float atkUp;
-
+    public float temporaryAtkUp;
     public GameObject IteamPerfab;
 
 

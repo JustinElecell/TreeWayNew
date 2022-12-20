@@ -128,7 +128,7 @@ public class WeaponMove_Enemy : MonoBehaviour
 
                 if (canAttack)
                 {
-                    TargetInvoked.TakeDamage(((int)stetas.iteam.Atk));
+                    TargetInvoked.TakeDamage(((int)stetas.iteam.Atk), TargetInvoked.damageDown);
                     saveTime = Time.time;
 
                     canAttack = false;
@@ -207,13 +207,13 @@ public class WeaponMove_Enemy : MonoBehaviour
             switch (otherstetas.type)
             {
                 case Stetas.Type.道具:
-                    otherstetas.TakeDamage(((int)stetas.iteam.Atk));
+                    otherstetas.TakeDamage(((int)stetas.iteam.Atk),otherstetas.damageDown);
                     stetas.Hp -= otherstetas.iteam.Atk;
 
                     break;
 
                 case Stetas.Type.召喚:
-                    otherstetas.TakeDamage(((int)stetas.iteam.Atk));
+                    otherstetas.TakeDamage(((int)stetas.iteam.Atk),otherstetas.damageDown);
                     stetas.Hp -= otherstetas.iteam.Atk;
                     break;
             }

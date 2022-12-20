@@ -35,7 +35,7 @@ public class FollowAttack : IteamSkillBase
                     {
                         Debug.Log("攻擊");
                         saveTime = Time.time;
-                        tmp.TakeDamage(stetas.WeaponAtkChange(stetas.iteam)/10);
+                        tmp.TakeDamage(stetas.WeaponAtkChange(stetas.iteam)/10,tmp.damageDown);
                         stetas.Hp -= tmp.enemy.Atk/10;
 
 

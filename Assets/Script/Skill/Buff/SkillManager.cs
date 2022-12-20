@@ -122,7 +122,6 @@ public class SkillManager : MonoBehaviour
             }
         });
 
-
         SkillFunc.Add("武具強化", () =>
         {
             Debug.Log("武具強化");
@@ -294,8 +293,6 @@ public class SkillManager : MonoBehaviour
                 }
             }
         });
-
-
 
         SkillFunc.Add("止水", () =>
         {
@@ -575,14 +572,13 @@ public class SkillManager : MonoBehaviour
             };
             GamePlayManager.instance.CreatIteam_AddDeath += func;
         });
+
     }
     
 
     public void SetAllSkill(List<List<string>> data)
     {
         skillLists = data;
-
-
         for(int i=0;i< skillLists.Count-1; i++)
         {
             SkillData skillData = new SkillData();
@@ -608,35 +604,7 @@ public class SkillManager : MonoBehaviour
 
         }
 
-        //skills = new ISkill[skillLists.Count - 1];
-
-
-        //for (int i=0;i< skills.Length;i++)
-        //{
-        //    SkillData skillData=new SkillData();
-        //    skillData.skillName = skillLists[i + 1][0];
-        //    skillData.skillEffect = skillLists[i + 1][1];
-        //    skillData.Weight = int.Parse(skillLists[i + 1][4]);
-
-        //    if (skillLists[i + 1][2]== "-")
-        //    {
-        //        skillData.maxLevel = 999;
-        //    }
-        //    else
-        //    {
-        //        skillData.maxLevel = int.Parse(skillLists[i + 1][2]);
-        //    }
-        //    ISkill iSkill = new ISkill();
-        //    iSkill.action = SkillFunc[skillData.skillName];
-        //    skills[i] = iSkill;
-        //    skills[i].data = skillData;
-        //}
     }
-
-    //public ISkill GetSkill()
-    //{
-    //    return skills[UnityEngine.Random.Range(0, skills.Length)];
-    //}
 
     //權重
     private Dictionary<int, int> weightDict = new Dictionary<int, int>();
@@ -668,7 +636,7 @@ public class SkillManager : MonoBehaviour
         return 1;
     }
 
-    public List<ISkill> GetSkillLists()
+    public List<ISkill> GetSkillLists(int Max)
     {
         List<ISkill> tmpskillLists=new List<ISkill>();
 
@@ -677,7 +645,7 @@ public class SkillManager : MonoBehaviour
         skillLists.Clear();
 
         // 技能數量小於3時，無限抽取
-        while (skillLists.Count < 3)
+        while (skillLists.Count < Max)
         {
             tmpskillLists.Clear();
             // 抽取權重值

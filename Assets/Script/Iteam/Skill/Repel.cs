@@ -63,7 +63,7 @@ public class Repel : IteamSkillBase
                         player.enemyList[0].GetComponent<Stetas>().repelMax = Max;
                         player.enemyList[0].GetComponent<Stetas>().actionType = Stetas.ActionType.不能動作;
                         
-                        player.enemyList[0].GetComponent<Stetas>().TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
+                        player.enemyList[0].GetComponent<Stetas>().TakeDamage(stetas.WeaponAtkChange(stetas.iteam), player.enemyList[0].GetComponent<Stetas>().damageDown);
 
                         StartCoroutine(IERepelCD());
 

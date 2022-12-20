@@ -93,7 +93,7 @@ public class InvokedMove_Boss : MonoBehaviour
 
                 if (canAttack)
                 {
-                    TargetEnemy.stetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
+                    TargetEnemy.stetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam),TargetEnemy.stetas.damageDown);
                     saveTime = Time.time;
                     canAttack = false;
                 }

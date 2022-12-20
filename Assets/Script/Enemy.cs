@@ -147,7 +147,7 @@ public class Enemy : MonoBehaviour
                 {
                     if(TargetInvoked!=null&&TargetInvoked.gameObject.activeSelf)
                     {
-                        TargetInvoked.stetas.TakeDamage(stetas.enemy.Atk);
+                        TargetInvoked.stetas.TakeDamage(stetas.enemy.Atk,TargetInvoked.stetas.damageDown);
                         
                         
 
@@ -213,7 +213,7 @@ public class Enemy : MonoBehaviour
         var tmp = GamePlayManager.instance.iteamGround_Enemy.transform.Find(stetas.enemy.name + "物件池");
 
         gameObject.transform.SetParent(tmp.transform);
-
+        stetas.damageDown = 0;
         InvokedList.Clear();
     }
 

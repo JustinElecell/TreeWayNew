@@ -50,7 +50,11 @@ public class GamePlayManager : MonoBehaviour
 
     [Header("Skill管理")]
     public SkillManager skillManager;
+    public PlayerSkillManager playerSkillManager;
+    public DamageManager damageManager;
+
     public SO_Iteam saveIteam;
+    public int GetBuffMax;
 
     private void Start()
     {
@@ -130,6 +134,8 @@ public class GamePlayManager : MonoBehaviour
             }
             Time.timeScale = 1;
             BuffInit();
+            playerSkillManager.Init();
+            damageManager.Init();
 
         }
         else
@@ -148,7 +154,7 @@ public class GamePlayManager : MonoBehaviour
         {
             if(MainManager.instance.TestFlag)
             {
-                skillPanel.SkillSet(skillManager.GetSkillLists());
+                skillPanel.SkillSet(skillManager.GetSkillLists(GetBuffMax));
 
                 player.mp -= 80;
 
@@ -166,7 +172,7 @@ public class GamePlayManager : MonoBehaviour
 
             if (player.mp >= 80)
             {
-                skillPanel.SkillSet(skillManager.GetSkillLists());
+                skillPanel.SkillSet(skillManager.GetSkillLists(GetBuffMax));
 
                 player.mp -= 80;
 

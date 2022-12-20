@@ -76,7 +76,7 @@ public class ComboHit : IteamSkillBase
             else
             {
                 Debug.Log("第" + (i+1).ToString() + "下");
-                player.enemyList[EnemyNo].GetComponent<Stetas>().TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
+                player.enemyList[EnemyNo].GetComponent<Stetas>().TakeDamage(stetas.WeaponAtkChange(stetas.iteam), player.enemyList[EnemyNo].GetComponent<Stetas>().damageDown);
             }
             yield return new WaitForSeconds(0.1f);
 

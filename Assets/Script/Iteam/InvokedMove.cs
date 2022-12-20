@@ -145,7 +145,7 @@ public class InvokedMove : MonoBehaviour
                             return;
                         }
 
-                        TargetStetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
+                        TargetStetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam),TargetStetas.damageDown);
                     }
                     saveTime = Time.time;
                     canAttack = false;
@@ -218,7 +218,7 @@ public class InvokedMove : MonoBehaviour
         TargetStetas = null;
         enemyList.Clear();
         stetas.BuffAtkUp = 0;
-
+        stetas.damageDown = 0;
     }
 
     IEnumerator Attack(Collider other)

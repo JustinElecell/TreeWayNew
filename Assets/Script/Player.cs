@@ -10,8 +10,10 @@ public class Player : MonoBehaviour
 
     public Stetas stetas;
 
+
     public float mp;
     public float mpMax;
+    public float mpUp;
     public void Init()
     {
         var tmpPos =new Vector3((GamePlayManager.instance.Rect.rect.size.x / 2), 0, 0);
@@ -38,13 +40,13 @@ public class Player : MonoBehaviour
         mpMax = ((int)(Mathf.Round(((float)(tmpMpMax)))));
         var tmpMp = baseMpMax * 0.3 * (1 + 0);
         mp = ((float)tmpMp);
-        stetas.player.MpUp = float.Parse(MainManager.instance.TargetCharater[4]);
+        stetas.player.REC = float.Parse(MainManager.instance.TargetCharater[4]);
+        mpUp = 0;
 
         //攻擊力初始化
-        var baseAtk= int.Parse(MainManager.instance.TargetCharater[5]);
+        var baseAtk = int.Parse(MainManager.instance.TargetCharater[5]);
         var baseAtkUp = float.Parse(MainManager.instance.TargetCharater[6]);
-        stetas.player.Atk = ((int)(baseAtk * (1 + stetas.player.Overfulfil * baseAtkUp) * (1 + 0)));
-
+        stetas.player.Atk =baseAtk;
 
         ResetPlayerHp();
 
@@ -94,7 +96,7 @@ public class Player : MonoBehaviour
             {
                 //(角色REC(魔力回復速度) * (1 + Buff合計)) * (1 + (當前等級 - 1) * 0.2)              ※此處當前等級意旨「關卡內透過消耗MP抽取Buff的次數，初始值為0」
 
-                var tmpMpUp = (stetas.player.MpUp * (1 + 0)) * (1 + (GamePlayManager.instance.buffCount) * 0.2);
+                var tmpMpUp = (stetas.player.REC * (1 + mpUp/100)) * (1 + (GamePlayManager.instance.buffCount) * 0.2);
                 mp += ((float)(tmpMpUp));
 
 

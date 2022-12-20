@@ -144,6 +144,7 @@ MonoBehaviour:
   roadNo: 0
   saveTime: 0
   BuffAtkUp: 0
+  Weight: 999
 --- !u!114 &5790502892671748698
 MonoBehaviour:
   m_ObjectHideFlags: 0

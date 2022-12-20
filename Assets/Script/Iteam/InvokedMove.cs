@@ -139,7 +139,7 @@ public class InvokedMove : MonoBehaviour
 
                     if (TargetStetas!=null&&TargetStetas.gameObject.activeSelf)
                     {
-                        if (stetas.Skill != null && stetas.Skill.enabled == true&& TargetStetas.type != Stetas.Type.Boss)
+                        if (stetas.Skill != null && stetas.Skill.enabled == true)
                         {
                             stetas.Skill.SkillEffect(TargetStetas.gameObject);
                             return;

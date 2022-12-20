@@ -31,7 +31,7 @@ public class SkillManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.T))
         {
-            SkillFunc["破滅衝擊"]();
+            SkillFunc["雙重施法"]();
 
         }
     }
@@ -428,7 +428,7 @@ public class SkillManager : MonoBehaviour
                     {
                         Debug.Log("不消耗MP");
                         Debug.Log(GamePlayManager.instance.player.transform.parent.transform.GetSiblingIndex() + 1);
-                        GamePlayManager.instance.SetIteam(skill, GamePlayManager.instance.player.transform.parent.transform.GetSiblingIndex()+1, false);
+                        GamePlayManager.instance.SetIteam(skill, GamePlayManager.instance.player.transform.parent.transform.GetSiblingIndex()+1, true);
                         return true;
                     }
                 }
@@ -448,7 +448,7 @@ public class SkillManager : MonoBehaviour
                     if (tmpInt <= 10 * skillsDic["雙重投擲"].buffLevel)
                     {
                         Debug.Log("不消耗MP");
-                        GamePlayManager.instance.SetIteam(skill, GamePlayManager.instance.player.transform.parent.transform.GetSiblingIndex()+1, false);
+                        GamePlayManager.instance.SetIteam(skill, GamePlayManager.instance.player.transform.parent.transform.GetSiblingIndex()+1, true);
 
                         return true;
                     }
@@ -469,7 +469,7 @@ public class SkillManager : MonoBehaviour
                     if (tmpInt <= 10 * skillsDic["雙重召喚"].buffLevel)
                     {
                         Debug.Log("不消耗MP");
-                        GamePlayManager.instance.SetIteam(skill, GamePlayManager.instance.player.transform.parent.transform.GetSiblingIndex()+1, false);
+                        GamePlayManager.instance.SetIteam(skill, GamePlayManager.instance.player.transform.parent.transform.GetSiblingIndex()+1, true);
 
                         return true;
                     }

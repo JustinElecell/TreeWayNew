@@ -9,7 +9,6 @@ public class Stetas : MonoBehaviour
         道具,
         敵人,
         召喚,
-        Boss
     }
     public enum ActionType
     {
@@ -44,6 +43,7 @@ public class Stetas : MonoBehaviour
     public float saveTime;
 
     public float BuffAtkUp;
+    public float Weight;
     //public int WeaponAtkChange(float atk)
     //{
     //    //( roundup ( ( 玩家基礎攻擊力 * ( 1 + 突破次數 * 突破時攻擊力加成比例 ) * (1+其餘攻擊力buff%) ) * ( 武器傷害 * ( 1 + 武器傷害Buff % ) ) ) ) * ( if ( 觸發翻倍=ture , 2 , 1 ) ) 

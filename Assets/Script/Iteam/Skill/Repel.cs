@@ -17,11 +17,17 @@ public class Repel : IteamSkillBase
     }
     public override void SkillEffect(GameObject obj)
     {
+
+
         if(!alwaysRepel)
         {
             Debug.Log(obj.name);
             //if(obj!=null)
             {
+                if (obj.GetComponent<Stetas>().Weight > 10)
+                {
+                    return;
+                }
                 StartCoroutine(Effect(obj));
 
             }
@@ -59,10 +65,16 @@ public class Repel : IteamSkillBase
                         
                         player.enemyList[0].GetComponent<Stetas>().TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
 
-                        StartCoroutine(IERepel(player.enemyList[0]));
                         StartCoroutine(IERepelCD());
+
+                        if (obj.GetComponent<Stetas>().Weight > 10)
+                        {
+                            return;
+                        }
+                        StartCoroutine(IERepel(player.enemyList[0]));
+
                     }
-                    
+
 
 
 

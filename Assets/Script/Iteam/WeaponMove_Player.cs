@@ -146,7 +146,7 @@ public class WeaponMove_Player : MonoBehaviour
                         otherstetas.TakeDamage(stetas.WeaponAtkChange(stetas.iteam));
                         stetas.Hp -= otherstetas.enemy.Atk;
                         
-                        if(stetas.Skill!=null&&stetas.Skill.enabled==true&& stetas.type != Stetas.Type.Boss)
+                        if(stetas.Skill!=null&&stetas.Skill.enabled==true)
                         {
                             Debug.Log(other.gameObject);
 

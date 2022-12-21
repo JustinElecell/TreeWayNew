@@ -10,11 +10,11 @@ public class DamageManager : MonoBehaviour
 
     public void Close(GameObject obj)
     {
-        obj.transform.SetParent(damageMonoTran);
+        Destroy(obj.gameObject);
     }
     public void Init()
     {
-        for(int i=0;i<120;i++)
+        for(int i=0;i<10;i++)
         {
             Instantiate(textObj, damageMonoTran);
 
@@ -33,7 +33,13 @@ public class DamageManager : MonoBehaviour
 
     public void Damage(GameObject target, int damage)
     {
+        if(damageMonoTran.childCount<=0)
+        {
+            Init();
+        }
+
         var obj = damageMonoTran.GetChild(0).gameObject;
+
         obj.GetComponent<Text>().text=damage.ToString();
         obj.transform.SetParent(target.transform.parent.transform);
         

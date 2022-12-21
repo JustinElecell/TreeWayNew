@@ -52,10 +52,8 @@ public class Player : MonoBehaviour
         for(int i=0;i<5/*stetas.player.Level*/;i++)
         {
             var skillNo = int.Parse(MainManager.instance.TargetCharater[10+i*4]);
-            Debug.Log(skillNo);
 
             var x = int.Parse(MainManager.instance.TargetCharater[11+i*4]);
-            Debug.Log(x);
 
 
             var y = 0;

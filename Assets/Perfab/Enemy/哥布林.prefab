@@ -193,6 +193,7 @@ MonoBehaviour:
   saveTime: 0
   BuffAtkUp: 0
   Weight: 0
+  damageDown: 0
 --- !u!1001 &9168952237921893516
 PrefabInstance:
   m_ObjectHideFlags: 0

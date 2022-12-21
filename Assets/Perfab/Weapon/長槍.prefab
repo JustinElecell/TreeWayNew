@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -7817916187480188323}
   - component: {fileID: 5556588072280786885}
   - component: {fileID: 3281415562058856678}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: "\u9577\u69CD"
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -145,6 +145,7 @@ MonoBehaviour:
   saveTime: 0
   BuffAtkUp: 0
   Weight: 0
+  damageDown: 0
 --- !u!54 &5556588072280786885
 Rigidbody:
   m_ObjectHideFlags: 0

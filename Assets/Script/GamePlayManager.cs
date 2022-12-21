@@ -57,13 +57,8 @@ public class GamePlayManager : MonoBehaviour
     public SO_Iteam saveIteam;
     public int GetBuffMax;
 
-    private void Start()
-    {
-        for(int i=0;i< SkillButtonLists.Length;i++)
-        {
-            SkillButtonLists[i].Init(MainManager.instance.skillIteams[i]);
-        }
-    }
+
+
     #region 初始化
 
     public void ResetAllIteamUI()
@@ -94,6 +89,7 @@ public class GamePlayManager : MonoBehaviour
 
         if (tmp != null)
         {
+            
             if (tmp.transform.childCount > 0)
             {
                 var iteamObj = tmp.transform.GetChild(0).gameObject;
@@ -121,10 +117,16 @@ public class GamePlayManager : MonoBehaviour
         if(instance==null)
         {
             instance = this;
+            for (int i = 0; i < SkillButtonLists.Length; i++)
+            {
+                SkillButtonLists[i].Init(MainManager.instance.skillIteams[i]);
+            }
             FuncInit();
 
             EnemyGroundInit();
             BuffInit();
+
+
 
             playerSkillManager.Init();
             damageManager.Init();
@@ -270,6 +272,7 @@ public class GamePlayManager : MonoBehaviour
             var tmp = iteamGround_Enemy.transform.Find(enemyData[enemyNo].name + "物件池");
             if (tmp != null)
             {
+
                 if(tmp.transform.childCount>0)
                 {
                     var enemyObj = tmp.transform.GetChild(0).gameObject;
@@ -456,7 +459,11 @@ public class GamePlayManager : MonoBehaviour
 
                 if (tmp != null)
                 {
-                    if(tmp.transform.childCount>0)
+                    if (tmp.transform.childCount <= 0)
+                    {
+                        CreateIteamInit(Skill, GamePlayManager.instance.iteamGround_Player.transform);
+                    }
+                    if (tmp.transform.childCount>0)
                     {
 
 

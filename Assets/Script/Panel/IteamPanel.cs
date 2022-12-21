@@ -30,6 +30,8 @@ public class IteamPanel : MonoBehaviour
     public Button ChangeButton;
 
     SO_Iteam targetIteam;
+    public Button[] TargetSkillButton;
+
     private void Start()
     {
         Debug.Log("Init");
@@ -111,11 +113,25 @@ public class IteamPanel : MonoBehaviour
 
         ChangeButton.onClick.AddListener(() => {
 
-            Debug.Log(targetIteam);
-            //var tmp = Resources.Load<SO_Iteam>("Iteam/Weapon/" + IteamLists[no][0]);
             MainManager.instance.skillIteams[MainManager.instance.targetSkillNo] = targetIteam;
-            MainManager.instance.TargetSkillButton[MainManager.instance.targetSkillNo].gameObject.GetComponent<Image>().sprite = targetIteam.IteamImage;
+            TargetSkillButton[MainManager.instance.targetSkillNo].gameObject.GetComponent<Image>().sprite = targetIteam.IteamImage;
         });
+
+        for (int i = 0; i < TargetSkillButton.Length; i++)
+        {
+            int no = i;
+            TargetSkillButton[i].onClick.AddListener(() => {
+
+                for (int r = 0; r < 5; r++)
+                {
+                    TargetSkillButton[r].gameObject.GetComponent<Image>().color = Color.white;
+                }
+                TargetSkillButton[no].gameObject.GetComponent<Image>().color = Color.green;
+                MainManager.instance.targetSkillNo = no;
+            });
+            MainManager.instance.skillIteams[MainManager.instance.targetSkillNo] = targetIteam;
+            TargetSkillButton[MainManager.instance.targetSkillNo].gameObject.GetComponent<Image>().sprite = targetIteam.IteamImage;
+        }
     }
 
     void SetText(int no)

@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
 
     Dictionary<Stetas.ActionType, Action> ActionTypeFunc = new Dictionary<Stetas.ActionType, Action>();
 
-    List<GameObject> InvokedList = new List<GameObject>();
+    public List<GameObject> InvokedList = new List<GameObject>();
     public InvokedMove TargetInvoked;
 
     public int roadNo;
@@ -113,6 +113,16 @@ public class Enemy : MonoBehaviour
 
         ActionTypeFunc.Add(Stetas.ActionType.攻擊, () => {
 
+            if (InvokedList.Count > 0)
+            {
+                for (int i = 0; i < InvokedList.Count; i++)
+                {
+                    if (InvokedList[i] == null)
+                    {
+                        InvokedList.RemoveAt(i);
+                    }
+                }
+            }
 
             if (TargetInvoked != null)
             {
@@ -156,6 +166,9 @@ public class Enemy : MonoBehaviour
 
                         canAttack = false;
                     }
+
+
+
 
                 }
                 else
@@ -263,15 +276,17 @@ public class Enemy : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
-            var otherstetas = other.gameObject.GetComponent<Stetas>();
-            switch (otherstetas.type)
-            {
-                case Stetas.Type.召喚:
-                    InvokedList.Remove(other.gameObject);
+            InvokedList.Remove(other.gameObject);
 
-                    break;
+            //var otherstetas = other.gameObject.GetComponent<Stetas>();
+            //switch (otherstetas.type)
+            //{
+            //    case Stetas.Type.召喚:
+            //        InvokedList.Remove(other.gameObject);
 
-            }
+            //        break;
+
+            //}
         }
     }
 

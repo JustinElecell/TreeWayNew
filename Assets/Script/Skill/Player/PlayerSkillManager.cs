@@ -7,7 +7,7 @@ public class PlayerSkillManager : MonoBehaviour
 {
     
     
-    Dictionary<int, Action<int,int>> skillFunc = new Dictionary<int, Action<int,int>>();
+    Dictionary<int, Action<float, float>> skillFunc = new Dictionary<int, Action<float, float>>();
 
     public List<int> UsedSkillNo = new List<int>();
     public void Init()
@@ -22,6 +22,13 @@ public class PlayerSkillManager : MonoBehaviour
         UsedSkillNo.Add(SkillNo);
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            skillFunc[3](2, 10);
+        }
+    }
     void FuncInit()
     {
         //「x類型」武器攻擊力提升 y %
@@ -170,12 +177,15 @@ public class PlayerSkillManager : MonoBehaviour
             {
                 if (data.iteamData != null)
                 {
+                    Debug.Log(data.iteamData.IteamName);
+
                     float tmpUp = 0;
                     switch (x)
                     {
                         case 0:
                             tmpUp = data.iteamData.Mp * (y / 100);
                             data.iteamData.Mp -= (tmpUp);
+                            data.RefreshUI();
 
                             break;
                         case 1:
@@ -183,6 +193,8 @@ public class PlayerSkillManager : MonoBehaviour
                             {
                                 tmpUp = data.iteamData.Mp * (y / 100);
                                 data.iteamData.Mp -= ((float)tmpUp);
+                                data.RefreshUI();
+                                Debug.Log("刷新");
                             }
                             break;
                         case 2:
@@ -190,6 +202,8 @@ public class PlayerSkillManager : MonoBehaviour
                             {
                                 tmpUp = data.iteamData.Mp * (y / 100);
                                 data.iteamData.Mp -= ((float)tmpUp);
+                                data.RefreshUI();
+
                             }
                             break;
                         case 3:
@@ -197,10 +211,13 @@ public class PlayerSkillManager : MonoBehaviour
                             {
                                 tmpUp = data.iteamData.Mp * (y / 100);
                                 data.iteamData.Mp -= ((float)tmpUp);
+                                data.RefreshUI();
+
                             }
                             break;
                     }
                 }
+
             }
 
 
@@ -218,6 +235,8 @@ public class PlayerSkillManager : MonoBehaviour
                             {
                                 var tmpUp = data.iteamData.Mp * (y / 100);
                                 data.iteamData.Mp -= ((float)tmpUp);
+                                data.RefreshUI();
+
                             }
                             break;
                         case 2:
@@ -225,6 +244,8 @@ public class PlayerSkillManager : MonoBehaviour
                             {
                                 var tmpUp = data.iteamData.Mp * (y / 100);
                                 data.iteamData.Mp -= ((float)tmpUp);
+                                data.RefreshUI();
+
                             }
                             break;
                         case 3:
@@ -232,6 +253,8 @@ public class PlayerSkillManager : MonoBehaviour
                             {
                                 var tmpUp = data.iteamData.Mp * (y / 100);
                                 data.iteamData.Mp -= ((float)tmpUp);
+                                data.RefreshUI();
+
                             }
                             break;
                         case 4:
@@ -239,6 +262,8 @@ public class PlayerSkillManager : MonoBehaviour
                             {
                                 var tmpUp = data.iteamData.Mp * (y / 100);
                                 data.iteamData.Mp -= ((float)tmpUp);
+                                data.RefreshUI();
+
                             }
                             break;
                         case 5:
@@ -246,6 +271,8 @@ public class PlayerSkillManager : MonoBehaviour
                             {
                                 var tmpUp = data.iteamData.Mp * (y / 100);
                                 data.iteamData.Mp -= ((float)tmpUp);
+                                data.RefreshUI();
+
                             }
                             break;
                         case 6:
@@ -253,6 +280,8 @@ public class PlayerSkillManager : MonoBehaviour
                             {
                                 var tmpUp = data.iteamData.Mp * (y / 100);
                                 data.iteamData.Mp -= ((float)tmpUp);
+                                data.RefreshUI();
+
                             }
                             break;
                         case 7:
@@ -260,6 +289,8 @@ public class PlayerSkillManager : MonoBehaviour
                             {
                                 var tmpUp = data.iteamData.Mp * (y / 100);
                                 data.iteamData.Mp -= ((float)tmpUp);
+                                data.RefreshUI();
+
                             }
                             break;
                         case 8:
@@ -267,6 +298,8 @@ public class PlayerSkillManager : MonoBehaviour
                             {
                                 var tmpUp = data.iteamData.Mp * (y / 100);
                                 data.iteamData.Mp -= ((float)tmpUp);
+                                data.RefreshUI();
+
                             }
                             break;
                         case 9:
@@ -274,6 +307,8 @@ public class PlayerSkillManager : MonoBehaviour
                             {
                                 var tmpUp = data.iteamData.Mp * (y / 100);
                                 data.iteamData.Mp -= ((float)tmpUp);
+                                data.RefreshUI();
+
                             }
                             break;
                         case 10:
@@ -281,6 +316,8 @@ public class PlayerSkillManager : MonoBehaviour
                             {
                                 var tmpUp = data.iteamData.Mp * (y / 100);
                                 data.iteamData.Mp -= ((float)tmpUp);
+                                data.RefreshUI();
+
                             }
                             break;
                         case 11:
@@ -288,6 +325,8 @@ public class PlayerSkillManager : MonoBehaviour
                             {
                                 var tmpUp = data.iteamData.Mp * (y / 100);
                                 data.iteamData.Mp -= ((float)tmpUp);
+                                data.RefreshUI();
+
                             }
                             break;
                         case 12:
@@ -295,6 +334,8 @@ public class PlayerSkillManager : MonoBehaviour
                             {
                                 var tmpUp = data.iteamData.Mp * (y / 100);
                                 data.iteamData.Mp -= ((float)tmpUp);
+                                data.RefreshUI();
+
                             }
                             break;
                     }
@@ -472,7 +513,7 @@ public class PlayerSkillManager : MonoBehaviour
         });
         // 抽取升級Buff時，選項+x
         skillFunc.Add(7, (x, y) => {
-            GamePlayManager.instance.GetBuffMax += x;
+            GamePlayManager.instance.GetBuffMax += ((int)x);
         });
         // 每攜帶一種類型的裝備，增加 x % 的攻擊力
         skillFunc.Add(8, (x, y) => {

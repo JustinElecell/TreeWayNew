@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -7817916187480188323}
   - component: {fileID: -7393734871878924060}
   - component: {fileID: 6278841092226617165}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: "Boss\u5B50\u5F481"
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -115,11 +115,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   hpBar: {fileID: 0}
+  player: {fileID: 0}
   iteam: {fileID: 11400000, guid: d828e750c6095d747b481653eaed874d, type: 2}
+  Skill: {fileID: 0}
   enemy: {fileID: 0}
+  BossHpBarFlag: 0
+  CantMoveCount: 0
+  repelMax: 1
   Hp: 0
   HpMax: 0
   actionType: 0
+  roadNo: 0
+  saveTime: 0
+  BuffAtkUp: 0
+  Weight: 0
+  damageDown: 0
 --- !u!54 &-7393734871878924060
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -149,3 +159,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stetas: {fileID: -7817916187480188323}
+  WeaponList: []
+  TargetInvoked: {fileID: 0}

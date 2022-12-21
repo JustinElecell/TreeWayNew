@@ -15,7 +15,6 @@ public class MainManager : MonoBehaviour
             instance = this;
             Application.targetFrameRate = 120;
             DontDestroyOnLoad(this.gameObject);
-            Init();
         }
         else
         {
@@ -29,26 +28,6 @@ public class MainManager : MonoBehaviour
     public int targetSkillNo = 1;
     public SO_Iteam[] skillIteams;
 
-    public Button[] TargetSkillButton;
 
-    void Init()
-    {
-        for(int i=0;i<TargetSkillButton.Length;i++)
-        {
-
-            int no = i;
-            TargetSkillButton[i].onClick.AddListener(() => {
-
-                for(int r=0;r<5;r++)
-                {
-                    TargetSkillButton[r].gameObject.GetComponent<Image>().color = Color.white;
-                }
-                TargetSkillButton[no].gameObject.GetComponent<Image>().color = Color.green;
-                targetSkillNo = no;
-            
-            
-            });
-        }
-    }
 
 }

@@ -68,7 +68,10 @@ public class InvokedMove : MonoBehaviour
     void FuncInit()
     {
         ActionTypeFunc.Add(Stetas.ActionType.移動, () => {
-
+            if(enemyList.Count>0)
+            {
+                stetas.actionType = Stetas.ActionType.攻擊;
+            }
 
 
             if (gameObject.transform.localPosition.x > -GamePlayManager.instance.Rect.rect.size.x / 2)
@@ -96,7 +99,9 @@ public class InvokedMove : MonoBehaviour
             }
             else
             {
-                ReSet();
+                //ReSet();
+                Destroy(this.gameObject);
+
 
             }
 
@@ -104,7 +109,17 @@ public class InvokedMove : MonoBehaviour
         });
 
         ActionTypeFunc.Add(Stetas.ActionType.攻擊, () => {
+            if (enemyList.Count>0)
+            {
+                for(int i=0;i< enemyList.Count;i++)
+                {
+                    if(!enemyList[i].activeSelf)
+                    {
+                        enemyList.RemoveAt(i);
 
+                    }
+                }
+            }
 
             if (TargetStetas != null)
             {
@@ -119,17 +134,17 @@ public class InvokedMove : MonoBehaviour
                     else
                     {
                         TargetStetas = null;
-                        if (FindFightEnemy())
+                        FindFightEnemy();
                         {
 
 
                         }
-                        else
-                        {
-                            // 沒有戰鬥中敵人
-                            stetas.actionType = Stetas.ActionType.移動;
-                            ResetSpeedSaveTime();
-                        }
+                        //else
+                        //{
+                        //    // 沒有戰鬥中敵人
+                        //    stetas.actionType = Stetas.ActionType.移動;
+                        //    ResetSpeedSaveTime();
+                        //}
                     }
                 }
 
@@ -149,10 +164,7 @@ public class InvokedMove : MonoBehaviour
                     }
                     saveTime = Time.time;
                     canAttack = false;
-                    if(TargetStetas!=null&&TargetStetas.Hp<=0)
-                    {
-                        enemyList.Remove(TargetStetas.gameObject);
-                    }
+
                 }
                 else
                 {
@@ -166,7 +178,11 @@ public class InvokedMove : MonoBehaviour
             }
             else
             {
-                stetas.actionType = Stetas.ActionType.移動;
+                if(!FindFightEnemy())
+                {
+                    stetas.actionType = Stetas.ActionType.移動;
+
+                }
             }
         });
 
@@ -182,8 +198,7 @@ public class InvokedMove : MonoBehaviour
             var tmp = GamePlayManager.instance.roads[stetas.roadNo - 1].transform.GetChild(0).transform.GetChild(0).GetComponent<Stetas>();
             foreach(var dataObj in enemyList)
             {
-
-                if(dataObj==tmp.gameObject)
+                if(tmp!=null&&dataObj == tmp.gameObject)
                 {
                     TargetStetas = tmp;
                     return true;
@@ -200,7 +215,8 @@ public class InvokedMove : MonoBehaviour
     {
         if (stetas.Hp <= 0)
         {
-            ReSet();
+            Destroy(this.gameObject);
+            //ReSet();
         }
         else
         {

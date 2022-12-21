@@ -71,8 +71,8 @@ public class IteamUI : MonoBehaviour
     public void RefreshUI()
     {
 
-        iteamData.Mp = Mathf.Round(iteamData.Mp);
-        SkillLimitText.text = iteamData.Mp.ToString();
+        //iteamData.Mp = Mathf.Round(iteamData.Mp);
+        SkillLimitText.text = Mathf.Round(iteamData.Mp).ToString();
 
 
     }

@@ -49,6 +49,7 @@ public class CharaterPanel : MonoBehaviour
             });
         }
         TargetCharaterButton.onClick.AddListener(() => {
+
             MainManager.instance.TargetCharater = charaterLists[charaterNo];
        
         });

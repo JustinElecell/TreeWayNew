@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 
     public Stetas stetas;
 
+    public float AtkUp;
 
     public float mp;
     public float mpMax;
@@ -48,6 +49,23 @@ public class Player : MonoBehaviour
         var baseAtkUp = float.Parse(MainManager.instance.TargetCharater[6]);
         stetas.player.Atk =baseAtk;
 
+        for(int i=0;i<5/*stetas.player.Level*/;i++)
+        {
+            var skillNo = int.Parse(MainManager.instance.TargetCharater[10+i*4]);
+            Debug.Log(skillNo);
+
+            var x = int.Parse(MainManager.instance.TargetCharater[11+i*4]);
+            Debug.Log(x);
+
+
+            var y = 0;
+            int.TryParse(MainManager.instance.TargetCharater[12+i*4],out y);
+            Debug.Log(y);
+
+            GamePlayManager.instance.playerSkillManager.AddPlayerSkill(skillNo,x,y);
+
+        }
+
         ResetPlayerHp();
 
         ResetPlayerMp();
@@ -61,6 +79,11 @@ public class Player : MonoBehaviour
         if(stetas.Hp<0)
         {
             stetas.Hp = 0;
+        }
+
+        if(stetas.Hp>stetas.HpMax)
+        {
+            stetas.Hp = stetas.HpMax;
         }
         GamePlayManager.instance.infoPanel.PlayerHpText.text = stetas.Hp.ToString() + " / " + stetas.HpMax.ToString();
         float tmp = stetas.Hp / stetas.HpMax;

@@ -15,6 +15,5 @@ public class SO_Player : ScriptableObject
     public int Def;
 
     public int Overfulfil;
-    public float AtkUp;
     //public float temporaryAtkUp;
 }

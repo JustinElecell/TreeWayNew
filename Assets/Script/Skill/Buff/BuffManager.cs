@@ -6,21 +6,21 @@ using System;
 
 
 
-public class SkillManager : MonoBehaviour
+public class BuffManager : MonoBehaviour
 {
 
     //public ISkill[] skills;
-    public Dictionary<string, ISkill> skillsDic = new Dictionary<string, ISkill>();
+    public Dictionary<string, ISkill> BuffsDic = new Dictionary<string, ISkill>();
 
-    List<List<string>> skillLists;
+    List<List<string>> buffLists;
 
-    Dictionary<string, Action> SkillFunc = new Dictionary<string, Action>();
+    Dictionary<string, Action> BuffFunc = new Dictionary<string, Action>();
 
     public GameObject CheckCircle;
 
     private void Awake()
     {
-        SkillInit();
+        BuffInit();
 
         weightDict.Add(1, 60);
         weightDict.Add(2, 20);
@@ -31,31 +31,31 @@ public class SkillManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.T))
         {
-            SkillFunc["雙重施法"]();
+            BuffFunc["破滅衝擊"]();
 
         }
     }
-    void SkillInit()
+    void BuffInit()
     {
         //等等修改為搜索玩家跟身上裝備，直接提升效果
-        SkillFunc.Add("攻擊力提升", () =>
+        BuffFunc.Add("攻擊力提升", () =>
         {
             Debug.Log("攻擊力提升");
             //tmp=data.iteamData.Hp*
-            skillsDic["攻擊力提升"].BuffLevelUp();
-            GamePlayManager.instance.player.stetas.player.AtkUp += 10* skillsDic["攻擊力提升"].buffLevel;
+            BuffsDic["攻擊力提升"].BuffLevelUp();
+            GamePlayManager.instance.player.AtkUp += 10* BuffsDic["攻擊力提升"].buffLevel;
         });
 
-        SkillFunc.Add("耐久度提升", () =>
+        BuffFunc.Add("耐久度提升", () =>
         {
-            skillsDic["耐久度提升"].BuffLevelUp();
+            BuffsDic["耐久度提升"].BuffLevelUp();
 
             Debug.Log("耐久度提升");
             foreach(var data in GamePlayManager.instance.SkillButtonLists)
             {
                 if(data.iteamData!=null)
                 {
-                    var tmpUp = data.iteamData.Hp * (0.1* skillsDic["耐久度提升"].buffLevel);
+                    var tmpUp = data.iteamData.Hp * (0.1* BuffsDic["耐久度提升"].buffLevel);
                     data.iteamData.Hp += ((float)tmpUp);
 
                 }
@@ -63,9 +63,9 @@ public class SkillManager : MonoBehaviour
 
 
         });
-        SkillFunc.Add("堅硬武具", () =>
+        BuffFunc.Add("堅硬武具", () =>
         {
-            skillsDic["堅硬武具"].BuffLevelUp();
+            BuffsDic["堅硬武具"].BuffLevelUp();
 
 
             Debug.Log("堅硬武具");
@@ -76,7 +76,7 @@ public class SkillManager : MonoBehaviour
                     if(data.iteamData.type== SO_Iteam.IteamType.武具)
                     {
 
-                        var tmpUp = data.iteamData.Hp * (0.12* skillsDic["堅硬武具"].buffLevel);
+                        var tmpUp = data.iteamData.Hp * (0.12* BuffsDic["堅硬武具"].buffLevel);
                         data.iteamData.Hp += ((float)tmpUp);
 
                     }
@@ -84,10 +84,10 @@ public class SkillManager : MonoBehaviour
                 }
             }
         });
-        SkillFunc.Add("穩固魔力", () =>
+        BuffFunc.Add("穩固魔力", () =>
         {
             Debug.Log("穩固魔力");
-            skillsDic["穩固魔力"].BuffLevelUp();
+            BuffsDic["穩固魔力"].BuffLevelUp();
 
             foreach (var data in GamePlayManager.instance.SkillButtonLists)
             {
@@ -95,7 +95,7 @@ public class SkillManager : MonoBehaviour
                 {
                     if (data.iteamData.type == SO_Iteam.IteamType.魔法)
                     {
-                        var tmpUp = data.iteamData.Hp * (0.12 * skillsDic["穩固魔力"].buffLevel);
+                        var tmpUp = data.iteamData.Hp * (0.12 * BuffsDic["穩固魔力"].buffLevel);
                         data.iteamData.Hp += ((float)tmpUp);
 
                     }
@@ -103,10 +103,10 @@ public class SkillManager : MonoBehaviour
                 }
             }
         });
-        SkillFunc.Add("強健生物", () =>
+        BuffFunc.Add("強健生物", () =>
         {
             Debug.Log("強健生物");
-            skillsDic["強健生物"].BuffLevelUp();
+            BuffsDic["強健生物"].BuffLevelUp();
 
             foreach (var data in GamePlayManager.instance.SkillButtonLists)
             {
@@ -114,7 +114,7 @@ public class SkillManager : MonoBehaviour
                 {
                     if (data.iteamData.type == SO_Iteam.IteamType.召喚)
                     {
-                        var tmpUp = data.iteamData.Hp * (0.12 * skillsDic["強健生物"].buffLevel);
+                        var tmpUp = data.iteamData.Hp * (0.12 * BuffsDic["強健生物"].buffLevel);
                         data.iteamData.Hp += ((float)tmpUp);
 
                     }
@@ -122,10 +122,10 @@ public class SkillManager : MonoBehaviour
             }
         });
 
-        SkillFunc.Add("武具強化", () =>
+        BuffFunc.Add("武具強化", () =>
         {
             Debug.Log("武具強化");
-            skillsDic["武具強化"].BuffLevelUp();
+            BuffsDic["武具強化"].BuffLevelUp();
 
             foreach (var data in GamePlayManager.instance.SkillButtonLists)
             {
@@ -133,17 +133,17 @@ public class SkillManager : MonoBehaviour
                 {
                     if (data.iteamData.type == SO_Iteam.IteamType.武具)
                     {
-                        data.iteamData.atkUp += (12 * skillsDic["武具強化"].buffLevel);
+                        data.iteamData.atkUp += (12 * BuffsDic["武具強化"].buffLevel);
 
                     }
                 }
             }
         });
 
-        SkillFunc.Add("魔力強化", () =>
+        BuffFunc.Add("魔力強化", () =>
         {
             Debug.Log("魔力強化");
-            skillsDic["魔力強化"].BuffLevelUp();
+            BuffsDic["魔力強化"].BuffLevelUp();
 
             foreach (var data in GamePlayManager.instance.SkillButtonLists)
             {
@@ -151,17 +151,17 @@ public class SkillManager : MonoBehaviour
                 {
                     if (data.iteamData.type == SO_Iteam.IteamType.魔法)
                     {
-                        data.iteamData.atkUp += (12* skillsDic["魔力強化"].buffLevel);
+                        data.iteamData.atkUp += (12* BuffsDic["魔力強化"].buffLevel);
 
                     }
 
                 }
             }
         });
-        SkillFunc.Add("召靈強化", () =>
+        BuffFunc.Add("召靈強化", () =>
         {
             Debug.Log("召靈強化");
-            skillsDic["召靈強化"].BuffLevelUp();
+            BuffsDic["召靈強化"].BuffLevelUp();
 
             foreach (var data in GamePlayManager.instance.SkillButtonLists)
             {
@@ -169,7 +169,7 @@ public class SkillManager : MonoBehaviour
                 {
                     if (data.iteamData.type == SO_Iteam.IteamType.召喚)
                     {
-                        data.iteamData.atkUp += (12* skillsDic["召靈強化"].buffLevel);
+                        data.iteamData.atkUp += (12* BuffsDic["召靈強化"].buffLevel);
 
                     }
 
@@ -177,10 +177,10 @@ public class SkillManager : MonoBehaviour
             }
 
         });
-        SkillFunc.Add("銳化刀刃", () =>
+        BuffFunc.Add("銳化刀刃", () =>
         {
             Debug.Log("銳化刀刃");
-            skillsDic["銳化刀刃"].BuffLevelUp();
+            BuffsDic["銳化刀刃"].BuffLevelUp();
 
             foreach (var data in GamePlayManager.instance.SkillButtonLists)
             {
@@ -188,7 +188,7 @@ public class SkillManager : MonoBehaviour
                 {
                     if (data.iteamData.attributesType == SO_Iteam.AttributesType.刃)
                     {
-                        data.iteamData.atkUp += (15* skillsDic["銳化刀刃"].buffLevel);
+                        data.iteamData.atkUp += (15* BuffsDic["銳化刀刃"].buffLevel);
                     }
 
                 }
@@ -196,10 +196,10 @@ public class SkillManager : MonoBehaviour
 
         });
 
-        SkillFunc.Add("堅刃", () =>
+        BuffFunc.Add("堅刃", () =>
         {
             Debug.Log("堅刃");
-            skillsDic["堅刃"].BuffLevelUp();
+            BuffsDic["堅刃"].BuffLevelUp();
 
             foreach (var data in GamePlayManager.instance.SkillButtonLists)
             {
@@ -207,7 +207,7 @@ public class SkillManager : MonoBehaviour
                 {
                     if (data.iteamData.attributesType == SO_Iteam.AttributesType.刃)
                     {
-                        var tmpUp = data.iteamData.Hp * (0.15 * skillsDic["堅刃"].buffLevel);
+                        var tmpUp = data.iteamData.Hp * (0.15 * BuffsDic["堅刃"].buffLevel);
                         data.iteamData.Hp += ((float)tmpUp);
 
                     }
@@ -216,10 +216,10 @@ public class SkillManager : MonoBehaviour
             }
 
         });
-        SkillFunc.Add("強化衝擊", () =>
+        BuffFunc.Add("強化衝擊", () =>
         {
             Debug.Log("強化衝擊");
-            skillsDic["強化衝擊"].BuffLevelUp();
+            BuffsDic["強化衝擊"].BuffLevelUp();
 
             foreach (var data in GamePlayManager.instance.SkillButtonLists)
             {
@@ -227,7 +227,7 @@ public class SkillManager : MonoBehaviour
                 {
                     if (data.iteamData.attributesType == SO_Iteam.AttributesType.打)
                     {
-                        data.iteamData.atkUp += (15 * skillsDic["強化衝擊"].buffLevel);
+                        data.iteamData.atkUp += (15 * BuffsDic["強化衝擊"].buffLevel);
                     }
 
                 }
@@ -235,10 +235,10 @@ public class SkillManager : MonoBehaviour
 
         });
 
-        SkillFunc.Add("硬化", () =>
+        BuffFunc.Add("硬化", () =>
         {
             Debug.Log("硬化");
-            skillsDic["硬化"].BuffLevelUp();
+            BuffsDic["硬化"].BuffLevelUp();
 
             foreach (var data in GamePlayManager.instance.SkillButtonLists)
             {
@@ -246,7 +246,7 @@ public class SkillManager : MonoBehaviour
                 {
                     if (data.iteamData.attributesType == SO_Iteam.AttributesType.打)
                     {
-                        var tmpUp = data.iteamData.Hp * (0.15 * skillsDic["硬化"].buffLevel);
+                        var tmpUp = data.iteamData.Hp * (0.15 * BuffsDic["硬化"].buffLevel);
                         data.iteamData.Hp += ((float)tmpUp);
                     }
 
@@ -254,10 +254,10 @@ public class SkillManager : MonoBehaviour
             }
 
         });
-        SkillFunc.Add("烈炎", () =>
+        BuffFunc.Add("烈炎", () =>
         {
             Debug.Log("烈炎");
-            skillsDic["烈炎"].BuffLevelUp();
+            BuffsDic["烈炎"].BuffLevelUp();
 
             foreach (var data in GamePlayManager.instance.SkillButtonLists)
             {
@@ -265,17 +265,17 @@ public class SkillManager : MonoBehaviour
                 {
                     if (data.iteamData.attributesType == SO_Iteam.AttributesType.火)
                     {
-                        data.iteamData.atkUp += (18 * skillsDic["烈炎"].buffLevel);
+                        data.iteamData.atkUp += (18 * BuffsDic["烈炎"].buffLevel);
                     }
 
                 }
             }
         });
         
-        SkillFunc.Add("召炎", () =>
+        BuffFunc.Add("召炎", () =>
         {
             Debug.Log("召炎");
-            skillsDic["召炎"].BuffLevelUp();
+            BuffsDic["召炎"].BuffLevelUp();
 
             foreach (var data in GamePlayManager.instance.SkillButtonLists)
             {
@@ -284,7 +284,7 @@ public class SkillManager : MonoBehaviour
                     if (data.iteamData.attributesType == SO_Iteam.AttributesType.火)
                     {
 
-                        var tmpMPDown = data.iteamData.Mp * (0.18 * skillsDic["召炎"].buffLevel);
+                        var tmpMPDown = data.iteamData.Mp * (0.18 * BuffsDic["召炎"].buffLevel);
                         data.iteamData.Mp -= ((float)tmpMPDown);
                         data.RefreshUI();
 
@@ -294,10 +294,10 @@ public class SkillManager : MonoBehaviour
             }
         });
 
-        SkillFunc.Add("止水", () =>
+        BuffFunc.Add("止水", () =>
         {
             Debug.Log("止水");
-            skillsDic["止水"].BuffLevelUp();
+            BuffsDic["止水"].BuffLevelUp();
 
             foreach (var data in GamePlayManager.instance.SkillButtonLists)
             {
@@ -305,7 +305,7 @@ public class SkillManager : MonoBehaviour
                 {
                     if (data.iteamData.attributesType == SO_Iteam.AttributesType.水)
                     {
-                        data.iteamData.atkUp += (18 * skillsDic["止水"].buffLevel);
+                        data.iteamData.atkUp += (18 * BuffsDic["止水"].buffLevel);
 
                     }
 
@@ -313,10 +313,10 @@ public class SkillManager : MonoBehaviour
             }
         });
 
-        SkillFunc.Add("引水", () =>
+        BuffFunc.Add("引水", () =>
         {
             Debug.Log("引水");
-            skillsDic["引水"].BuffLevelUp();
+            BuffsDic["引水"].BuffLevelUp();
 
             foreach (var data in GamePlayManager.instance.SkillButtonLists)
             {
@@ -325,7 +325,7 @@ public class SkillManager : MonoBehaviour
                     if (data.iteamData.attributesType == SO_Iteam.AttributesType.水)
                     {
 
-                        var tmpMPDown = data.iteamData.Mp * (0.18 * skillsDic["引水"].buffLevel);
+                        var tmpMPDown = data.iteamData.Mp * (0.18 * BuffsDic["引水"].buffLevel);
                         data.iteamData.Mp -= ((float)tmpMPDown);
                         data.RefreshUI();
                     }
@@ -333,10 +333,10 @@ public class SkillManager : MonoBehaviour
                 }
             }
         });
-        SkillFunc.Add("狂風", () =>
+        BuffFunc.Add("狂風", () =>
         {
             Debug.Log("狂風");
-            skillsDic["狂風"].BuffLevelUp();
+            BuffsDic["狂風"].BuffLevelUp();
 
             foreach (var data in GamePlayManager.instance.SkillButtonLists)
             {
@@ -344,16 +344,16 @@ public class SkillManager : MonoBehaviour
                 {
                     if (data.iteamData.attributesType == SO_Iteam.AttributesType.風)
                     {
-                        data.iteamData.atkUp += (18* skillsDic["狂風"].buffLevel);
+                        data.iteamData.atkUp += (18* BuffsDic["狂風"].buffLevel);
                     }
 
                 }
             }
         });
-        SkillFunc.Add("呼風", () =>
+        BuffFunc.Add("呼風", () =>
         {
             Debug.Log("呼風");
-            skillsDic["呼風"].BuffLevelUp();
+            BuffsDic["呼風"].BuffLevelUp();
 
             foreach (var data in GamePlayManager.instance.SkillButtonLists)
             {
@@ -362,7 +362,7 @@ public class SkillManager : MonoBehaviour
                     if (data.iteamData.attributesType == SO_Iteam.AttributesType.風)
                     {
 
-                        var tmpMPDown = data.iteamData.Mp * (0.18 * skillsDic["呼風"].buffLevel);
+                        var tmpMPDown = data.iteamData.Mp * (0.18 * BuffsDic["呼風"].buffLevel);
                         data.iteamData.Mp -= ((float)tmpMPDown);
                         data.RefreshUI();
 
@@ -373,10 +373,10 @@ public class SkillManager : MonoBehaviour
         });
 
 
-        SkillFunc.Add("響雷", () =>
+        BuffFunc.Add("響雷", () =>
         {
             Debug.Log("響雷");
-            skillsDic["響雷"].BuffLevelUp();
+            BuffsDic["響雷"].BuffLevelUp();
 
             foreach (var data in GamePlayManager.instance.SkillButtonLists)
             {
@@ -384,16 +384,16 @@ public class SkillManager : MonoBehaviour
                 {
                     if (data.iteamData.attributesType == SO_Iteam.AttributesType.雷)
                     {
-                        data.iteamData.atkUp += (18 * skillsDic["響雷"].buffLevel);
+                        data.iteamData.atkUp += (18 * BuffsDic["響雷"].buffLevel);
                     }
                 }
             }
 
         });
-        SkillFunc.Add("喚雷", () =>
+        BuffFunc.Add("喚雷", () =>
         {
             Debug.Log("喚雷");
-            skillsDic["喚雷"].BuffLevelUp();
+            BuffsDic["喚雷"].BuffLevelUp();
 
             foreach (var data in GamePlayManager.instance.SkillButtonLists)
             {
@@ -402,7 +402,7 @@ public class SkillManager : MonoBehaviour
                     if (data.iteamData.attributesType == SO_Iteam.AttributesType.雷)
                     {
 
-                        var tmpMPDown = data.iteamData.Mp * (0.18 * skillsDic["喚雷"].buffLevel);
+                        var tmpMPDown = data.iteamData.Mp * (0.18 * BuffsDic["喚雷"].buffLevel);
                         data.iteamData.Mp -= ((float)tmpMPDown);
                         data.RefreshUI();
 
@@ -412,16 +412,16 @@ public class SkillManager : MonoBehaviour
             }
         });
 
-        SkillFunc.Add("雙重施法", () =>
+        BuffFunc.Add("雙重施法", () =>
         {
             Debug.Log("雙重施法");
-            skillsDic["雙重施法"].BuffLevelUp();
+            BuffsDic["雙重施法"].BuffLevelUp();
             
             Func<Player,SO_Iteam,bool> func = (player,skill) => {
                 if(skill.type==SO_Iteam.IteamType.魔法)
                 {
                     var tmpInt = UnityEngine.Random.Range(0, 100);
-                    if(tmpInt<=10* skillsDic["雙重施法"].buffLevel)
+                    if(tmpInt<=10* BuffsDic["雙重施法"].buffLevel)
                     {
                         Debug.Log("不消耗MP");
                         Debug.Log(GamePlayManager.instance.player.transform.parent.transform.GetSiblingIndex() + 1);
@@ -434,15 +434,15 @@ public class SkillManager : MonoBehaviour
             GamePlayManager.instance.testAction += func;
 
         });
-        SkillFunc.Add("雙重投擲", () =>
+        BuffFunc.Add("雙重投擲", () =>
         {
             Debug.Log("雙重投擲");
-            skillsDic["雙重投擲"].BuffLevelUp();
+            BuffsDic["雙重投擲"].BuffLevelUp();
             Func<Player, SO_Iteam, bool> func = (player, skill) => {
                 if (skill.type == SO_Iteam.IteamType.武具)
                 {
                     var tmpInt = UnityEngine.Random.Range(0, 100);
-                    if (tmpInt <= 10 * skillsDic["雙重投擲"].buffLevel)
+                    if (tmpInt <= 10 * BuffsDic["雙重投擲"].buffLevel)
                     {
                         Debug.Log("不消耗MP");
                         GamePlayManager.instance.SetIteam(skill, GamePlayManager.instance.player.transform.parent.transform.GetSiblingIndex()+1, true);
@@ -455,15 +455,15 @@ public class SkillManager : MonoBehaviour
             GamePlayManager.instance.testAction += func;
 
         });
-        SkillFunc.Add("雙重召喚", () =>
+        BuffFunc.Add("雙重召喚", () =>
         {
             Debug.Log("雙重召喚");
-            skillsDic["雙重召喚"].BuffLevelUp();
+            BuffsDic["雙重召喚"].BuffLevelUp();
             Func<Player, SO_Iteam, bool> func = (player, skill) => {
                 if (skill.type == SO_Iteam.IteamType.召喚)
                 {
                     var tmpInt = UnityEngine.Random.Range(0, 100);
-                    if (tmpInt <= 10 * skillsDic["雙重召喚"].buffLevel)
+                    if (tmpInt <= 10 * BuffsDic["雙重召喚"].buffLevel)
                     {
                         Debug.Log("不消耗MP");
                         GamePlayManager.instance.SetIteam(skill, GamePlayManager.instance.player.transform.parent.transform.GetSiblingIndex()+1, true);
@@ -476,24 +476,24 @@ public class SkillManager : MonoBehaviour
             GamePlayManager.instance.testAction += func;
 
         });
-        SkillFunc.Add("千變", () =>
+        BuffFunc.Add("千變", () =>
         {
             Debug.Log("千變");
-            skillsDic["千變"].BuffLevelUp();
+            BuffsDic["千變"].BuffLevelUp();
             Action<SO_Iteam, SO_Iteam,Stetas> func = (saveSkill, skill,targetStetas) => {
                 if(saveSkill!=skill)
                 {
-                    Debug.Log("增傷: " + skillsDic["千變"].buffLevel * 12 + "%");
-                    targetStetas.BuffAtkUp = skillsDic["千變"].buffLevel * 12;
+                    Debug.Log("增傷: " + BuffsDic["千變"].buffLevel * 12 + "%");
+                    targetStetas.BuffAtkUp = BuffsDic["千變"].buffLevel * 12;
                 }
             };
 
             GamePlayManager.instance.IteamATKUp += func;
         });
-        SkillFunc.Add("魔力回收", () =>
+        BuffFunc.Add("魔力回收", () =>
         {
             Debug.Log("魔力回收");
-            skillsDic["魔力回收"].BuffLevelUp();
+            BuffsDic["魔力回收"].BuffLevelUp();
             
             Func<Player, SO_Iteam, bool> func = (player, skill) => {
 
@@ -515,17 +515,17 @@ public class SkillManager : MonoBehaviour
             GamePlayManager.instance.testAction += func;
 
         });
-        SkillFunc.Add("魔力節約", () =>
+        BuffFunc.Add("魔力節約", () =>
         {
             Debug.Log("魔力節約");
-            skillsDic["魔力節約"].BuffLevelUp();
+            BuffsDic["魔力節約"].BuffLevelUp();
 
             foreach (var data in GamePlayManager.instance.SkillButtonLists)
             {
                 if (data.iteamData != null)
                 {
 
-                    var tmpMPDown = data.iteamData.Mp * (0.1 * skillsDic["魔力節約"].buffLevel);
+                    var tmpMPDown = data.iteamData.Mp * (0.1 * BuffsDic["魔力節約"].buffLevel);
                     data.iteamData.Mp -= ((float)tmpMPDown);
                     data.RefreshUI();
 
@@ -533,10 +533,10 @@ public class SkillManager : MonoBehaviour
             }
 
         });
-        SkillFunc.Add("破滅衝擊", () =>
+        BuffFunc.Add("破滅衝擊", () =>
         {
             Debug.Log("破滅衝擊");
-            skillsDic["破滅衝擊"].BuffLevelUp();
+            BuffsDic["破滅衝擊"].BuffLevelUp();
 
             Action<Stetas> func = (objStetas) => {
                 if (objStetas.type == Stetas.Type.道具&&objStetas.iteam.type==SO_Iteam.IteamType.武具)
@@ -551,10 +551,10 @@ public class SkillManager : MonoBehaviour
 
 
         });
-        SkillFunc.Add("再生", () =>
+        BuffFunc.Add("再生", () =>
         {
             Debug.Log("再生");
-            skillsDic["再生"].BuffLevelUp();
+            BuffsDic["再生"].BuffLevelUp();
 
             Action<Stetas> func = (objStetas) => {
                if(objStetas.type==Stetas.Type.召喚)
@@ -578,28 +578,28 @@ public class SkillManager : MonoBehaviour
 
     public void SetAllSkill(List<List<string>> data)
     {
-        skillLists = data;
-        for(int i=0;i< skillLists.Count-1; i++)
+        buffLists = data;
+        for(int i=0;i< buffLists.Count-1; i++)
         {
             SkillData skillData = new SkillData();
-            skillData.skillName = skillLists[i + 1][0];
-            skillData.skillEffect = skillLists[i + 1][1];
-            skillData.Weight = int.Parse(skillLists[i + 1][4]);
+            skillData.skillName = buffLists[i + 1][0];
+            skillData.skillEffect = buffLists[i + 1][1];
+            skillData.Weight = int.Parse(buffLists[i + 1][4]);
 
-            if (skillLists[i + 1][2] == "-")
+            if (buffLists[i + 1][2] == "-")
             {
                 skillData.maxLevel = 999;
             }
             else
             {
-                skillData.maxLevel = int.Parse(skillLists[i + 1][2]);
+                skillData.maxLevel = int.Parse(buffLists[i + 1][2]);
             }
             ISkill iSkill = new ISkill();
-            iSkill.action = SkillFunc[skillData.skillName];
+            iSkill.action = BuffFunc[skillData.skillName];
             
             iSkill.data = skillData;
 
-            skillsDic.Add(skillData.skillName, iSkill);
+            BuffsDic.Add(skillData.skillName, iSkill);
 
 
         }
@@ -651,7 +651,7 @@ public class SkillManager : MonoBehaviour
             // 抽取權重值
             var tmpID = GetRanId();
             // 將符合權重值的技能追加進暫時清單
-            foreach(var tmpdata in skillsDic)
+            foreach(var tmpdata in BuffsDic)
             {
                 if (tmpdata.Value.data.Weight== tmpID)
                 {

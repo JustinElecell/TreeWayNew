@@ -2,13 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+
 public class PlayerSkillManager : MonoBehaviour
 {
+    
+    
     Dictionary<int, Action<int,int>> skillFunc = new Dictionary<int, Action<int,int>>();
 
+    public List<int> UsedSkillNo = new List<int>();
     public void Init()
     {
         FuncInit();
+    }
+
+
+    public void AddPlayerSkill(int SkillNo,int x, int y)
+    {
+        skillFunc[SkillNo](x, y);
+        UsedSkillNo.Add(SkillNo);
     }
 
     void FuncInit()
@@ -24,29 +35,28 @@ public class PlayerSkillManager : MonoBehaviour
                     switch (x)
                     {
                         case 0:
-                            tmpUp = data.iteamData.Atk * (y / 100);
-                            data.iteamData.Atk += (tmpUp);
+                            data.iteamData.atkUp += y;
                             
                             break;
                         case 1:
                             if (data.iteamData.type == SO_Iteam.IteamType.武具)
                             {
-                                tmpUp = data.iteamData.Atk * (y / 100);
-                                data.iteamData.Atk += ((float)tmpUp);
+                                data.iteamData.atkUp += y;
+
                             }
                             break;
                         case 2:
                             if (data.iteamData.type == SO_Iteam.IteamType.魔法)
                             {
-                                tmpUp = data.iteamData.Atk * (y / 100);
-                                data.iteamData.Atk += ((float)tmpUp);
+                                data.iteamData.atkUp += y;
+
                             }
                             break;
                         case 3:
                             if (data.iteamData.type == SO_Iteam.IteamType.召喚)
                             {
-                                tmpUp = data.iteamData.Atk * (y / 100);
-                                data.iteamData.Atk += ((float)tmpUp);
+                                data.iteamData.atkUp += y;
+
                             }
                             break;
                     }
@@ -67,85 +77,85 @@ public class PlayerSkillManager : MonoBehaviour
                         case 1:
                             if (data.iteamData.attributesType == SO_Iteam.AttributesType.刃)
                             {
-                                var tmpUp = data.iteamData.Atk * (y / 100);
-                                data.iteamData.Atk += ((float)tmpUp);
+                                data.iteamData.atkUp += y;
+
                             }
                             break;
                         case 2:
                             if (data.iteamData.attributesType == SO_Iteam.AttributesType.打)
                             {
-                                var tmpUp = data.iteamData.Atk * (y / 100);
-                                data.iteamData.Atk += ((float)tmpUp);
+                                data.iteamData.atkUp += y;
+
                             }
                             break;
                         case 3:
                             if (data.iteamData.attributesType == SO_Iteam.AttributesType.火)
                             {
-                                var tmpUp = data.iteamData.Atk * (y / 100);
-                                data.iteamData.Atk += ((float)tmpUp);
+                                data.iteamData.atkUp += y;
+
                             }
                             break;
                         case 4:
                             if (data.iteamData.attributesType == SO_Iteam.AttributesType.雷)
                             {
-                                var tmpUp = data.iteamData.Atk * (y / 100);
-                                data.iteamData.Atk += ((float)tmpUp);
+                                data.iteamData.atkUp += y;
+
                             }
                             break;
                         case 5:
                             if (data.iteamData.attributesType == SO_Iteam.AttributesType.風)
                             {
-                                var tmpUp = data.iteamData.Atk * (y / 100);
-                                data.iteamData.Atk += ((float)tmpUp);
+                                data.iteamData.atkUp += y;
+
                             }
                             break;
                         case 6:
                             if (data.iteamData.attributesType == SO_Iteam.AttributesType.水)
                             {
-                                var tmpUp = data.iteamData.Atk * (y / 100);
-                                data.iteamData.Atk += ((float)tmpUp);
+                                data.iteamData.atkUp += y;
+
                             }
                             break;
                         case 7:
                             if (data.iteamData.attributesType == SO_Iteam.AttributesType.火|| data.iteamData.attributesType == SO_Iteam.AttributesType.雷)
                             {
-                                var tmpUp = data.iteamData.Atk * (y / 100);
-                                data.iteamData.Atk += ((float)tmpUp);
+                                data.iteamData.atkUp += y;
+
                             }
                             break;
                         case 8:
                             if (data.iteamData.attributesType == SO_Iteam.AttributesType.風|| data.iteamData.attributesType == SO_Iteam.AttributesType.水)
                             {
-                                var tmpUp = data.iteamData.Atk * (y / 100);
-                                data.iteamData.Atk += ((float)tmpUp);
+                                data.iteamData.atkUp += y;
+
                             }
                             break;
                         case 9:
                             if (data.iteamData.attributesType == SO_Iteam.AttributesType.風|| data.iteamData.attributesType == SO_Iteam.AttributesType.雷)
                             {
-                                var tmpUp = data.iteamData.Atk * (y / 100);
-                                data.iteamData.Atk += ((float)tmpUp);
+                                data.iteamData.atkUp += y;
+
                             }
                             break;
                         case 10:
                             if (data.iteamData.attributesType == SO_Iteam.AttributesType.水|| data.iteamData.attributesType == SO_Iteam.AttributesType.火)
                             {
-                                var tmpUp = data.iteamData.Atk * (y / 100);
-                                data.iteamData.Atk += ((float)tmpUp);
+                                data.iteamData.atkUp += y;
+
                             }
                             break;
                         case 11:
                             if (data.iteamData.attributesType == SO_Iteam.AttributesType.雷|| data.iteamData.attributesType == SO_Iteam.AttributesType.水)
                             {
-                                var tmpUp = data.iteamData.Atk * (y / 100);
-                                data.iteamData.Atk += ((float)tmpUp);
+                                data.iteamData.atkUp += y;
+
                             }
                             break;
                         case 12:
                             if (data.iteamData.attributesType == SO_Iteam.AttributesType.風|| data.iteamData.attributesType == SO_Iteam.AttributesType.火)
                             {
-                                var tmpUp = data.iteamData.Atk * (y / 100);
-                                data.iteamData.Atk += ((float)tmpUp);
+                                data.iteamData.atkUp += y;
+
                             }
                             break;
                     }
@@ -335,7 +345,7 @@ public class PlayerSkillManager : MonoBehaviour
                         }
                         break;
                 }
-                return true;
+                return false;
             };
             GamePlayManager.instance.testAction += func;
         });
@@ -454,7 +464,7 @@ public class PlayerSkillManager : MonoBehaviour
                         }
                         break;
                 }
-                return true;
+                return false;
             };
             GamePlayManager.instance.testAction += func;
 
@@ -474,12 +484,12 @@ public class PlayerSkillManager : MonoBehaviour
                 {
                     Debug.Log(data.type);
 
-                    tmp.Add(data.type, 0);
+                    tmp.TryAdd(data.type, 0);
 
                 }
             }
 
-            GamePlayManager.instance.player.stetas.player.AtkUp += tmp.Count * x;
+            GamePlayManager.instance.player.AtkUp += tmp.Count * x;
 
         });
         //「x類型」武器有y % 的機率使造成傷害翻倍
@@ -723,22 +733,36 @@ public class PlayerSkillManager : MonoBehaviour
 
         });
 
-        //使受到傷害減少 x %
+        // 使受到傷害減少 x %
         skillFunc.Add(18, (x, y) => {
-
-
-
+            Action<Stetas> action = (enemyStetas) => {
+                enemyStetas.damageDown -= x;
+            };
+            GamePlayManager.instance.CreatEnemy += action;
         });
+        // 每波次結束時恢復 x % HP
         skillFunc.Add(19, (x, y) => {
 
-
+            Action action = () => {
+                var tmp = GamePlayManager.instance.player.stetas.HpMax * (x / 100);
+                GamePlayManager.instance.player.stetas.Hp += tmp;
+                GamePlayManager.instance.player.ResetPlayerHp();
+            };
+            GamePlayManager.instance.WaveUpOver += action;
 
         });
+
+        // 使起始MP增加 x ％
         skillFunc.Add(20, (x, y) => {
 
-
+            var tmp = GamePlayManager.instance.player.mpMax * (x / 100);
+            GamePlayManager.instance.player.mp += tmp;
+            GamePlayManager.instance.player.ResetPlayerMp();
 
         });
+
+
+
 
     }
 

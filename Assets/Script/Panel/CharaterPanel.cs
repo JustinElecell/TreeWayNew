@@ -32,7 +32,6 @@ public class CharaterPanel : MonoBehaviour
     {
         charaterLists = ReadCsv.MyReadCSV.Read("Csv/Charater");
 
-        Debug.Log(charaterLists.Count);  
         
         for(int i=1;i<charaterLists.Count;i++)
         {

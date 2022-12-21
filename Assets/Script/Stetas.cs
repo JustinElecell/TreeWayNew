@@ -45,12 +45,13 @@ public class Stetas : MonoBehaviour
     public float BuffAtkUp;
     public float Weight;
     public float damageDown = 0;
+    
 
     public int WeaponAtkChange(SO_Iteam data)
     {
         //(roundup((玩家基礎攻擊力 * (1 + 突破次數 * 突破時攻擊力加成比例) * (1 + 其餘攻擊力buff %)) * (武器傷害 * (1 + 武器傷害Buff % )))) * ( if (觸發翻倍 = ture , 2 , 1 ) )         
         //突破次數 * 突破時攻擊力加成比例已經在遊戲開始時，在Player.cs初始化算在stetas.player.Atk內了
-        return ((int)((GamePlayManager.instance.player.stetas.player.Atk * (1 + (GamePlayManager.instance.player.stetas.player.AtkUp+data.temporaryAtkUp)/100)) * (data.Atk / 100 * (1 + data.atkUp / 100))))*((int)(1+BuffAtkUp/100));
+        return ((int)((GamePlayManager.instance.player.stetas.player.Atk * (1 + (GamePlayManager.instance.player.AtkUp+data.temporaryAtkUp)/100)) * (data.Atk / 100 * (1 + data.atkUp / 100))))*((int)(1+BuffAtkUp/100));
     }
     //false:死    true:還活著
 

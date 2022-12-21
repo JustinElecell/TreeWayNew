@@ -4883,6 +4883,7 @@ MonoBehaviour:
   saveTime: 0
   BuffAtkUp: 0
   Weight: 0
+  damageDown: 0
 --- !u!1 &747626370
 GameObject:
   m_ObjectHideFlags: 0
@@ -5367,6 +5368,7 @@ MonoBehaviour:
   saveTime: 0
   BuffAtkUp: 0
   Weight: 0
+  damageDown: 0
 --- !u!1 &840309252
 GameObject:
   m_ObjectHideFlags: 0
@@ -5639,6 +5641,7 @@ MonoBehaviour:
   saveTime: 0
   BuffAtkUp: 0
   Weight: 0
+  damageDown: 0
 --- !u!1 &891382033
 GameObject:
   m_ObjectHideFlags: 0
@@ -7066,7 +7069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e48026407f43942950c9a43ae0cdeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestFlag: 1
+  TestFlag: 0
   TargetCharater: []
   targetSkillNo: 0
   skillIteams:
@@ -7602,6 +7605,7 @@ MonoBehaviour:
   saveTime: 0
   BuffAtkUp: 0
   Weight: 0
+  damageDown: 0
 --- !u!1 &1324598500
 GameObject:
   m_ObjectHideFlags: 0
@@ -8853,6 +8857,7 @@ MonoBehaviour:
   saveTime: 0
   BuffAtkUp: 0
   Weight: 0
+  damageDown: 0
 --- !u!1 &1578978891
 GameObject:
   m_ObjectHideFlags: 0

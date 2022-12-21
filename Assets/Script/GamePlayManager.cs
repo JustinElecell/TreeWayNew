@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.Events;
 public class GamePlayManager : MonoBehaviour
 {
     public static GamePlayManager instance;
@@ -49,7 +50,7 @@ public class GamePlayManager : MonoBehaviour
     public IteamUI[] SkillButtonLists;
 
     [Header("Skill管理")]
-    public SkillManager skillManager;
+    public BuffManager skillManager;
     public PlayerSkillManager playerSkillManager;
     public DamageManager damageManager;
 
@@ -123,19 +124,23 @@ public class GamePlayManager : MonoBehaviour
             FuncInit();
 
             EnemyGroundInit();
+            BuffInit();
+
+            playerSkillManager.Init();
+            damageManager.Init();
 
             White = Color.white;
             Green = Color.green;
-            timeCount_Coroutine = StartCoroutine(TimeCount());
+
+
             if (FindPlayer())
             {
                 player.Init();
 
             }
             Time.timeScale = 1;
-            BuffInit();
-            playerSkillManager.Init();
-            damageManager.Init();
+
+            timeCount_Coroutine = StartCoroutine(TimeCount());
 
         }
         else
@@ -272,6 +277,7 @@ public class GamePlayManager : MonoBehaviour
                     enemyObj.transform.SetParent(roads[UnityEngine.Random.Range(0, 3)].transform);
 
                     enemyObj.SetActive(true);
+                    CreatEnemy?.Invoke(enemyObj.GetComponent<Stetas>());
                 }
             }
             yield return new WaitForSeconds(tmpTime);
@@ -355,6 +361,7 @@ public class GamePlayManager : MonoBehaviour
     {
         Wave++;
         infoPanel.WaveText.text = "Wave " + Wave.ToString() + " / 3";
+        WaveUpOver?.Invoke();
     }
 
     public bool FindPlayer()
@@ -386,6 +393,10 @@ public class GamePlayManager : MonoBehaviour
     public event Func<Player,SO_Iteam,bool> testAction;
     public event Action<SO_Iteam, SO_Iteam,Stetas> IteamATKUp;
     public event Action<Stetas> CreatIteam_AddDeath;
+    public event Action<Stetas> CreatEnemy;
+    public event Action WaveUpOver;
+    //public event Action<Stetas> CreatEnemy
+
     public void SetSkill(int no)
     {
         if(Skill!=null)
@@ -398,12 +409,12 @@ public class GamePlayManager : MonoBehaviour
                 if (tmp != null)
                 {
 
-
-                    if(testAction == null||!testAction.Invoke(player, Skill))
+                    if(!testAction.Invoke(player, Skill))
                     {
-                        player.mp -= Skill.Mp;
-                        player.ResetPlayerMp();
+                        //player.mp -= Skill.Mp;
+                        //player.ResetPlayerMp();
                     }
+
 
                     if (tmp.transform.childCount > 0)
                     {
@@ -425,10 +436,6 @@ public class GamePlayManager : MonoBehaviour
                             iteamObj.GetComponent<Stetas>().Skill.enabled = true;
                         }
                         iteamObj.SetActive(true);
-                        
-
-                        
-
                     }
 
                 }
@@ -439,26 +446,38 @@ public class GamePlayManager : MonoBehaviour
             {
                 var tmp = iteamGround_Player.transform.Find(Skill.IteamName + "物件池");
                 
-                if (!testAction.Invoke(player, Skill))
+                if (testAction == null || !testAction.Invoke(player, Skill))
                 {
                     player.mp -= Skill.Mp;
                     player.ResetPlayerMp();
                 }
 
+                //Debug.Log("TTTTT" + testAction.GetInvocationList().Length);
+
                 if (tmp != null)
                 {
                     if(tmp.transform.childCount>0)
                     {
+
+
+                        // 叫技能
+
                         var iteamObj = tmp.transform.GetChild(0).gameObject;
                         iteamObj.GetComponent<Stetas>().iteam = Skill;
+
+                        IteamATKUp?.Invoke(saveIteam, Skill, iteamObj.GetComponent<Stetas>());
+                        CreatIteam_AddDeath?.Invoke(iteamObj.GetComponent<Stetas>());
+
+
+                        saveIteam = Skill;
                         iteamObj.transform.SetParent(player.transform.parent.transform);
                         iteamObj.GetComponent<Stetas>().roadNo = iteamObj.transform.parent.transform.GetSiblingIndex() + 1;
-                        if (iteamObj.GetComponent<Stetas>().Skill!=null)
+
+                        if (iteamObj.GetComponent<Stetas>().Skill != null)
                         {
                             iteamObj.GetComponent<Stetas>().Skill.enabled = true;
                         }
                         iteamObj.SetActive(true);
-
                     }
 
                 }

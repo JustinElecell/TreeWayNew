@@ -31,91 +31,94 @@ public class IteamPanel : MonoBehaviour
 
     SO_Iteam targetIteam;
     public Button[] TargetSkillButton;
-
-    private void Start()
+    bool IsLoadFloag = false;
+    public void OnEnable()
     {
-        Debug.Log("Init");
-        IteamLists = ReadCsv.MyReadCSV.Read("Csv/Iteam");
-        Debug.Log(IteamLists.Count);
-        
 
-        for(int i=0;i< Buttons.Length;i++)
+        if(!IsLoadFloag)
         {
-            int no = i;
-            Buttons[i].onClick.AddListener(() => {
-                for(int r=0;r< Panels.Length;r++)
-                {
-                    Panels[r].gameObject.transform.parent.transform.parent.gameObject.SetActive(false);
-                    Buttons[r].gameObject.GetComponent<Image>().color = Color.white;
-                }
-                Panels[no].gameObject.transform.parent.transform.parent.gameObject.SetActive(true);
-                Buttons[no].gameObject.GetComponent<Image>().color = color;
+            IteamLists = ReadCsv.MyReadCSV.Read("Csv/Iteam");
 
-
-            });
-        }
-
-        for(int i=0;i<IteamLists.Count;i++)
-        {
-            switch(IteamLists[i][2])
+            for (int i = 0; i < Buttons.Length; i++)
             {
-                case "武具":
-                    var tmp = Instantiate(IteamsObjButton, Panels[0]);
-                    int no = i;
+                int no = i;
+                Buttons[i].onClick.AddListener(() => {
+                    for (int r = 0; r < Panels.Length; r++)
+                    {
+                        Panels[r].gameObject.transform.parent.transform.parent.gameObject.SetActive(false);
+                        Buttons[r].gameObject.GetComponent<Image>().color = Color.white;
+                    }
+                    Panels[no].gameObject.transform.parent.transform.parent.gameObject.SetActive(true);
+                    Buttons[no].gameObject.GetComponent<Image>().color = color;
 
-                    var data = Resources.Load<SO_Iteam>("Iteam/Weapon/" + IteamLists[no][0]);
-                    tmp.gameObject.GetComponent<Image>().sprite = data.IteamImage;
 
-                    tmp.onClick.AddListener(() => {
+                });
+            }
+            for (int i=0;i<IteamLists.Count;i++)
+            {
+                switch(IteamLists[i][2])
+                {
+                    case "武具":
+                        var tmp = Instantiate(IteamsObjButton, Panels[0]);
+                        int no = i;
+
+                        var data = Resources.Load<SO_Iteam>("Iteam/Weapon/" + IteamLists[no][0]);
+                        tmp.gameObject.GetComponent<Image>().sprite = data.IteamImage;
+
+                        tmp.onClick.AddListener(() => {
                         
 
 
-                        Debug.Log(IteamLists[no][0]);
-                        SetText(no);
+                            Debug.Log(IteamLists[no][0]);
+                            SetText(no);
 
 
 
-                    });
-                    break;
-                case "魔法":
+                        });
+                        break;
+                    case "魔法":
 
-                    var tmp_M = Instantiate(IteamsObjButton, Panels[1]);
-                    int no_M = i;
-                    var data_M = Resources.Load<SO_Iteam>("Iteam/Magic/" + IteamLists[no_M][0]);
-                    tmp_M.gameObject.GetComponent<Image>().sprite = data_M.IteamImage;
+                        var tmp_M = Instantiate(IteamsObjButton, Panels[1]);
+                        int no_M = i;
+                        var data_M = Resources.Load<SO_Iteam>("Iteam/Magic/" + IteamLists[no_M][0]);
+                        tmp_M.gameObject.GetComponent<Image>().sprite = data_M.IteamImage;
 
-                    tmp_M.onClick.AddListener(() => {
+                        tmp_M.onClick.AddListener(() => {
 
-                        Debug.Log(IteamLists[no_M][0]);
+                            Debug.Log(IteamLists[no_M][0]);
 
-                        SetText(no_M);
+                            SetText(no_M);
 
-                    });
-                    break;
-                case "召喚":
+                        });
+                        break;
+                    case "召喚":
 
-                    var tmp_I = Instantiate(IteamsObjButton, Panels[2]);
-                    int no_I = i;
-                    tmp_I.onClick.AddListener(() => {
+                        var tmp_I = Instantiate(IteamsObjButton, Panels[2]);
+                        int no_I = i;
+                        tmp_I.onClick.AddListener(() => {
 
-                        Debug.Log(IteamLists[no_I][0]);
-                        SetText(no_I);
+                            Debug.Log(IteamLists[no_I][0]);
+                            SetText(no_I);
 
 
-                    });
-                    break;
+                        });
+                        break;
+                }
             }
+
+            SetText(0);
+            Buttons[0].gameObject.GetComponent<Image>().color = color;
+            Panels[0].GetChild(0).GetComponent<Image>().color = color;
+            
+            ChangeButton.onClick.AddListener(() => {
+
+                MainManager.instance.skillIteams[MainManager.instance.targetSkillNo] = targetIteam;
+                TargetSkillButton[MainManager.instance.targetSkillNo].gameObject.GetComponent<Image>().sprite = targetIteam.IteamImage;
+            });
+
+            IsLoadFloag = true;
         }
 
-        SetText(1);
-        Buttons[0].gameObject.GetComponent<Image>().color = color;
-        Panels[0].GetChild(0).GetComponent<Image>().color = color;
-
-        ChangeButton.onClick.AddListener(() => {
-
-            MainManager.instance.skillIteams[MainManager.instance.targetSkillNo] = targetIteam;
-            TargetSkillButton[MainManager.instance.targetSkillNo].gameObject.GetComponent<Image>().sprite = targetIteam.IteamImage;
-        });
 
         for (int i = 0; i < TargetSkillButton.Length; i++)
         {
@@ -129,8 +132,15 @@ public class IteamPanel : MonoBehaviour
                 TargetSkillButton[no].gameObject.GetComponent<Image>().color = Color.green;
                 MainManager.instance.targetSkillNo = no;
             });
-            MainManager.instance.skillIteams[MainManager.instance.targetSkillNo] = targetIteam;
-            TargetSkillButton[MainManager.instance.targetSkillNo].gameObject.GetComponent<Image>().sprite = targetIteam.IteamImage;
+
+            //MainManager.instance.skillIteams[MainManager.instance.targetSkillNo] = targetIteam;
+            //TargetSkillButton[MainManager.instance.targetSkillNo].gameObject.GetComponent<Image>().sprite = targetIteam.IteamImage;
+            if(MainManager.instance.skillIteams[i]!=null)
+            {
+                TargetSkillButton[i].gameObject.GetComponent<Image>().sprite = MainManager.instance.skillIteams[i].IteamImage;
+
+            }
+
         }
     }
 

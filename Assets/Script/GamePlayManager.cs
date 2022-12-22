@@ -111,44 +111,51 @@ public class GamePlayManager : MonoBehaviour
     }
 
 
-    private void OnEnable()
+    void Awake()
     {
-
         if(instance==null)
         {
             instance = this;
-            for (int i = 0; i < SkillButtonLists.Length; i++)
-            {
-                SkillButtonLists[i].Init(MainManager.instance.skillIteams[i]);
-            }
-            FuncInit();
-
-            EnemyGroundInit();
-            BuffInit();
-
-
-
-            playerSkillManager.Init();
-            damageManager.Init();
-
-            White = Color.white;
-            Green = Color.green;
-
-
-            if (FindPlayer())
-            {
-                player.Init();
-
-            }
-            Time.timeScale = 1;
-
-            timeCount_Coroutine = StartCoroutine(TimeCount());
-
+            StartCoroutine(IEInit());
         }
         else
         {
             Destroy(this.gameObject);
         }
+    }
+
+
+    public IEnumerator IEInit()
+    {
+        yield return new WaitForEndOfFrame();
+        for (int i = 0; i < SkillButtonLists.Length; i++)
+        {
+            SkillButtonLists[i].Init(MainManager.instance.skillIteams[i]);
+        }
+        FuncInit();
+
+        EnemyGroundInit();
+        BuffInit();
+
+
+
+        playerSkillManager.Init();
+        damageManager.Init();
+
+        White = Color.white;
+        Green = Color.green;
+
+
+        if (FindPlayer())
+        {
+            player.Init();
+
+        }
+        Time.timeScale = 1;
+
+        timeCount_Coroutine = StartCoroutine(TimeCount());
+        yield return null;
+
     }
 
     void BuffInit()

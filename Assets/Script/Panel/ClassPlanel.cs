@@ -24,14 +24,21 @@ public class ClassPlanel : MonoBehaviour
     {
 
         var async = SceneManager.LoadSceneAsync("GamePlay");
-
-        while (!async.isDone)
+        //test: Debug.Log("初始未完成");
+        async.allowSceneActivation = false;
+        while (async.progress<0.9f)
         {
+            Debug.Log("讀取中");
             yield return null;
+            //goto test;
         }
 
-        //async.allowSceneActivation = true;
-        yield return null;
+
+        Debug.Log("初始化完成");
+        async.allowSceneActivation = true;
+
+
+        //yield return null;
 
     }
 

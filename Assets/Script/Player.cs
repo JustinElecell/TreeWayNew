@@ -15,10 +15,11 @@ public class Player : MonoBehaviour
     public float mp;
     public float mpMax;
     public float mpUp;
+
     public void Init()
     {
-        var tmpPos =new Vector3((GamePlayManager.instance.Rect.rect.size.x / 2), 0, 0);
-
+        var tmpPos =new Vector3((GamePlayManager.instance.Rect.rect.size.x / 2+this.gameObject.GetComponent<SpriteRenderer>().size.x*this.gameObject.transform.localScale.x *2/3), 0, 0);
+        Debug.Log(GamePlayManager.instance.Rect.rect.size.x);
         gameObject.transform.SetParent(GamePlayManager.instance.Rect.transform.GetChild(1).transform);
         gameObject.transform.localPosition = tmpPos;
 
@@ -58,7 +59,6 @@ public class Player : MonoBehaviour
 
             var y = 0;
             int.TryParse(MainManager.instance.TargetCharater[12+i*4],out y);
-            Debug.Log(y);
 
             GamePlayManager.instance.playerSkillManager.AddPlayerSkill(skillNo,x,y);
 

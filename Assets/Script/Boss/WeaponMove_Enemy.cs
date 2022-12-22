@@ -58,7 +58,7 @@ public class WeaponMove_Enemy : MonoBehaviour
     void FuncInit()
     {
         ActionTypeFunc.Add(Stetas.ActionType.移動, () => {
-            if (gameObject.transform.localPosition.x < GamePlayManager.instance.Rect.rect.size.x / 2 - 150)
+            if (gameObject.transform.localPosition.x < GamePlayManager.instance.Rect.rect.size.x / 2 )
             {
                 // 移動
                 var pos = gameObject.transform.localPosition;

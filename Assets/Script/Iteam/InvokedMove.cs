@@ -68,14 +68,20 @@ public class InvokedMove : MonoBehaviour
     void FuncInit()
     {
         ActionTypeFunc.Add(Stetas.ActionType.移動, () => {
-            if(enemyList.Count>0)
-            {
-                stetas.actionType = Stetas.ActionType.攻擊;
-            }
+                if (enemyList.Count > 0)
+                {
+                    FindFightEnemy();
+                    saveTime = Time.time;
+
+                    stetas.actionType = Stetas.ActionType.攻擊;
+                    return;
+                }
 
 
             if (gameObject.transform.localPosition.x > -GamePlayManager.instance.Rect.rect.size.x / 2)
             {
+
+
                 if(speed < speedMax)
                 {
                     if(Time.time-speedSaveTime>1f/5)
@@ -95,6 +101,7 @@ public class InvokedMove : MonoBehaviour
                 pos.x -= (speed * Time.deltaTime);
                 gameObject.transform.localPosition = pos;
                 canAttack = true;
+                
 
             }
             else
@@ -109,17 +116,7 @@ public class InvokedMove : MonoBehaviour
         });
 
         ActionTypeFunc.Add(Stetas.ActionType.攻擊, () => {
-            if (enemyList.Count>0)
-            {
-                for(int i=0;i< enemyList.Count;i++)
-                {
-                    if(!enemyList[i].activeSelf)
-                    {
-                        enemyList.RemoveAt(i);
 
-                    }
-                }
-            }
 
             if (TargetStetas != null)
             {
@@ -193,6 +190,18 @@ public class InvokedMove : MonoBehaviour
 
     bool FindFightEnemy()
     {
+        if (enemyList.Count > 0)
+        {
+            for (int i = 0; i < enemyList.Count; i++)
+            {
+                if (!enemyList[i].activeSelf)
+                {
+                    enemyList.RemoveAt(i);
+
+                }
+            }
+        }
+
         if (GamePlayManager.instance.roads[stetas.roadNo - 1].transform.GetChild(0).transform.childCount > 0)
         {
             var tmp = GamePlayManager.instance.roads[stetas.roadNo - 1].transform.GetChild(0).transform.GetChild(0).GetComponent<Stetas>();

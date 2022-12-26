@@ -13,8 +13,16 @@ public class MainManager : MonoBehaviour
         if(instance==null)
         {
             instance = this;
-            Application.targetFrameRate = 120;
             DontDestroyOnLoad(this.gameObject);
+            Debug.Log(MjSave.instance.playerID);
+            if(MjSave.instance.playerID!="")
+            {
+                ID.text = "ID : " + MjSave.instance.playerID.ToString();
+            }
+            else
+            {
+                ID.text = "ID : Null";
+            }
         }
         else
         {
@@ -28,6 +36,6 @@ public class MainManager : MonoBehaviour
     public int targetSkillNo = 1;
     public SO_Iteam[] skillIteams;
 
-
+    public Text ID;
 
 }

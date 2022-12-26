@@ -197,6 +197,19 @@ public class Enemy : MonoBehaviour
 
     bool FindFightInvoked()
     {
+        if (InvokedList.Count > 0)
+        {
+            for (int i = 0; i < InvokedList.Count; i++)
+            {
+                if (!InvokedList[i].activeSelf)
+                {
+                    InvokedList.RemoveAt(i);
+
+                }
+            }
+        }
+
+
         if (GamePlayManager.instance.roads[roadNo - 1].transform.GetChild(1).transform.childCount > 0)
         {
             TargetInvoked = GamePlayManager.instance.roads[roadNo - 1].transform.GetChild(1).transform.GetChild(0).GetComponent<InvokedMove>();

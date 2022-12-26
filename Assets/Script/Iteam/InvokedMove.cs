@@ -106,8 +106,8 @@ public class InvokedMove : MonoBehaviour
             }
             else
             {
-                //ReSet();
-                Destroy(this.gameObject);
+                ReSet();
+                //Destroy(this.gameObject);
 
 
             }
@@ -224,8 +224,8 @@ public class InvokedMove : MonoBehaviour
     {
         if (stetas.Hp <= 0)
         {
-            Destroy(this.gameObject);
-            //ReSet();
+            //Destroy(this.gameObject);
+            ReSet();
         }
         else
         {

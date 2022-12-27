@@ -14,7 +14,7 @@ public class LoadBase : MonoBehaviour
         async.allowSceneActivation = false;
         while (async.progress < 0.9f)
         {
-            Debug.Log("讀取中");
+            Debug.Log("讀取中: "+ async.progress*100+"%");
             yield return null;
             //goto test;
         }

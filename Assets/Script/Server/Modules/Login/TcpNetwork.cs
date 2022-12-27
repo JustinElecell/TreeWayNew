@@ -681,7 +681,7 @@ namespace ElecellConnection
 
                 client.Reset(); // FIX
             }
-
+            Debug.Log(result_str);
             callbacks(status, result_str);
             yield return null;
         }

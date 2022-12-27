@@ -19,6 +19,7 @@ namespace ElecellConnection
         private static TcpNetwork _instance;
         private static bool _instantiated;
 
+
         public static TcpNetwork instance
         {
             get

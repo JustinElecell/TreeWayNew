@@ -7,7 +7,7 @@ using ElecellConnection;
 using SimpleJSON;
 
 using GameSecurity;
-
+using UnityEngine.Events;
 
 namespace EleCellLogin
 {
@@ -367,22 +367,55 @@ namespace EleCellLogin
 
         }
 
-//        public static void Release()
-//        {
-//            if (_instance == null) return;
+        public static void rloginExample(string pass, string language, UnityAction<string , string> callback)
+        {
+            Debug.Log(gameID);
+            if (gameID == null)
+            {
+                callback("GameServer.login : Game ID not set", null);
+                return;
+            }
 
-//            //if (SA_FB.IsLoggedIn) SA_FB.LogOut();
-//#if UNITY_ANDROID
-//            if (AN_GoogleSignIn.GetLastSignedInAccount() != null)
-//            {
-//                AN_GoogleSignInOptions gso = new AN_GoogleSignInOptions.Builder(AN_GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).Build();
-//                AN_GoogleSignInClient client = AN_GoogleSignIn.GetClient(gso);
-//                client.SignOut(() => { });
-//            }
-//#endif
-//            Destroy(_instance.gameObject);
-//            _instance = null;
-//        }
+            lang = language;
+            instance.loginInitiated = true;
+            Debug.Log(lang);
+            //instance.qloginWWW(null, null, "Player", language, pass, callback);
+
+        }
+
+        //        public static void Release()
+        //        {
+        //            if (_instance == null) return;
+
+        //            //if (SA_FB.IsLoggedIn) SA_FB.LogOut();
+        //#if UNITY_ANDROID
+        //            if (AN_GoogleSignIn.GetLastSignedInAccount() != null)
+        //            {
+        //                AN_GoogleSignInOptions gso = new AN_GoogleSignInOptions.Builder(AN_GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN).Build();
+        //                AN_GoogleSignInClient client = AN_GoogleSignIn.GetClient(gso);
+        //                client.SignOut(() => { });
+        //            }
+        //#endif
+        //            Destroy(_instance.gameObject);
+        //            _instance = null;
+        //        }
+
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                //PlayerPrefs.DeleteAll();
+
+                //GameServer.instance.PlayerSteta(,new EleCellProfileCallback(delegate (string err, string message);
+
+                Test(test2);
+            }
+        }
+        void test2(string srror,string message)
+        {
+
+        }
 
         private static bool FBinit = false;
         //private static bool GoogleInit = false;
@@ -640,6 +673,29 @@ namespace EleCellLogin
             //    });
             //}
         }
+        public void Test(EleCellProfileCallback callback)
+        {
+            TcpForm form = new TcpForm();
+            form.AddField("game", gameID);
+            form.AddField("accessToken", AccessToken);
+            Debug.Log(MjSave.instance.playerID.Replace(".", ""));
+            
+            form.AddField("pid",  MjSave.instance.playerID.Replace(".",""));
+
+            form.AddField("playerLvl", playerStats["playerLvl"].AsInt+1);
+
+
+            NetworkManager.instance.Query("saveData", form, new GenericCallback<JSONClass>(delegate (JSONClass json)
+            {
+                Debug.Log("成功" + json);
+
+
+            }));
+
+
+
+        }
+
 
         void bindFbCB(string error, string message)
         {
@@ -773,6 +829,7 @@ namespace EleCellLogin
             NetworkManager.instance.Query("friend", form,
                 new GenericCallback<JSONClass>(delegate (JSONClass json)
                 {
+
                     if (json["error"] != null)
                     {
                         callback(json["error"], null);
@@ -964,7 +1021,7 @@ namespace EleCellLogin
                     }
                     else
                     {
-                          Debug.Log("Json[build]:\n" + json["build"].ToString());
+                          //Debug.Log("Json[build]:\n" + json["build"].ToString());
 
                         _accessToken = json["accessToken"];
                         _accessToken = _accessToken.Replace("\"", "");
@@ -982,6 +1039,7 @@ namespace EleCellLogin
                             return;
                         }
 
+                        Debug.Log(_instance._serverTime);
                         _pinfo = new PlayerInfo();
                         _pinfo.id = json["pid"].AsInt;
                         _pinfo.pid = ((string)json["pid"]).Replace("\"", "");
@@ -1022,6 +1080,7 @@ namespace EleCellLogin
                         //item
                         _itemList = (JSONClass)json["item"];
 
+                        Debug.Log(_itemList.ToString());
                         //itemprice
                         _priceList = (JSONClass)json["itemprice"];
 
@@ -1221,7 +1280,7 @@ namespace EleCellLogin
                             _inviteList[i].id = json["invite"][i]["pid"].AsInt;
                             _inviteList[i].fbid = json["invite"][i]["fbid"];
                             _inviteList[i].nick = json["invite"][i]["nick"];
-                            _inviteList[i].level = json["invite"][i]["playerLvl"].AsInt;
+                            _inviteList[i].level = json["invite"][i]["playerLvl"].AsInt+1;
                             _inviteList[i].lastSeen = GameTime(json["invite"][i]["loginTime"]);
 
 
@@ -4099,7 +4158,7 @@ namespace EleCellLogin
                     }
                     else
                     {
-                        _instance._pStats["playerLvl"].AsInt = json["level"].AsInt;
+                        _instance._pStats["playerLvl"].AsInt = json["level"].AsInt+1;
                         _instance._pStats["xp"].AsInt = _instance._pStats["xp"].AsInt + json["battleXP"].AsInt;
                         _instance._pStats["xplow"].AsInt = json["xplow"].AsInt;
                         _instance._pStats["xphi"].AsInt = json["xp"].AsInt;
@@ -4110,6 +4169,45 @@ namespace EleCellLogin
                 })
             );
         }
+
+        //public void PlayerSteta(JSONClass result, EleCellJsonCallback callback)
+        //{
+        //    if (gameID == null) { callback("GameServer.reportBattle : Game ID not set", null); return; }
+        //    if (_accessToken == null) { callback("GameServer.reportBattle : No access token", null); return; }
+
+        //    TcpForm form = new TcpForm();
+        //    form.AddField("game", gameID);
+        //    form.AddField("accessToken", _accessToken);
+        //    form.AddField("action", "report");
+        //    form.AddField("battleID", _instance._lastBattle.id);
+
+        //    for (int i = 0; i < result.Count; i++)
+        //    {
+        //        if (result[i].Count > 0)
+        //            form.AddField(result.getKeyAt(i), (JSONClass)result[i]);
+        //        else
+        //            form.AddField(result.getKeyAt(i), result[i]);
+        //    }
+
+        //    NetworkManager.instance.Query("battle", form,
+        //        new GenericCallback<JSONClass>(delegate (JSONClass json) {
+        //            if (json["error"] != null)
+        //            {
+        //                callback(json["error"], null);
+        //            }
+        //            else
+        //            {
+        //                _instance._pStats["playerLvl"].AsInt = json["level"].AsInt+1;
+        //                _instance._pStats["xp"].AsInt = _instance._pStats["xp"].AsInt + json["battleXP"].AsInt;
+        //                _instance._pStats["xplow"].AsInt = json["xplow"].AsInt;
+        //                _instance._pStats["xphi"].AsInt = json["xp"].AsInt;
+
+        //                _instance.CheckTrophy(0, "playerLvl");
+        //                callback(null, json);
+        //            }
+        //        })
+        //    );
+        //}
 
         public static void buyHeroStats(int heroID, int stats, int price, EleCellProfileCallback callback)
         {
@@ -4365,7 +4463,7 @@ callback(null,null, igc_field,  (int)query.value);
                     }
                     else
                     {
-                        _instance._pStats["playerLvl"].AsInt = json["level"].AsInt;
+                        _instance._pStats["playerLvl"].AsInt = json["level"].AsInt+1;
                         _instance._pStats["xp"].AsInt = _instance._pStats["xp"].AsInt + xp;
                         _instance._pStats["xplow"].AsInt = json["xplow"].AsInt;
                         _instance._pStats["xphi"].AsInt = json["xp"].AsInt;
@@ -4487,6 +4585,7 @@ callback(null,null, igc_field,  (int)query.value);
             if (_cloudsaving)
             {
                 _cloudsaving = false;
+                Debug.Log(_saveString);
                 StartCoroutine(uploadSaveWWW(_saveString, cloudSaveCB));
             }
         }

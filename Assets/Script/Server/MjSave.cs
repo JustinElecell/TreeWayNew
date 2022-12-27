@@ -202,7 +202,7 @@ public class MjSave {
 	public static void UpdateStats(JSONClass json){
 		if (json == null) return;
 		
-		instance.level = json["playerLvl"].AsInt;
+		instance.level = json["playerLvl"].AsInt+1;
 		instance.xp = json["xp"].AsInt ;
         instance.coin = double.Parse(json["coin"]);
 		instance.credit= json["credit"].AsInt ;

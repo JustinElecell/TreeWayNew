@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
+using EleCellLogin;
 public class MainManager : MonoBehaviour
 {
     public static MainManager instance;
@@ -38,4 +39,13 @@ public class MainManager : MonoBehaviour
 
     public Text ID;
 
+
+    public void TEST()
+    {
+        GameServer.instance.Test(Test2);
+    }
+    void Test2(string x ,string y)
+    {
+
+    }
 }

@@ -40,6 +40,9 @@ public class LoginManager : LoadBase
         keyUpdated = false;                                                     // 版本更新flag
         GameServer.updatePKey(pKeyUpdated);                                    // 版本更新
     }
+
+
+
     void pKeyUpdated(string error, string message)
     {
         if (error == null)
@@ -120,13 +123,9 @@ public class LoginManager : LoadBase
         StartCoroutine(LoadScene("Menu"));
 
     }
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            PlayerPrefs.DeleteAll();
-        }
-    }
+
+
+
     void loginFinished(string error, string message)
 	{
 #if UNITY_EDITOR

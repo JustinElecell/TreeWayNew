@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ReadCsv;
 using UnityEngine.UI;
-
+using EleCellLogin;
 
 public class IteamPanel : MonoBehaviour
 {
@@ -32,10 +32,9 @@ public class IteamPanel : MonoBehaviour
     SO_Iteam targetIteam;
     public Button[] TargetSkillButton;
     bool IsLoadFloag = false;
-    public void OnEnable()
+    private void Awake()
     {
-
-        if(!IsLoadFloag)
+        if (!IsLoadFloag)
         {
             IteamLists = ReadCsv.MyReadCSV.Read("Csv/Iteam");
 
@@ -54,19 +53,19 @@ public class IteamPanel : MonoBehaviour
 
                 });
             }
-            for (int i=0;i<IteamLists.Count;i++)
+            for (int i = 0; i < IteamLists.Count; i++)
             {
-                switch(IteamLists[i][2])
+                switch (IteamLists[i][3])
                 {
                     case "武具":
                         var tmp = Instantiate(IteamsObjButton, Panels[0]);
                         int no = i;
 
-                        var data = Resources.Load<SO_Iteam>("Iteam/Weapon/" + IteamLists[no][0]);
+                        var data = Resources.Load<SO_Iteam>("Iteam/Weapon/" + IteamLists[no][1]);
                         tmp.gameObject.GetComponent<Image>().sprite = data.IteamImage;
 
                         tmp.onClick.AddListener(() => {
-                        
+
 
 
                             Debug.Log(IteamLists[no][0]);
@@ -80,7 +79,7 @@ public class IteamPanel : MonoBehaviour
 
                         var tmp_M = Instantiate(IteamsObjButton, Panels[1]);
                         int no_M = i;
-                        var data_M = Resources.Load<SO_Iteam>("Iteam/Magic/" + IteamLists[no_M][0]);
+                        var data_M = Resources.Load<SO_Iteam>("Iteam/Magic/" + IteamLists[no_M][1]);
                         tmp_M.gameObject.GetComponent<Image>().sprite = data_M.IteamImage;
 
                         tmp_M.onClick.AddListener(() => {
@@ -109,7 +108,7 @@ public class IteamPanel : MonoBehaviour
             SetText(0);
             Buttons[0].gameObject.GetComponent<Image>().color = color;
             Panels[0].GetChild(0).GetComponent<Image>().color = color;
-            
+
             ChangeButton.onClick.AddListener(() => {
 
                 MainManager.instance.skillIteams[MainManager.instance.targetSkillNo] = targetIteam;
@@ -118,6 +117,13 @@ public class IteamPanel : MonoBehaviour
 
             IsLoadFloag = true;
         }
+    }
+
+
+    public void OnEnable()
+    {
+
+
 
 
         for (int i = 0; i < TargetSkillButton.Length; i++)
@@ -142,28 +148,45 @@ public class IteamPanel : MonoBehaviour
             }
 
         }
+
+
+        for (int i = 0; i < IteamLists.Count; i++)
+        {
+
+
+            GameServer.instance.AddItemBase(IteamLists[i][0], 1, new EleCellProfileCallback(delegate (string err, string message)
+            {
+                if (err == null)
+                {
+                    Debug.Log("use success");
+                    //Debug.Log("now Count:" + ItemList["RandomReward"].AsInt);
+                }
+            }));
+        }
+
     }
+
 
     void SetText(int no)
     {
-        Name.text = IteamLists[no][0];
-        DMG.text = IteamLists[no][4];
-        HP.text = IteamLists[no][8];
-        MP.text = IteamLists[no][7];
-        SPD.text = IteamLists[no][10];
-        Special.text = IteamLists[no][12];
+        Name.text = IteamLists[no][1];
+        DMG.text = IteamLists[no][5];
+        HP.text = IteamLists[no][9];
+        MP.text = IteamLists[no][8];
+        SPD.text = IteamLists[no][11];
+        Special.text = IteamLists[no][13];
 
-        switch (IteamLists[no][2])
+        switch (IteamLists[no][3])
         {
             case "武具":
-                targetIteam = Resources.Load<SO_Iteam>("Iteam/Weapon/" + IteamLists[no][0]);
+                targetIteam = Resources.Load<SO_Iteam>("Iteam/Weapon/" + IteamLists[no][1]);
                 break;
             case "魔法":
-                targetIteam = Resources.Load<SO_Iteam>("Iteam/Magic/" + IteamLists[no][0]);
+                targetIteam = Resources.Load<SO_Iteam>("Iteam/Magic/" + IteamLists[no][1]);
 
                 break;
             case "召喚":
-                targetIteam = Resources.Load<SO_Iteam>("Iteam/Invoked/" + IteamLists[no][0]);
+                targetIteam = Resources.Load<SO_Iteam>("Iteam/Invoked/" + IteamLists[no][1]);
 
                 break;
         }

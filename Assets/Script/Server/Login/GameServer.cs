@@ -407,15 +407,12 @@ namespace EleCellLogin
             {
                 //PlayerPrefs.DeleteAll();
 
-                //GameServer.instance.PlayerSteta(,new EleCellProfileCallback(delegate (string err, string message);
+                GameServer.instance.DrawTest(new EleCellProfileCallback(delegate (string err, string message) { }));
 
-                Test(test2);
+
             }
         }
-        void test2(string srror,string message)
-        {
 
-        }
 
         private static bool FBinit = false;
         //private static bool GoogleInit = false;
@@ -673,28 +670,7 @@ namespace EleCellLogin
             //    });
             //}
         }
-        public void Test(EleCellProfileCallback callback)
-        {
-            TcpForm form = new TcpForm();
-            form.AddField("game", gameID);
-            form.AddField("accessToken", AccessToken);
-            Debug.Log(MjSave.instance.playerID.Replace(".", ""));
-            
-            form.AddField("pid",  MjSave.instance.playerID.Replace(".",""));
 
-            form.AddField("playerLvl", playerStats["playerLvl"].AsInt+1);
-
-
-            NetworkManager.instance.Query("saveData", form, new GenericCallback<JSONClass>(delegate (JSONClass json)
-            {
-                Debug.Log("成功" + json);
-
-
-            }));
-
-
-
-        }
 
 
         void bindFbCB(string error, string message)
@@ -3418,10 +3394,140 @@ namespace EleCellLogin
                     }
                 })
             );
-
-
         }
 
+        public void AddItem(string itemName,int level,EleCellProfileCallback callback)
+        {
+
+            TcpForm form = new TcpForm();
+            form.AddField("game", gameID);
+            form.AddField("accessToken", AccessToken);
+
+            form.AddField("pid", MjSave.instance.playerID.Replace(".", ""));
+
+            form.AddField("type", "item");
+            form.AddField("item", itemName);
+            form.AddField("qty", level);
+
+            NetworkManager.instance.Query("saveManager", form,
+                new GenericCallback<JSONClass>(delegate (JSONClass json) {
+                    if (json["error"] != null)
+                    {
+                        Debug.Log(json["error"]);
+                        //callback(json["error"], null);
+                    }
+                    else
+                    {
+
+#if UNITY_EDITOR
+                        //callback(null, json.ToString());
+                        Debug.Log(json);
+#else
+						callback(null,null);
+#endif
+                        
+                    }
+                })
+            );
+        }
+
+        public void AddItemBase(string itemName, int level, EleCellProfileCallback callback)
+        {
+
+            TcpForm form = new TcpForm();
+            form.AddField("game", gameID);
+            form.AddField("accessToken", AccessToken);
+
+            form.AddField("pid", "100000001");
+
+            form.AddField("type", "itemBase");
+            form.AddField("item", itemName);
+            form.AddField("qty", level);
+
+            NetworkManager.instance.Query("saveManager", form,
+                new GenericCallback<JSONClass>(delegate (JSONClass json) {
+                    if (json["error"] != null)
+                    {
+                        Debug.Log(json["error"]);
+                        //callback(json["error"], null);
+                    }
+                    else
+                    {
+
+#if UNITY_EDITOR
+                        //callback(null, json.ToString());
+                        Debug.Log(json);
+#else
+						callback(null,null);
+#endif
+
+                    }
+                })
+            );
+        }
+
+        public void Test(EleCellProfileCallback callback)
+        {
+            TcpForm form = new TcpForm();
+            form.AddField("game", gameID);
+            form.AddField("accessToken", AccessToken);
+            
+            form.AddField("pid", MjSave.instance.playerID.Replace(".", ""));
+            
+            form.AddField("type", "players");
+
+            form.AddField("playerLvl", playerStats["playerLvl"].AsInt + 1);
+
+
+            NetworkManager.instance.Query("saveManager", form, 
+                new GenericCallback<JSONClass>(delegate (JSONClass json){
+                    if (json["error"] != null)
+                    {
+                        Debug.Log(json["error"]);
+                        //callback(json["error"], null);
+                    }
+                    else
+                    {
+
+    #if UNITY_EDITOR
+                        //callback(null, json.ToString());
+                        Debug.Log(json);
+    #else
+						    callback(null,null);
+    #endif
+
+                    }
+
+                })
+            );
+
+        }
+        public void DrawTest(EleCellProfileCallback callback)
+        {
+            TcpForm form = new TcpForm();
+            form.AddField("game", gameID);
+            form.AddField("accessToken", AccessToken);
+            form.AddField("pid", "100000001");
+            form.AddField("drawMax", 10);
+            NetworkManager.instance.Query("Draw", form,
+                new GenericCallback<JSONClass>(delegate (JSONClass json) {
+                    if (json["error"] != null)
+                    {
+                        Debug.Log(json["error"]);
+                    }
+                    else
+                    {
+#if UNITY_EDITOR
+                        //callback(null, json.ToString());
+                        Debug.Log(json);
+#else
+						    callback(null,null);
+#endif
+                    }
+                })
+            );
+
+        }
         public static void missionQuery(int missionID, EleCellProfileCallback callback)
         {
             if (gameID == null)

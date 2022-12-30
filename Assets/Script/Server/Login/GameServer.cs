@@ -407,7 +407,7 @@ namespace EleCellLogin
             {
                 //PlayerPrefs.DeleteAll();
 
-                GameServer.instance.DrawTest(new EleCellProfileCallback(delegate (string err, string message) { }));
+                //GameServer.instance.DrawTest(new EleCellProfileCallback(delegate (string err, string message) { }));
 
 
             }
@@ -3502,13 +3502,15 @@ namespace EleCellLogin
             );
 
         }
-        public void DrawTest(EleCellProfileCallback callback)
+        public void DrawTest(int drawMax, EleCellJsonCallback callback)
         {
             TcpForm form = new TcpForm();
             form.AddField("game", gameID);
             form.AddField("accessToken", AccessToken);
-            form.AddField("pid", "100000001");
-            form.AddField("drawMax", 10);
+            form.AddField("targetID", "100000001");
+            form.AddField("pid", MjSave.instance.playerID.Replace(".", ""));
+
+            form.AddField("drawMax", drawMax);
             NetworkManager.instance.Query("Draw", form,
                 new GenericCallback<JSONClass>(delegate (JSONClass json) {
                     if (json["error"] != null)
@@ -3517,17 +3519,35 @@ namespace EleCellLogin
                     }
                     else
                     {
-#if UNITY_EDITOR
-                        //callback(null, json.ToString());
                         Debug.Log(json);
-#else
-						    callback(null,null);
-#endif
+                        callback(null,json);
                     }
                 })
             );
-
         }
+        public void LoadItem_Server(EleCellJsonCallback callback)
+        {
+            TcpForm form = new TcpForm();
+            form.AddField("game", gameID);
+            form.AddField("accessToken", AccessToken);
+            
+            form.AddField("pid", MjSave.instance.playerID.Replace(".", ""));
+
+            NetworkManager.instance.Query("loadManager", form,
+                new GenericCallback<JSONClass>(delegate (JSONClass json) {
+                    if (json["error"] != null)
+                    {
+                        Debug.Log(json["error"]);
+                    }
+                    else
+                    {
+                        Debug.Log(json);
+                        callback(null, json);
+                    }
+                })
+            );
+        }
+
         public static void missionQuery(int missionID, EleCellProfileCallback callback)
         {
             if (gameID == null)

@@ -39,6 +39,7 @@ public class MainManager : MonoBehaviour
 
     public Text ID;
 
+    public List<SO_Iteam> AllItemList = new List<SO_Iteam>();
 
     public void TEST()
     {

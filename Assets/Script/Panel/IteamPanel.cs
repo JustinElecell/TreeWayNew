@@ -4,6 +4,7 @@ using UnityEngine;
 using ReadCsv;
 using UnityEngine.UI;
 using EleCellLogin;
+using SimpleJSON;
 
 public class IteamPanel : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class IteamPanel : MonoBehaviour
     public Button IteamsObjButton;
 
     public Text Name;
+    public Text Level;
+
     public Text DMG;
     public Text HP;
     public Text MP;
@@ -31,17 +34,22 @@ public class IteamPanel : MonoBehaviour
 
     SO_Iteam targetIteam;
     public Button[] TargetSkillButton;
+
+
+
     bool IsLoadFloag = false;
     private void Awake()
     {
         if (!IsLoadFloag)
         {
+
             IteamLists = ReadCsv.MyReadCSV.Read("Csv/Iteam");
 
             for (int i = 0; i < Buttons.Length; i++)
             {
                 int no = i;
-                Buttons[i].onClick.AddListener(() => {
+                Buttons[i].onClick.AddListener(() =>
+                {
                     for (int r = 0; r < Panels.Length; r++)
                     {
                         Panels[r].gameObject.transform.parent.transform.parent.gameObject.SetActive(false);
@@ -53,61 +61,67 @@ public class IteamPanel : MonoBehaviour
 
                 });
             }
-            for (int i = 0; i < IteamLists.Count; i++)
-            {
-                switch (IteamLists[i][3])
-                {
-                    case "武具":
-                        var tmp = Instantiate(IteamsObjButton, Panels[0]);
-                        int no = i;
+            //for (int i = 0; i < IteamLists.Count; i++)
+            //{
+            //    switch (IteamLists[i][3])
+            //    {
+            //        case "武具":
+            //            var tmp = Instantiate(IteamsObjButton, Panels[0]);
+            //            int no = i;
 
-                        var data = Resources.Load<SO_Iteam>("Iteam/Weapon/" + IteamLists[no][1]);
-                        tmp.gameObject.GetComponent<Image>().sprite = data.IteamImage;
-
-                        tmp.onClick.AddListener(() => {
-
-
-
-                            Debug.Log(IteamLists[no][0]);
-                            SetText(no);
+            //            var data = Resources.Load<SO_Iteam>("Iteam/PlayerItem/" + IteamLists[no][1]);
+            //            tmp.gameObject.GetComponent<Image>().sprite = data.IteamImage;
+            //            MainManager.instance.AllItemList.Add(data);
+            //            tmp.onClick.AddListener(() => {
 
 
 
-                        });
-                        break;
-                    case "魔法":
-
-                        var tmp_M = Instantiate(IteamsObjButton, Panels[1]);
-                        int no_M = i;
-                        var data_M = Resources.Load<SO_Iteam>("Iteam/Magic/" + IteamLists[no_M][1]);
-                        tmp_M.gameObject.GetComponent<Image>().sprite = data_M.IteamImage;
-
-                        tmp_M.onClick.AddListener(() => {
-
-                            Debug.Log(IteamLists[no_M][0]);
-
-                            SetText(no_M);
-
-                        });
-                        break;
-                    case "召喚":
-
-                        var tmp_I = Instantiate(IteamsObjButton, Panels[2]);
-                        int no_I = i;
-                        tmp_I.onClick.AddListener(() => {
-
-                            Debug.Log(IteamLists[no_I][0]);
-                            SetText(no_I);
+            //                Debug.Log(IteamLists[no][0]);
+            //                SetText(no);
 
 
-                        });
-                        break;
-                }
-            }
 
-            SetText(0);
-            Buttons[0].gameObject.GetComponent<Image>().color = color;
-            Panels[0].GetChild(0).GetComponent<Image>().color = color;
+            //            });
+            //            break;
+            //        case "魔法":
+
+            //            var tmp_M = Instantiate(IteamsObjButton, Panels[1]);
+            //            int no_M = i;
+            //            var data_M = Resources.Load<SO_Iteam>("Iteam/PlayerItem/" + IteamLists[no_M][1]);
+            //            tmp_M.gameObject.GetComponent<Image>().sprite = data_M.IteamImage;
+
+            //            MainManager.instance.AllItemList.Add(data_M);
+
+            //            tmp_M.onClick.AddListener(() => {
+
+            //                Debug.Log(IteamLists[no_M][0]);
+
+            //                SetText(no_M);
+
+            //            });
+            //            break;
+            //        case "召喚":
+
+            //            var tmp_I = Instantiate(IteamsObjButton, Panels[2]);
+            //            int no_I = i;
+            //            var data_I = Resources.Load<SO_Iteam>("Iteam/PlayerItem/" + IteamLists[no_I][1]);
+            //            MainManager.instance.AllItemList.Add(data_I);
+
+
+            //            tmp_I.onClick.AddListener(() => {
+
+            //                Debug.Log(IteamLists[no_I][0]);
+            //                SetText(no_I);
+
+
+            //            });
+            //            break;
+            //    }
+            //}
+
+            //SetText(0);
+            //Buttons[0].gameObject.GetComponent<Image>().color = color;
+            //Panels[0].GetChild(0).GetComponent<Image>().color = color;
 
             ChangeButton.onClick.AddListener(() => {
 
@@ -119,10 +133,96 @@ public class IteamPanel : MonoBehaviour
         }
     }
 
+    int FindItem(string itemNo)
+    {
+        for (int i = 0; i < IteamLists.Count; i++)
+        {
+            if (IteamLists[i][0] == itemNo)
+            {
+
+                return i;
+
+            }
+
+        }
+        Debug.Log("沒找到對應編號道具");
+        return 0;
+    }
 
     public void OnEnable()
     {
 
+        GameServer.instance.LoadItem_Server(new EleCellJsonCallback(delegate (string err, JSONClass message) {
+
+            for(int i=0;i< message[0].Count;i++)
+            {
+                var no = FindItem(message[0][i]["type"]);
+                var data = Resources.Load<SO_Iteam>("Iteam/PlayerItem/" + IteamLists[no][1]);
+                Debug.Log(message[0][i]["qty"]);
+                int level = int.Parse(message[0][i]["qty"]);
+
+
+                switch (data.type)
+                {
+                    case SO_Iteam.IteamType.武具:
+                        var tmp = Instantiate(IteamsObjButton, Panels[0]);
+
+                        tmp.gameObject.GetComponent<Image>().sprite = data.IteamImage;
+                        MainManager.instance.AllItemList.Add(data);
+                        tmp.onClick.AddListener(() =>
+                        {
+                            SetText(data,no, level);
+
+                        });
+                        tmp.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Lv " + level;
+                        break;
+                    case SO_Iteam.IteamType.魔法:
+
+                        var tmp_M = Instantiate(IteamsObjButton, Panels[1]);
+                        int no_M = i;
+                        tmp_M.gameObject.GetComponent<Image>().sprite = data.IteamImage;
+
+                        MainManager.instance.AllItemList.Add(data);
+
+                        tmp_M.onClick.AddListener(() =>
+                        {
+
+
+                            SetText(data,no, level);
+
+                        });
+                        tmp_M.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Lv " + level;
+
+                        break;
+                    case SO_Iteam.IteamType.召喚:
+
+                        var tmp_I = Instantiate(IteamsObjButton, Panels[2]);
+                        int no_I = i;
+                        MainManager.instance.AllItemList.Add(data);
+
+
+                        tmp_I.onClick.AddListener(() =>
+                        {
+
+                            Debug.Log(IteamLists[no_I][0]);
+                            SetText(data, no, level);
+
+
+                        });
+                        tmp_I.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Lv " + level;
+
+                        break;
+                }
+
+
+            }
+
+            var no2 = FindItem(message[0][0]["type"]);
+            var data2 = Resources.Load<SO_Iteam>("Iteam/PlayerItem/" + IteamLists[no2][1]);
+            int level2 = int.Parse(message[0][0]["qty"]);
+
+            SetText(data2, no2, level2);
+        }));
 
 
 
@@ -141,56 +241,45 @@ public class IteamPanel : MonoBehaviour
 
             //MainManager.instance.skillIteams[MainManager.instance.targetSkillNo] = targetIteam;
             //TargetSkillButton[MainManager.instance.targetSkillNo].gameObject.GetComponent<Image>().sprite = targetIteam.IteamImage;
-            if(MainManager.instance.skillIteams[i]!=null)
-            {
-                TargetSkillButton[i].gameObject.GetComponent<Image>().sprite = MainManager.instance.skillIteams[i].IteamImage;
+            
+            
+            //if(MainManager.instance.skillIteams[i]!=null)
+            //{
+            //    TargetSkillButton[i].gameObject.GetComponent<Image>().sprite = MainManager.instance.skillIteams[i].IteamImage;
 
-            }
+            //}
 
         }
 
 
-        for (int i = 0; i < IteamLists.Count; i++)
-        {
+        //for (int i = 0; i < IteamLists.Count; i++)
+        //{
 
 
-            GameServer.instance.AddItemBase(IteamLists[i][0], 1, new EleCellProfileCallback(delegate (string err, string message)
-            {
-                if (err == null)
-                {
-                    Debug.Log("use success");
-                    //Debug.Log("now Count:" + ItemList["RandomReward"].AsInt);
-                }
-            }));
-        }
+        //    GameServer.instance.AddItemBase(IteamLists[i][0], 1, new EleCellProfileCallback(delegate (string err, string message)
+        //    {
+        //        if (err == null)
+        //        {
+        //            Debug.Log("use success");
+        //            //Debug.Log("now Count:" + ItemList["RandomReward"].AsInt);
+        //        }
+        //    }));
+        //}
 
     }
 
 
-    void SetText(int no)
+    void SetText(SO_Iteam data,int no,int level)
     {
-        Name.text = IteamLists[no][1];
-        DMG.text = IteamLists[no][5];
-        HP.text = IteamLists[no][9];
-        MP.text = IteamLists[no][8];
-        SPD.text = IteamLists[no][11];
+        Name.text = data.IteamName;
+        DMG.text = data.Atk.ToString()+"%";
+        HP.text = data.Hp.ToString();
+        MP.text = data.Mp.ToString();
+        SPD.text = data.Speed.ToString();
         Special.text = IteamLists[no][13];
 
-        switch (IteamLists[no][3])
-        {
-            case "武具":
-                targetIteam = Resources.Load<SO_Iteam>("Iteam/Weapon/" + IteamLists[no][1]);
-                break;
-            case "魔法":
-                targetIteam = Resources.Load<SO_Iteam>("Iteam/Magic/" + IteamLists[no][1]);
-
-                break;
-            case "召喚":
-                targetIteam = Resources.Load<SO_Iteam>("Iteam/Invoked/" + IteamLists[no][1]);
-
-                break;
-        }
-
+        Level.text = "Lv " + level;
+        targetIteam = data;
 
         if (targetIteam != null)
         {

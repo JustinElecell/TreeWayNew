@@ -29,6 +29,7 @@ public class SO_Iteam : ScriptableObject
 
     public string IteamName = "";
     public string IteamString = "";
+    public string iteamSpecal = "";
     public Sprite IteamImage;
     public IteamType type;
     public AttributesType attributesType;

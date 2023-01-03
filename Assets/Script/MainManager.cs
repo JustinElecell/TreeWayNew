@@ -4,11 +4,19 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
 using EleCellLogin;
+using SimpleJSON;
 public class MainManager : MonoBehaviour
 {
     public static MainManager instance;
 
+    public enum ServerData
+    {
+        CardPool,
+        Charater,
+        Item
+    }
 
+    public Dictionary<ServerData, JSONClass> ServerData_Json = new Dictionary<ServerData, JSONClass>();
     private void Awake()
     {
         if(instance==null)
@@ -40,6 +48,8 @@ public class MainManager : MonoBehaviour
     public Text ID;
 
     public List<SO_Iteam> AllItemList = new List<SO_Iteam>();
+
+    public DrawChancePanel DrawChancePanel;
 
     public void TEST()
     {

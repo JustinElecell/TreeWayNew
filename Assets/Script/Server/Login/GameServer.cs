@@ -3405,7 +3405,7 @@ namespace EleCellLogin
 
             form.AddField("pid", MjSave.instance.playerID.Replace(".", ""));
 
-            form.AddField("type", "item");
+            form.AddField("SaveType", "item");
             form.AddField("item", itemName);
             form.AddField("qty", level);
 
@@ -3440,7 +3440,7 @@ namespace EleCellLogin
 
             form.AddField("pid", "100000001");
 
-            form.AddField("type", "itemBase");
+            form.AddField("SaveType", "itemBase");
             form.AddField("item", itemName);
             form.AddField("qty", level);
 
@@ -3507,10 +3507,12 @@ namespace EleCellLogin
             TcpForm form = new TcpForm();
             form.AddField("game", gameID);
             form.AddField("accessToken", AccessToken);
+            
             form.AddField("targetID", "100000001");
             form.AddField("pid", MjSave.instance.playerID.Replace(".", ""));
 
             form.AddField("drawMax", drawMax);
+            form.AddField("PoolType", "Charater");
             NetworkManager.instance.Query("Draw", form,
                 new GenericCallback<JSONClass>(delegate (JSONClass json) {
                     if (json["error"] != null)
@@ -3525,12 +3527,69 @@ namespace EleCellLogin
                 })
             );
         }
+        public void SaveCharaterBase_Server(string charaterNo,EleCellJsonCallback callback)
+        {
+
+            TcpForm form = new TcpForm();
+            form.AddField("game", gameID);
+            form.AddField("accessToken", AccessToken);
+
+            //form.AddField("pid", MjSave.instance.playerID.Replace(".", ""));
+            form.AddField("pid", "100000001");
+
+            form.AddField("SaveType", "CharaterBase");
+
+            form.AddField("qty", 0);
+            form.AddField("type", charaterNo);
+
+            NetworkManager.instance.Query("saveManager", form,
+                new GenericCallback<JSONClass>(delegate (JSONClass json) {
+                    if (json["error"] != null)
+                    {
+                        Debug.Log(json["error"]);
+                    }
+                    else
+                    {
+                        Debug.Log(json);
+                        callback(null, json);
+                    }
+                })
+            );
+
+        }
+        public void LoadCardPool_Server(EleCellJsonCallback callback)
+        {
+            TcpForm form = new TcpForm();
+            form.AddField("game", gameID);
+            form.AddField("accessToken", AccessToken);
+
+            form.AddField("pid", MjSave.instance.playerID.Replace(".", ""));
+
+            form.AddField("type", "CardPool");
+
+
+            NetworkManager.instance.Query("loadManager", form,
+                new GenericCallback<JSONClass>(delegate (JSONClass json) {
+                    if (json["error"] != null)
+                    {
+                        Debug.Log(json["error"]);
+                    }
+                    else
+                    {
+                        Debug.Log(json);
+                        callback(null, json);
+                    }
+                })
+            );
+        }
         public void LoadItem_Server(EleCellJsonCallback callback)
         {
             TcpForm form = new TcpForm();
             form.AddField("game", gameID);
             form.AddField("accessToken", AccessToken);
             
+            form.AddField("type", "item");
+
             form.AddField("pid", MjSave.instance.playerID.Replace(".", ""));
 
             NetworkManager.instance.Query("loadManager", form,
@@ -3547,7 +3606,55 @@ namespace EleCellLogin
                 })
             );
         }
+        public void LoadItem_Server(string Target,EleCellJsonCallback callback)
+        {
+            TcpForm form = new TcpForm();
+            form.AddField("game", gameID);
+            form.AddField("accessToken", AccessToken);
 
+            form.AddField("type", "item");
+
+            form.AddField("pid", Target);
+
+            NetworkManager.instance.Query("loadManager", form,
+                new GenericCallback<JSONClass>(delegate (JSONClass json) {
+                    if (json["error"] != null)
+                    {
+                        Debug.Log(json["error"]);
+                    }
+                    else
+                    {
+                        Debug.Log(json);
+                        callback(null, json);
+                    }
+                })
+            );
+        }
+
+        public void LoadCharater_Server(string Target, EleCellJsonCallback callback)
+        {
+            TcpForm form = new TcpForm();
+            form.AddField("game", gameID);
+            form.AddField("accessToken", AccessToken);
+
+            form.AddField("type", "LoadCharater");
+
+            form.AddField("pid", Target);
+
+            NetworkManager.instance.Query("loadManager", form,
+                new GenericCallback<JSONClass>(delegate (JSONClass json) {
+                    if (json["error"] != null)
+                    {
+                        Debug.Log(json["error"]);
+                    }
+                    else
+                    {
+                        Debug.Log(json);
+                        callback(null, json);
+                    }
+                })
+            );
+        }
         public static void missionQuery(int missionID, EleCellProfileCallback callback)
         {
             if (gameID == null)

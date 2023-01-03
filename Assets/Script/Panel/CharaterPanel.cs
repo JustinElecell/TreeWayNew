@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using ReadCsv;
 using UnityEngine.UI;
+
+using EleCellLogin;
+using SimpleJSON;
+using ElecellConnection;
+
 public class CharaterPanel : MonoBehaviour
 {
     public Transform createrTran;
@@ -40,6 +45,10 @@ public class CharaterPanel : MonoBehaviour
 
             var tmp = Instantiate(charaterButtonPerfab, createrTran);
 
+            //GameServer.instance.SaveCharaterBase_Server(charaterLists[i][0], new EleCellJsonCallback(delegate (string err, JSONClass message)
+            //{
+
+            //}));
             tmp.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Image/Charater/" + no.ToString());
             tmp.onClick.AddListener(() => {
 
@@ -56,6 +65,11 @@ public class CharaterPanel : MonoBehaviour
         SetCharaterText(1);
         charaterNo = 1;
         MainManager.instance.TargetCharater = charaterLists[1];
+
+
+
+
+
 
 
     }

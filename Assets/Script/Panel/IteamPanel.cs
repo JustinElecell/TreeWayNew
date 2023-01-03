@@ -61,67 +61,6 @@ public class IteamPanel : MonoBehaviour
 
                 });
             }
-            //for (int i = 0; i < IteamLists.Count; i++)
-            //{
-            //    switch (IteamLists[i][3])
-            //    {
-            //        case "武具":
-            //            var tmp = Instantiate(IteamsObjButton, Panels[0]);
-            //            int no = i;
-
-            //            var data = Resources.Load<SO_Iteam>("Iteam/PlayerItem/" + IteamLists[no][1]);
-            //            tmp.gameObject.GetComponent<Image>().sprite = data.IteamImage;
-            //            MainManager.instance.AllItemList.Add(data);
-            //            tmp.onClick.AddListener(() => {
-
-
-
-            //                Debug.Log(IteamLists[no][0]);
-            //                SetText(no);
-
-
-
-            //            });
-            //            break;
-            //        case "魔法":
-
-            //            var tmp_M = Instantiate(IteamsObjButton, Panels[1]);
-            //            int no_M = i;
-            //            var data_M = Resources.Load<SO_Iteam>("Iteam/PlayerItem/" + IteamLists[no_M][1]);
-            //            tmp_M.gameObject.GetComponent<Image>().sprite = data_M.IteamImage;
-
-            //            MainManager.instance.AllItemList.Add(data_M);
-
-            //            tmp_M.onClick.AddListener(() => {
-
-            //                Debug.Log(IteamLists[no_M][0]);
-
-            //                SetText(no_M);
-
-            //            });
-            //            break;
-            //        case "召喚":
-
-            //            var tmp_I = Instantiate(IteamsObjButton, Panels[2]);
-            //            int no_I = i;
-            //            var data_I = Resources.Load<SO_Iteam>("Iteam/PlayerItem/" + IteamLists[no_I][1]);
-            //            MainManager.instance.AllItemList.Add(data_I);
-
-
-            //            tmp_I.onClick.AddListener(() => {
-
-            //                Debug.Log(IteamLists[no_I][0]);
-            //                SetText(no_I);
-
-
-            //            });
-            //            break;
-            //    }
-            //}
-
-            //SetText(0);
-            //Buttons[0].gameObject.GetComponent<Image>().color = color;
-            //Panels[0].GetChild(0).GetComponent<Image>().color = color;
 
             ChangeButton.onClick.AddListener(() => {
 

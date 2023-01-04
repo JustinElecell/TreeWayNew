@@ -29,7 +29,7 @@ public class DrawPoolPanel : MonoBehaviour
         });
 
         chanceButton.onClick.AddListener(() => {
-            MainManager.instance.DrawChancePanel.Init();
+            MainManager.instance.DrawChancePanel.Init(data);
         
         });
         TypeText.text = data["Type"];

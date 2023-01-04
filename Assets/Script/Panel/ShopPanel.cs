@@ -57,9 +57,12 @@ public class ShopPanel : MonoBehaviour
     }
     private void OnEnable()
     {
-        CreatPoolTran.transform.DetachChildren();
+        //CreatPoolTran.transform.DetachChildren();
 
-
+        for(int i=0;i< CreatPoolTran.childCount;i++)
+        {
+            Destroy(CreatPoolTran.GetChild(i).gameObject);
+        }
     }
 
     void ButtonInit()

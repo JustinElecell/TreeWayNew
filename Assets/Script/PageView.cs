@@ -42,7 +42,7 @@ public class PageView : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         posList.Add(1);
     }
 
-    void Update()
+    private void FixedUpdate()
     {
         if (!isDrag && !stopMove)//如果拖动没有结束并且界面还没停止移动就继续移动
         {

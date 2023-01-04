@@ -17,6 +17,7 @@ public class MainManager : MonoBehaviour
     }
 
     public Dictionary<ServerData, JSONClass> ServerData_Json = new Dictionary<ServerData, JSONClass>();
+    public List<List<string>> CardPoolData = new List<List<string>>();
     private void Awake()
     {
         if(instance==null)
@@ -24,7 +25,9 @@ public class MainManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject);
             Debug.Log(MjSave.instance.playerID);
-            if(MjSave.instance.playerID!="")
+            CardPoolData = ReadCsv.MyReadCSV.Read("Csv/CardPool");
+
+            if (MjSave.instance.playerID!="")
             {
                 ID.text = "ID : " + MjSave.instance.playerID.ToString();
             }

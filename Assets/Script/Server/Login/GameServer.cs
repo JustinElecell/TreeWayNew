@@ -3502,7 +3502,7 @@ namespace EleCellLogin
             );
 
         }
-        public void DrawTest(int drawMax, EleCellJsonCallback callback)
+        public void DrawTest(int drawMax,string poolName, EleCellJsonCallback callback)
         {
             TcpForm form = new TcpForm();
             form.AddField("game", gameID);
@@ -3512,7 +3512,7 @@ namespace EleCellLogin
             form.AddField("pid", MjSave.instance.playerID.Replace(".", ""));
 
             form.AddField("drawMax", drawMax);
-            form.AddField("PoolType", "Charater");
+            form.AddField("PoolType", poolName);
             NetworkManager.instance.Query("Draw", form,
                 new GenericCallback<JSONClass>(delegate (JSONClass json) {
                     if (json["error"] != null)

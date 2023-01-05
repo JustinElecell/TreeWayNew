@@ -91,21 +91,19 @@ public class IteamPanel : MonoBehaviour
     public void OnEnable()
     {
 
+
         GameServer.instance.LoadItem_Server(new EleCellJsonCallback(delegate (string err, JSONClass message) {
 
             for(int i=0;i< message[0].Count;i++)
             {
                 var no = FindItem(message[0][i]["type"]);
                 var data = Resources.Load<SO_Iteam>("Iteam/PlayerItem/" + IteamLists[no][1]);
-                Debug.Log(message[0][i]["qty"]);
                 int level = int.Parse(message[0][i]["qty"]);
-
 
                 switch (data.type)
                 {
                     case SO_Iteam.IteamType.武具:
                         var tmp = Instantiate(IteamsObjButton, Panels[0]);
-
                         tmp.gameObject.GetComponent<Image>().sprite = data.IteamImage;
                         MainManager.instance.AllItemList.Add(data);
                         tmp.onClick.AddListener(() =>
@@ -120,9 +118,7 @@ public class IteamPanel : MonoBehaviour
                         var tmp_M = Instantiate(IteamsObjButton, Panels[1]);
                         int no_M = i;
                         tmp_M.gameObject.GetComponent<Image>().sprite = data.IteamImage;
-
                         MainManager.instance.AllItemList.Add(data);
-
                         tmp_M.onClick.AddListener(() =>
                         {
 
@@ -138,21 +134,15 @@ public class IteamPanel : MonoBehaviour
                         var tmp_I = Instantiate(IteamsObjButton, Panels[2]);
                         int no_I = i;
                         MainManager.instance.AllItemList.Add(data);
-
-
                         tmp_I.onClick.AddListener(() =>
                         {
 
                             Debug.Log(IteamLists[no_I][0]);
                             SetText(data, no, level);
-
-
                         });
                         tmp_I.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Lv " + level;
-
                         break;
                 }
-
 
             }
 

@@ -51,8 +51,7 @@ public class MainManager : MonoBehaviour
     public Text ID;
 
     public List<SO_Iteam> AllItemList = new List<SO_Iteam>();
-
-    public DrawChancePanel DrawChancePanel;
+    public ShopPanel shopPanel;
 
     public void TEST()
     {

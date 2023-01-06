@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
         var baseAtkUp = float.Parse(MainManager.instance.TargetCharater[6]);
         stetas.player.Atk =baseAtk;
 
-        for(int i=0;i<5/*stetas.player.Level*/;i++)
+        for(int i=0;i<5;i++)
         {
             var skillNo = int.Parse(MainManager.instance.TargetCharater[10+i*4]);
 

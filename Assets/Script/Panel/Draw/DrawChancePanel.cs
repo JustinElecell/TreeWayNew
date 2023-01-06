@@ -163,14 +163,12 @@ public class DrawChancePanel : MonoBehaviour
         // 裝備的部分
         for (int i = 0; i < MainManager.instance.ServerData_Json[MainManager.ServerData.Item][0].Count; i++)
         {
-
             if(MainManager.instance.ServerData_Json[MainManager.ServerData.Item][0][i]["type"].AsInt > Up && 
                 MainManager.instance.ServerData_Json[MainManager.ServerData.Item][0][i]["type"].AsInt < Down)
             {
                 var tmp = PickUpList.Find(x => x == MainManager.instance.ServerData_Json[MainManager.ServerData.Item][0][i]["type"].AsInt);
                 if (tmp == 0)
                 {
-                    //Debug.Log(MainManager.instance.ServerData_Json[MainManager.ServerData.Charater][0][i]["type"].AsInt);
                     NoPickUpList.Add(MainManager.instance.ServerData_Json[MainManager.ServerData.Item][0][i]["type"].AsInt);
                 }
             }

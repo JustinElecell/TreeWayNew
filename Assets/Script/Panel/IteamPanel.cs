@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using EleCellLogin;
 using SimpleJSON;
 
-public class IteamPanel : MonoBehaviour
+public class IteamPanel : BasePanel
 {
     List<List<string>> IteamLists;
     //List<List<string>> WeaponLists;
@@ -38,6 +38,7 @@ public class IteamPanel : MonoBehaviour
 
 
     bool IsLoadFloag = false;
+
     private void Awake()
     {
         if (!IsLoadFloag)
@@ -72,6 +73,7 @@ public class IteamPanel : MonoBehaviour
         }
     }
 
+
     int FindItem(string itemNo)
     {
         for (int i = 0; i < IteamLists.Count; i++)
@@ -87,14 +89,21 @@ public class IteamPanel : MonoBehaviour
         Debug.Log("沒找到對應編號道具");
         return 0;
     }
-
-    public void OnEnable()
+    private void Start()
     {
+        Init();
+    }
+    public override void Init()
+    {
+        GameServer.instance.LoadItem_Server(MjSave.instance.playerID.Replace(".", ""), new EleCellJsonCallback(delegate (string err, JSONClass message) {
 
+            if (message.Count == 0)
+            {
+                return;
+            }
+            Debug.Log(message);
 
-        GameServer.instance.LoadItem_Server(new EleCellJsonCallback(delegate (string err, JSONClass message) {
-
-            for(int i=0;i< message[0].Count;i++)
+            for (int i = 0; i < message[0].Count; i++)
             {
                 var no = FindItem(message[0][i]["type"]);
                 var data = Resources.Load<SO_Iteam>("Iteam/PlayerItem/" + IteamLists[no][1]);
@@ -105,10 +114,9 @@ public class IteamPanel : MonoBehaviour
                     case SO_Iteam.IteamType.武具:
                         var tmp = Instantiate(IteamsObjButton, Panels[0]);
                         tmp.gameObject.GetComponent<Image>().sprite = data.IteamImage;
-                        MainManager.instance.AllItemList.Add(data);
                         tmp.onClick.AddListener(() =>
                         {
-                            SetText(data,no, level);
+                            SetText(data, no, level);
 
                         });
                         tmp.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Lv " + level;
@@ -118,12 +126,11 @@ public class IteamPanel : MonoBehaviour
                         var tmp_M = Instantiate(IteamsObjButton, Panels[1]);
                         int no_M = i;
                         tmp_M.gameObject.GetComponent<Image>().sprite = data.IteamImage;
-                        MainManager.instance.AllItemList.Add(data);
                         tmp_M.onClick.AddListener(() =>
                         {
 
 
-                            SetText(data,no, level);
+                            SetText(data, no, level);
 
                         });
                         tmp_M.transform.GetChild(0).gameObject.GetComponent<Text>().text = "Lv " + level;
@@ -133,7 +140,6 @@ public class IteamPanel : MonoBehaviour
 
                         var tmp_I = Instantiate(IteamsObjButton, Panels[2]);
                         int no_I = i;
-                        MainManager.instance.AllItemList.Add(data);
                         tmp_I.onClick.AddListener(() =>
                         {
 
@@ -153,8 +159,6 @@ public class IteamPanel : MonoBehaviour
             SetText(data2, no2, level2);
         }));
 
-
-
         for (int i = 0; i < TargetSkillButton.Length; i++)
         {
             int no = i;
@@ -167,35 +171,10 @@ public class IteamPanel : MonoBehaviour
                 TargetSkillButton[no].gameObject.GetComponent<Image>().color = Color.green;
                 MainManager.instance.targetSkillNo = no;
             });
-
-            //MainManager.instance.skillIteams[MainManager.instance.targetSkillNo] = targetIteam;
-            //TargetSkillButton[MainManager.instance.targetSkillNo].gameObject.GetComponent<Image>().sprite = targetIteam.IteamImage;
-            
-            
-            //if(MainManager.instance.skillIteams[i]!=null)
-            //{
-            //    TargetSkillButton[i].gameObject.GetComponent<Image>().sprite = MainManager.instance.skillIteams[i].IteamImage;
-
-            //}
-
         }
-
-
-        //for (int i = 0; i < IteamLists.Count; i++)
-        //{
-
-
-        //    GameServer.instance.AddItemBase(IteamLists[i][0], 1, new EleCellProfileCallback(delegate (string err, string message)
-        //    {
-        //        if (err == null)
-        //        {
-        //            Debug.Log("use success");
-        //            //Debug.Log("now Count:" + ItemList["RandomReward"].AsInt);
-        //        }
-        //    }));
-        //}
-
     }
+
+
 
 
     void SetText(SO_Iteam data,int no,int level)

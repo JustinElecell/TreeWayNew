@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using EleCellLogin;
 using SimpleJSON;
 
-public class ShopPanel : MonoBehaviour
+public class ShopPanel : BasePanel
 {
     List<List<string>> IteamLists;
     [Header("抽抽")]
@@ -25,7 +25,7 @@ public class ShopPanel : MonoBehaviour
     public PageView pageView;
 
 
-    private void Awake()
+    public void Init()
     {
         IteamLists = ReadCsv.MyReadCSV.Read("Csv/Iteam");
 
@@ -39,25 +39,11 @@ public class ShopPanel : MonoBehaviour
             }
             pageView.Init();
             MainManager.instance.ServerData_Json.Add(MainManager.ServerData.CardPool, message);
-            Debug.Log("儲存資料" + MainManager.instance.ServerData_Json[MainManager.ServerData.CardPool][0]);
 
         }));
 
-        GameServer.instance.LoadItem_Server("100000001", new EleCellJsonCallback(delegate (string err, JSONClass message)
-        {
-            MainManager.instance.ServerData_Json.Add(MainManager.ServerData.Item, message);
-            Debug.Log("儲存資料"+MainManager.instance.ServerData_Json[MainManager.ServerData.Item][0]);
-
-        }));
-
-        GameServer.instance.LoadCharater_Server("100000001", new EleCellJsonCallback(delegate (string err, JSONClass message) {
-            MainManager.instance.ServerData_Json.Add(MainManager.ServerData.Charater, message);
-            Debug.Log(MainManager.instance.ServerData_Json[MainManager.ServerData.Charater][0][3]);
-        }));
+        
     }
-
-
-
 
     public SO_Iteam FindItem(string itemNo)
     {

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using EleCellLogin;
 using SimpleJSON;
 
-public class DrawPoolPanel : MonoBehaviour
+public class DrawPoolPanel : BasePanel
 {
     public Button[] draw;
     public Button chanceButton;
@@ -13,24 +13,73 @@ public class DrawPoolPanel : MonoBehaviour
 
     Transform drawEndTran;
     Image drawEndPerfab;
-    
+
+    private void OnEnable()
+    {
+        
+    }
     public void Init(JSONNode data)
     {
         drawEndTran = MainManager.instance.shopPanel.drawEndTran;
         drawEndPerfab = MainManager.instance.shopPanel.DrawEndPerfab;
 
         draw[0].onClick.AddListener(() => {
+            
+
             GameServer.instance.DrawTest(1, data["Type"],new EleCellJsonCallback(delegate (string err, JSONClass message) {
-                Debug.Log(message);
+
+
+
+                for (int i = 0; i < MainManager.instance.itemPanel.Panels.Length; i++)
+                {
+                    DerstorChild(MainManager.instance.itemPanel.Panels[i]);
+                }
+
+                DerstorChild(drawEndTran);
+                DerstorChild(MainManager.instance.charaterPanel.createrTran);
+
+                for (int i = 0; i < message[0].Count; i++)
+                {
+                    var tmp = Instantiate(drawEndPerfab, drawEndTran);
+                    if (message[0][i].AsInt > 1000)
+                    {
+
+                        tmp.sprite = MainManager.instance.shopPanel.FindItem(message[0][i]).IteamImage;
+                    }
+                    else
+                    {
+                        //Debug.Log("Image/Charater/" + message[0][i].ToString());
+                        tmp.sprite = Resources.Load<Sprite>("Image/Charater/" + message[0][i].AsInt.ToString());
+                    }
+
+                }
+                MainManager.instance.itemPanel.Init();
+                MainManager.instance.charaterPanel.Init();
+
+                MainManager.instance.shopPanel.DrawEndPanel.SetActive(true);
+                
+
             }));
 
         });
 
         draw[1].onClick.AddListener(() => {
-            ResetDrawEnd();
-            Debug.Log(data["Type"]);
+
+
             GameServer.instance.DrawTest(10, data["Type"], new EleCellJsonCallback(delegate (string err, JSONClass message) {
-                for(int i=0;i<message[0].Count;i++)
+
+                Debug.Log("長度" + message[0].Count);
+
+
+
+                for (int i = 0; i < MainManager.instance.itemPanel.Panels.Length; i++)
+                {
+                    DerstorChild(MainManager.instance.itemPanel.Panels[i]);
+                }
+                DerstorChild(drawEndTran);
+                DerstorChild(MainManager.instance.charaterPanel.createrTran);
+
+                for (int i=0;i<message[0].Count;i++)
                 {
 
                     var tmp = Instantiate(drawEndPerfab, drawEndTran);
@@ -46,7 +95,13 @@ public class DrawPoolPanel : MonoBehaviour
                     }
 
                 }
+                MainManager.instance.itemPanel.Init();
+                MainManager.instance.charaterPanel.Init();
+
+
                 MainManager.instance.shopPanel.DrawEndPanel.SetActive(true);
+                
+
 
             }));
         });
@@ -58,12 +113,5 @@ public class DrawPoolPanel : MonoBehaviour
         TypeText.text = data["Type"];
     }
 
-    void ResetDrawEnd()
-    {
-        for(int i=0; i< drawEndTran.childCount;i++)
-        {
-            Destroy(drawEndTran.GetChild(i).gameObject);
-        }
-    }
 
 }

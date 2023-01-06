@@ -3576,36 +3576,12 @@ namespace EleCellLogin
                     }
                     else
                     {
-                        Debug.Log(json);
                         callback(null, json);
                     }
                 })
             );
         }
-        public void LoadItem_Server(EleCellJsonCallback callback)
-        {
-            TcpForm form = new TcpForm();
-            form.AddField("game", gameID);
-            form.AddField("accessToken", AccessToken);
-            
-            form.AddField("type", "item");
 
-            form.AddField("pid", MjSave.instance.playerID.Replace(".", ""));
-
-            NetworkManager.instance.Query("loadManager", form,
-                new GenericCallback<JSONClass>(delegate (JSONClass json) {
-                    if (json["error"] != null)
-                    {
-                        Debug.Log(json["error"]);
-                    }
-                    else
-                    {
-                        Debug.Log(json);
-                        callback(null, json);
-                    }
-                })
-            );
-        }
         public void LoadItem_Server(string Target,EleCellJsonCallback callback)
         {
             TcpForm form = new TcpForm();
@@ -3649,7 +3625,32 @@ namespace EleCellLogin
                     }
                     else
                     {
-                        Debug.Log(json);
+                        callback(null, json);
+                    }
+                })
+            );
+            
+        }
+
+        public void LevelUp_Server(int Cost, string type , EleCellJsonCallback callback)
+        {
+            TcpForm form = new TcpForm();
+            form.AddField("game", gameID);
+            form.AddField("accessToken", AccessToken);
+
+            form.AddField("cost", Cost);
+            form.AddField("type", type);
+
+            form.AddField("pid", MjSave.instance.playerID.Replace(".", ""));
+
+            NetworkManager.instance.Query("charaLevelUp", form,
+                new GenericCallback<JSONClass>(delegate (JSONClass json) {
+                    if (json["error"] != null)
+                    {
+                        Debug.Log(json["error"]);
+                    }
+                    else
+                    {
                         callback(null, json);
                     }
                 })

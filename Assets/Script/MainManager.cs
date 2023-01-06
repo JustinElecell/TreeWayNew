@@ -18,29 +18,6 @@ public class MainManager : MonoBehaviour
 
     public Dictionary<ServerData, JSONClass> ServerData_Json = new Dictionary<ServerData, JSONClass>();
     public List<List<string>> CardPoolData = new List<List<string>>();
-    private void Awake()
-    {
-        if(instance==null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-            Debug.Log(MjSave.instance.playerID);
-            CardPoolData = ReadCsv.MyReadCSV.Read("Csv/CardPool");
-
-            if (MjSave.instance.playerID!="")
-            {
-                ID.text = "ID : " + MjSave.instance.playerID.ToString();
-            }
-            else
-            {
-                ID.text = "ID : Null";
-            }
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
 
     public bool TestFlag;
     public List<string> TargetCharater;
@@ -50,15 +27,60 @@ public class MainManager : MonoBehaviour
 
     public Text ID;
 
-    public List<SO_Iteam> AllItemList = new List<SO_Iteam>();
+    [Header("Panel")]
     public ShopPanel shopPanel;
+    public IteamPanel itemPanel;
+    public CharaterPanel charaterPanel;
 
-    public void TEST()
+
+    private void Awake()
     {
-        GameServer.instance.Test(Test2);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+
+            GameServer.instance.LoadItem_Server("100000001", new EleCellJsonCallback(delegate (string err, JSONClass message)
+            {
+                MainManager.instance.ServerData_Json.Add(MainManager.ServerData.Item, message);
+
+            }));
+
+            GameServer.instance.LoadCharater_Server("100000001", new EleCellJsonCallback(delegate (string err, JSONClass message)
+            {
+                MainManager.instance.ServerData_Json.Add(MainManager.ServerData.Charater, message);
+            }));
+
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
-    void Test2(string x ,string y)
+
+    private void Start()
     {
+        Init();
 
     }
+    void Init()
+    {
+        CardPoolData = ReadCsv.MyReadCSV.Read("Csv/CardPool");
+        if (MjSave.instance.playerID != "")
+        {
+            ID.text = "ID : " + MjSave.instance.playerID.ToString();
+        }
+        else
+        {
+            ID.text = "ID : Null";
+        }
+
+
+        shopPanel.Init();
+        charaterPanel.Init();
+    }
+
+
+
+
 }

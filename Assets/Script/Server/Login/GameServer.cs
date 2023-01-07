@@ -1328,6 +1328,9 @@ namespace EleCellLogin
 
                         // stats
                         _pStats = (JSONClass)json["stats"];
+                        Debug.Log(_pStats["coin"].AsInt);
+                        SaveManager.instance.SaveCoin(_pStats["coin"].AsInt);
+
 
                         Debug.Log(_pStats);
                         // lang callback

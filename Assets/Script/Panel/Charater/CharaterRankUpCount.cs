@@ -10,9 +10,9 @@ public class CharaterRankUpCount : MonoBehaviour
 
     public void SetUpRank(int Rank)
     {
-        if(Rank>1)
+        if(Rank>=1)
         {
-            UpcountText.text = "+" + (Rank-1).ToString();
+            UpcountText.text = "+" + (Rank).ToString();
             this.gameObject.SetActive(true);
         }
         else

@@ -12,9 +12,16 @@ public class ClassPlanel : LoadBase
     {
 
         EnterButton.onClick.AddListener(() => {
+            for(int i=0;i<5;i++)
+            {
+                if(MainManager.instance.skillIteams[i]!=null)
+                {
+                    StartCoroutine(LoadScene("GamePlay"));
+                    return;
+                }
+            }
 
-            StartCoroutine(LoadScene("GamePlay"));
-        
+            MainManager.instance.noticePanel.Notic("已裝備數為0");
         
         });
     }

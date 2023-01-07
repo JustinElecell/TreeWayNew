@@ -64,10 +64,23 @@ public class IteamPanel : BasePanel
             }
 
             ChangeButton.onClick.AddListener(() => {
+                SaveManager.instance.saveData.skillItemList[MainManager.instance.targetSkillNo] = targetIteam.IteamName;
+                SaveManager.instance.Save();
 
                 MainManager.instance.skillIteams[MainManager.instance.targetSkillNo] = targetIteam;
                 TargetSkillButton[MainManager.instance.targetSkillNo].gameObject.GetComponent<Image>().sprite = targetIteam.IteamImage;
             });
+
+            for(int i=0;i<5;i++)
+            {
+                if(MainManager.instance.skillIteams[i]!=null)
+                {
+                    TargetSkillButton[i].gameObject.GetComponent<Image>().sprite = MainManager.instance.skillIteams[i].IteamImage;
+                }
+
+
+            }
+
 
             IsLoadFloag = true;
         }

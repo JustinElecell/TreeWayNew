@@ -24,86 +24,98 @@ public class DrawPoolPanel : BasePanel
         drawEndPerfab = MainManager.instance.shopPanel.DrawEndPerfab;
 
         draw[0].onClick.AddListener(() => {
-            
+            if (SaveManager.instance.saveData.coin >= 1000)
+            {
 
-            GameServer.instance.DrawTest(1, data["Type"],new EleCellJsonCallback(delegate (string err, JSONClass message) {
-
-
-
-                for (int i = 0; i < MainManager.instance.itemPanel.Panels.Length; i++)
+                GameServer.instance.DrawTest(1, data["Type"], new EleCellJsonCallback(delegate (string err, JSONClass message)
                 {
-                    DerstorChild(MainManager.instance.itemPanel.Panels[i]);
-                }
 
-                DerstorChild(drawEndTran);
-                DerstorChild(MainManager.instance.charaterPanel.createrTran);
-
-                for (int i = 0; i < message[0].Count; i++)
-                {
-                    var tmp = Instantiate(drawEndPerfab, drawEndTran);
-                    if (message[0][i].AsInt > 1000)
+                    for (int i = 0; i < MainManager.instance.itemPanel.Panels.Length; i++)
                     {
-
-                        tmp.sprite = MainManager.instance.shopPanel.FindItem(message[0][i]).IteamImage;
-                    }
-                    else
-                    {
-                        //Debug.Log("Image/Charater/" + message[0][i].ToString());
-                        tmp.sprite = Resources.Load<Sprite>("Image/Charater/" + message[0][i].AsInt.ToString());
+                        DerstorChild(MainManager.instance.itemPanel.Panels[i]);
                     }
 
-                }
-                MainManager.instance.itemPanel.Init();
-                MainManager.instance.charaterPanel.Init();
+                    DerstorChild(drawEndTran);
+                    DerstorChild(MainManager.instance.charaterPanel.createrTran);
 
-                MainManager.instance.shopPanel.DrawEndPanel.SetActive(true);
-                
+                    for (int i = 0; i < message[0].Count; i++)
+                    {
+                        var tmp = Instantiate(drawEndPerfab, drawEndTran);
+                        if (message[0][i].AsInt > 1000)
+                        {
 
-            }));
+                            tmp.sprite = MainManager.instance.shopPanel.FindItem(message[0][i]).IteamImage;
+                        }
+                        else
+                        {
+                            //Debug.Log("Image/Charater/" + message[0][i].ToString());
+                            tmp.sprite = Resources.Load<Sprite>("Image/Charater/" + message[0][i].AsInt.ToString());
+                        }
+
+                    }
+                    MainManager.instance.itemPanel.Init();
+                    MainManager.instance.charaterPanel.Init();
+
+                    SaveManager.instance.SaveCoin(SaveManager.instance.saveData.coin - 1000);
+                    MainManager.instance.shopPanel.ResetPanel();
+                    MainManager.instance.charaterPanel.ResetPanel();
+                    MainManager.instance.shopPanel.DrawEndPanel.SetActive(true);
+
+                }));
+            }
+            else
+            {
+                MainManager.instance.noticePanel.Notic("金幣不足");
+            }
 
         });
 
         draw[1].onClick.AddListener(() => {
 
+            if(SaveManager.instance.saveData.coin>=10000)
+            {
 
-            GameServer.instance.DrawTest(10, data["Type"], new EleCellJsonCallback(delegate (string err, JSONClass message) {
+                GameServer.instance.DrawTest(10, data["Type"], new EleCellJsonCallback(delegate (string err, JSONClass message) {
 
-                Debug.Log("長度" + message[0].Count);
+                    Debug.Log("長度" + message[0].Count);
 
+                    for (int i = 0; i < MainManager.instance.itemPanel.Panels.Length; i++)
+                    {
+                        DerstorChild(MainManager.instance.itemPanel.Panels[i]);
+                    }
+                    DerstorChild(drawEndTran);
+                    DerstorChild(MainManager.instance.charaterPanel.createrTran);
 
-
-                for (int i = 0; i < MainManager.instance.itemPanel.Panels.Length; i++)
-                {
-                    DerstorChild(MainManager.instance.itemPanel.Panels[i]);
-                }
-                DerstorChild(drawEndTran);
-                DerstorChild(MainManager.instance.charaterPanel.createrTran);
-
-                for (int i=0;i<message[0].Count;i++)
-                {
-
-                    var tmp = Instantiate(drawEndPerfab, drawEndTran);
-                    if (message[0][i].AsInt>1000)
+                    for (int i = 0; i < message[0].Count; i++)
                     {
 
-                        tmp.sprite = MainManager.instance.shopPanel.FindItem(message[0][i]).IteamImage;
+                        var tmp = Instantiate(drawEndPerfab, drawEndTran);
+                        if (message[0][i].AsInt > 1000)
+                        {
+
+                            tmp.sprite = MainManager.instance.shopPanel.FindItem(message[0][i]).IteamImage;
+                        }
+                        else
+                        {
+                            //Debug.Log("Image/Charater/" + message[0][i].ToString());
+                            tmp.sprite = Resources.Load<Sprite>("Image/Charater/" + message[0][i].AsInt.ToString());
+                        }
+
                     }
-                    else
-                    {
-                        //Debug.Log("Image/Charater/" + message[0][i].ToString());
-                        tmp.sprite = Resources.Load<Sprite>("Image/Charater/" + message[0][i].AsInt.ToString());
-                    }
+                    MainManager.instance.itemPanel.Init();
+                    MainManager.instance.charaterPanel.Init();
 
-                }
-                MainManager.instance.itemPanel.Init();
-                MainManager.instance.charaterPanel.Init();
+                    SaveManager.instance.SaveCoin(SaveManager.instance.saveData.coin - 1000);
+                    MainManager.instance.shopPanel.ResetPanel();
+                    MainManager.instance.charaterPanel.ResetPanel();
+                    MainManager.instance.shopPanel.DrawEndPanel.SetActive(true);
+                }));
+            }
+            else
+            {
+                MainManager.instance.noticePanel.Notic("金幣不足");
+            }
 
-
-                MainManager.instance.shopPanel.DrawEndPanel.SetActive(true);
-                
-
-
-            }));
         });
 
         chanceButton.onClick.AddListener(() => {

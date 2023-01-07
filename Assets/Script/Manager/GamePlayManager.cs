@@ -152,6 +152,7 @@ public class GamePlayManager : MonoBehaviour
 
         }
         Time.timeScale = 1;
+        Destroy(MainManager.instance.gameObject);
 
         timeCount_Coroutine = StartCoroutine(TimeCount());
         yield return null;

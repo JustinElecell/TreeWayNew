@@ -44,11 +44,22 @@ public class CharaterPanel : BasePanel
     public int targetLevel;
     public Button TargetCharaterButton;
     public CharaterRankUpCount RankUp;
+    
+    public Text CoinText;
+
     private void Start()
     {
         TargetCharaterButton.onClick.AddListener(() => {
 
             MainManager.instance.TargetCharater = charaterLists[charaterNo];
+            SaveManager.instance.saveData.targetCharaterNo = charaterNo;
+            
+            MainManager.instance.TargetCharater = charaterLists[charaterNo];
+
+            MainManager.instance.targetCharaterLevel = itemStetasList[charaterNo].Level;
+            MainManager.instance.targetRank = itemStetasList[charaterNo].Rank;
+
+            SaveManager.instance.Save();
         });
 
         LevelUpButton.onClick.AddListener(() => {
@@ -59,9 +70,6 @@ public class CharaterPanel : BasePanel
                     SetCharaterText(targetNo);
                 }));
             }
-
-
-
         });
     }
     public override void Init()
@@ -104,30 +112,53 @@ public class CharaterPanel : BasePanel
                     SetCharaterText(no);
 
                     RankUp.SetUpRank(itemStetasList[no].Rank);
+
                     charaterNo = no;
 
                 });
 
-                if (i == 0)
-                {
-                    SetCharaterText(no);
-                    //charaterNo = 1;
-                    //MainManager.instance.TargetCharater = charaterLists[1];
-                }
+
 
             }
 
 
+            if (SaveManager.instance.saveData.targetCharaterNo == 0)
+            {
+                SetTargetCharater(1);
+
+            }
+            else
+            {
+                SetTargetCharater(SaveManager.instance.saveData.targetCharaterNo);
+
+            }
+            
+
         }));
 
 
-
+        ResetPanel();
 
     }
 
+    void SetTargetCharater(int no)
+    {
+        SetCharaterText(no);
+        RankUp.SetUpRank(itemStetasList[no].Rank);
 
 
+        MainManager.instance.TargetCharater = charaterLists[no];
 
+        MainManager.instance.targetCharaterLevel = itemStetasList[no].Level;
+        MainManager.instance.targetRank = itemStetasList[no].Rank;
+
+    }
+
+    public override void ResetPanel()
+    {
+        CoinText.text = SaveManager.instance.saveData.coin.ToString();
+
+    }
 
 
 
@@ -136,10 +167,21 @@ public class CharaterPanel : BasePanel
 
         targetNo = No;
         Level.text = itemStetasList[No].Level.ToString();
+
         Name.text = itemStetasList[No].Name;
-        HP.text =itemStetasList[No].HP.ToString();
-        MP.text = itemStetasList[No].MP.ToString();
-        ATK.text = itemStetasList[No].ATK.ToString();
+        var tmpHp = itemStetasList[No].HP*float.Parse(charaterLists[No][7]) * itemStetasList[No].Rank;
+        HP.text =itemStetasList[No].HP.ToString()+" (+"+ tmpHp.ToString("F1") + ")";
+
+        var tmpMp = itemStetasList[No].MP* float.Parse(charaterLists[No][8]) * itemStetasList[No].Rank;
+
+        MP.text = itemStetasList[No].MP.ToString()+" (+" + tmpMp.ToString("F1") + ")";
+
+
+        var tmpAtk = itemStetasList[No].ATK* float.Parse(charaterLists[No][6]) * itemStetasList[No].Rank;
+
+        ATK.text = itemStetasList[No].ATK.ToString() + " (+" + tmpAtk.ToString("F1") + ")";
+
+
         REC.text = itemStetasList[No].REC.ToString();
         image.sprite = Resources.Load<Sprite>("Image/Charater/" + No.ToString());
         for (int i = 0; i < Lv.Length; i++)

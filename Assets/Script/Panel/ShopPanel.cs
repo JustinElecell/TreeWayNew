@@ -23,7 +23,8 @@ public class ShopPanel : BasePanel
     public Transform CreatPoolTran;
 
     public PageView pageView;
-
+    
+    public Text coinText;
 
     public void Init()
     {
@@ -42,8 +43,14 @@ public class ShopPanel : BasePanel
 
         }));
 
-        
+        ResetPanel();
     }
+
+    public override void ResetPanel()
+    {
+        coinText.text = SaveManager.instance.saveData.coin.ToString();
+    }
+
 
     public SO_Iteam FindItem(string itemNo)
     {

@@ -21,6 +21,8 @@ public class MainManager : MonoBehaviour
 
     public bool TestFlag;
     public List<string> TargetCharater;
+    public int targetCharaterLevel;
+    public int targetRank;
 
     public int targetSkillNo = 1;
     public SO_Iteam[] skillIteams;
@@ -31,6 +33,7 @@ public class MainManager : MonoBehaviour
     public ShopPanel shopPanel;
     public IteamPanel itemPanel;
     public CharaterPanel charaterPanel;
+    public NoticePanel noticePanel;
 
 
     private void Awake()
@@ -38,6 +41,7 @@ public class MainManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+
             DontDestroyOnLoad(this.gameObject);
 
             GameServer.instance.LoadItem_Server("100000001", new EleCellJsonCallback(delegate (string err, JSONClass message)
@@ -78,6 +82,18 @@ public class MainManager : MonoBehaviour
 
         shopPanel.Init();
         charaterPanel.Init();
+
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (SaveManager.instance.saveData.skillItemList[i] != "")
+            {
+                var tmp = Resources.Load<SO_Iteam>("Iteam/PlayerItem/" + SaveManager.instance.saveData.skillItemList[i]);
+                MainManager.instance.skillIteams[i] = tmp;
+
+            }
+
+        }
     }
 
 

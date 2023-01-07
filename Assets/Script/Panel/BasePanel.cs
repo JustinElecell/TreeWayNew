@@ -5,6 +5,7 @@ using UnityEngine;
 public class BasePanel : MonoBehaviour
 {
     public virtual void Init() { }
+    public virtual void ResetPanel() { }
     public void DerstorChild(Transform tran)
     {
         for (int i = 0; i < tran.childCount; i++)

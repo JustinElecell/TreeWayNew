@@ -30,15 +30,15 @@ public class Player : MonoBehaviour
         //Hp初始化
         var baseHp = int.Parse(MainManager.instance.TargetCharater[2]);
         var baseHpUpRate = float.Parse(MainManager.instance.TargetCharater[7]);
-        stetas.player.Hp = baseHp * (1+stetas.player.Overfulfil* baseHpUpRate) * (1+0);
-        
+        stetas.player.Hp = baseHp * (1+MainManager.instance.targetRank* baseHpUpRate) * (1+0);
+        Debug.Log(stetas.player.Overfulfil);
         stetas.HpMax = stetas.player.Hp;
         stetas.Hp = stetas.HpMax;
 
         //mp初始化
         var baseMpMax = int.Parse(MainManager.instance.TargetCharater[3]);
         var baseMpUpRate = float.Parse(MainManager.instance.TargetCharater[8]);
-        var tmpMpMax = baseMpMax * (1 +stetas.player.Overfulfil * baseMpUpRate)*(1+0);
+        var tmpMpMax = baseMpMax * (1 + MainManager.instance.targetRank * baseMpUpRate)*(1+0);
         mpMax = ((int)(Mathf.Round(((float)(tmpMpMax)))));
         var tmpMp = baseMpMax * 0.3 * (1 + 0);
         mp = ((float)tmpMp);
@@ -48,9 +48,10 @@ public class Player : MonoBehaviour
         //攻擊力初始化
         var baseAtk = int.Parse(MainManager.instance.TargetCharater[5]);
         var baseAtkUp = float.Parse(MainManager.instance.TargetCharater[6]);
-        stetas.player.Atk =baseAtk;
+        stetas.player.Atk =baseAtk+ (1 + (float)(MainManager.instance.targetRank) * baseAtkUp);
 
-        for(int i=0;i<5;i++)
+        Debug.Log("技能等級"+MainManager.instance.targetCharaterLevel);
+        for(int i=0;i<MainManager.instance.targetCharaterLevel;i++)
         {
             var skillNo = int.Parse(MainManager.instance.TargetCharater[10+i*4]);
 

@@ -65,7 +65,7 @@ public class DrawPoolPanel : BasePanel
             }
             else
             {
-                MainManager.instance.noticePanel.Notic("金幣不足");
+                NoticePanel.instance.Notic("金幣不足");
             }
 
         });
@@ -113,7 +113,7 @@ public class DrawPoolPanel : BasePanel
             }
             else
             {
-                MainManager.instance.noticePanel.Notic("金幣不足");
+                NoticePanel.instance.Notic("金幣不足");
             }
 
         });

@@ -8,6 +8,10 @@ public class LoginManager : LoadBase
 {
     public Button[] buttons;
 
+    public CreatePanel CreatePanel;
+    public GameObject LoginPanel;
+    public GameObject MainPanel;
+    public InterPanel interPanel;
     public static LoginManager instance;
 
     // 版本控制
@@ -19,14 +23,6 @@ public class LoginManager : LoadBase
     {
         instance = this;
 
-        buttons[0].onClick.AddListener(() => {
-            GameServer.rlogin(null, Application.systemLanguage.ToString(), loginFinished);
-        });
-          
-        buttons[1].onClick.AddListener(() => {
-            StartCoroutine(LoadScene("Menu"));
-        });
-        
         Time.timeScale = 1f;                    // 指定時間寬度，1表示接近真實時間，0.5表示慢於真實時間...
         Application.targetFrameRate = 120;       // 指定FPS
         version = Application.version;
@@ -39,8 +35,62 @@ public class LoginManager : LoadBase
         StartCoroutine(VersionChecker("TreeWayTest"));     // 版本確認
         keyUpdated = false;                                                     // 版本更新flag
         GameServer.updatePKey(pKeyUpdated);                                    // 版本更新
+
+        if(PlayerPrefs.HasKey("log"))
+        {
+            StartCoroutine(StartLoginCheck());
+
+        }
+        else
+        {
+            //建立帳號
+            buttons[0].onClick.AddListener(() => {
+                buttons[0].enabled = false;
+                GameServer.rlogin(null, Application.systemLanguage.ToString(), new EleCellProfileCallback(delegate (string err, string message) {
+
+                    MainPanel.SetActive(false);
+                    //Debug.Log(GameServer.playerInfo.pass);
+                    CreatePanel.Init(GameServer.playerInfo.id.ToString(), GameServer.playerInfo.pass,message);
+
+                }));
+            });
+
+            //登入帳號
+            buttons[1].onClick.AddListener(() => {
+
+                MainPanel.SetActive(false);
+                LoginPanel.SetActive(true);
+                //if (RecoverPanel.instance.id.value.Length < 9) return;
+                //if (RecoverPanel.instance.pass.value.Length < 1) return;
+
+                //parentPanel.SetActive(false);
+                //Loading.Show();
+                //GameServer.rlogin(RecoverPanel.instance.id.value + RecoverPanel.instance.pass.value, SystemSettings.SettingData.instance.language, loginFinished);
+                //StartCoroutine(LoadScene("Menu"));
+            });
+
+            // google登入
+            buttons[2].onClick.AddListener(() => {
+
+                //MjSave.instance.playerName = "DSCPlayer" + Random.Range(1001, 9999).ToString();
+                //parentPanel.SetActive(false);
+                //Loading.Show();
+                //GameServer.loginGoogle(SystemSettings.SettingData.instance.language, loginFinished);
+
+
+            });
+        }
+
+
+
     }
 
+    IEnumerator StartLoginCheck()
+    {
+        yield return new WaitForSeconds(1f);
+        GameServer.rlogin(null, Application.systemLanguage.ToString(), loginFinished);
+
+    }
 
 
     void pKeyUpdated(string error, string message)
@@ -93,7 +143,7 @@ public class LoginManager : LoadBase
             }
         }
     }
-    public static void StartGame(string languagefile)
+    public void StartGame(string languagefile)
     {
         if (languagefile.Length > 0)
         {
@@ -103,19 +153,9 @@ public class LoginManager : LoadBase
         }
 
         MjSave.UpdateStats(GameServer.playerStats);
+        interPanel.Init(MjSave.instance.playerID);
+        MainPanel.SetActive(false);
 
-        LoginManager.instance.Load();
-        //if (MjLogin.newAccount)
-        //{
-        //    MjLogin.newAccount = false;
-        //    instance.StartCoroutine(instance.showPass());
-        //    //instance.showPass2();
-        //}
-        //else
-        //{
-        //    //instance.StartCoroutine(instance.StartGameC());
-        //    instance.StartGameC2();
-        //}
     }
 
     public void Load()
@@ -123,6 +163,7 @@ public class LoginManager : LoadBase
         StartCoroutine(LoadScene("Menu"));
 
     }
+
 
 
 
@@ -137,7 +178,9 @@ public class LoginManager : LoadBase
 		Debug.Log(GameServer.AccessToken);
 #endif
 
-		if (error != null)
+        Debug.Log(GameServer.playerStats["pid"]);
+
+        if (error != null)
 		{
 
 			if (error == "Device not matched")

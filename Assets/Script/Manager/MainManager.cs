@@ -33,7 +33,6 @@ public class MainManager : MonoBehaviour
     public ShopPanel shopPanel;
     public IteamPanel itemPanel;
     public CharaterPanel charaterPanel;
-    public NoticePanel noticePanel;
 
 
     private void Awake()

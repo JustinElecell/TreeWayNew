@@ -20,8 +20,7 @@ public class ClassPlanel : LoadBase
                     return;
                 }
             }
-
-            MainManager.instance.noticePanel.Notic("已裝備數為0");
+            NoticePanel.instance.Notic("已裝備數為0");
         
         });
     }

@@ -75,6 +75,7 @@ public class Slime : BossInit
     {
         yield return StartCoroutine(IEAttackType1(0.6f, 5, 2, 2, bullot[0]));
         yield return StartCoroutine(IEAttackType3(0.7f, 7, 2.1f, 1, bullot[0], 1));
+
         yield return StartCoroutine(IEAttackType3(0.7f, 7, 2.1f, 1, bullot[0], 2));
         yield return StartCoroutine(IEAttackType3(0.7f, 7, 2.1f, 1, bullot[0], 3));
         yield return StartCoroutine(IEAttackType4(0.8f, 2, 5.73f, 3, bullot[0], bullot[1]));

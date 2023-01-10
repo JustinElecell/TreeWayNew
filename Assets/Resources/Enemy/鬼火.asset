@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efaa0988641a7ab4bb88594031897598, type: 3}
+  m_Name: "\u9B3C\u706B"
+  m_EditorClassIdentifier: 
+  name: "\u9B3C\u706B"
+  explanation: 
+  generationRate: 1.2
+  mp: 0
+  hp: 141.7
+  speed: 4
+  Atk: 5
+  Atk_wait: 1
+  enemyPerfab: {fileID: 8892595592438941920, guid: 35da54b4e50f6224489411f00522b7f9, type: 3}

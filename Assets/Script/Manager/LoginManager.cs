@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using EleCellLogin;
 using TextLocalization;
+using GooglePlayGames.BasicApi;
+using GooglePlayGames;
+
 public class LoginManager : LoadBase
 {
     public Button[] buttons;
@@ -30,13 +33,18 @@ public class LoginManager : LoadBase
         GameServer.setGame("TreeWayTest", version);
 
     }
+
+
+
+
     private void Start()
     {
         StartCoroutine(VersionChecker("TreeWayTest"));     // 版本確認
         keyUpdated = false;                                                     // 版本更新flag
         GameServer.updatePKey(pKeyUpdated);                                    // 版本更新
 
-        if(PlayerPrefs.HasKey("log"))
+
+        if (PlayerPrefs.HasKey("log"))
         {
             StartCoroutine(StartLoginCheck());
 
@@ -71,13 +79,25 @@ public class LoginManager : LoadBase
 
             // google登入
             buttons[2].onClick.AddListener(() => {
+                Debug.Log("TEST");
+                //PlayGamesPlatform.Instance.ManuallyAuthenticate(ProcessAuthentication);
 
-                //MjSave.instance.playerName = "DSCPlayer" + Random.Range(1001, 9999).ToString();
-                //parentPanel.SetActive(false);
-                //Loading.Show();
-                //GameServer.loginGoogle(SystemSettings.SettingData.instance.language, loginFinished);
+                PlayGamesPlatform.Instance.Authenticate((SignInStatus status) => {
+                    if (status == SignInStatus.Success)
+                    {
+                        NoticePanel.instance.Notic("連接成功");
+                        // Continue with Play Games Services
+                    }
+                    else
+                    {
+                        NoticePanel.instance.Notic("連接失敗:" + status);
+
+                        // Disable your integration with Play Games Services or show a login button
+                        // to ask users to sign-in. Clicking it should call
+                    }
 
 
+                });
             });
         }
 

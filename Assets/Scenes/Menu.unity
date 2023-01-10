@@ -13977,7 +13977,6 @@ MonoBehaviour:
   shopPanel: {fileID: 747626374}
   itemPanel: {fileID: 805839072}
   charaterPanel: {fileID: 685796218}
-  noticePanel: {fileID: 0}
 --- !u!4 &1244313858
 Transform:
   m_ObjectHideFlags: 0

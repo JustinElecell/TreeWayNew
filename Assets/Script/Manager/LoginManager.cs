@@ -6,8 +6,7 @@ using EleCellLogin;
 using TextLocalization;
 using GooglePlayGames.BasicApi;
 using GooglePlayGames;
-
-public class LoginManager : LoadBase
+public class LoginManager : MonoBehaviour
 {
     public Button[] buttons;
 
@@ -43,63 +42,88 @@ public class LoginManager : LoadBase
         keyUpdated = false;                                                     // 版本更新flag
         GameServer.updatePKey(pKeyUpdated);                                    // 版本更新
 
-
         if (PlayerPrefs.HasKey("log"))
         {
-            StartCoroutine(StartLoginCheck());
+            if(SceneLoadManager.instance.DelectFlag)
+            {
+                Debug.Log("全部刪除");
+
+
+                PlayerPrefs.DeleteAll();
+
+                if (ES3.FileExists("./Save/TEST.es3"))
+                {
+                    ES3.DeleteFile("./Save/TEST.es3");
+                }
+                MjSave.Reset();
+            }
+            else
+            {
+                StartCoroutine(StartLoginCheck());
+
+            }
 
         }
-        else
-        {
-            //建立帳號
-            buttons[0].onClick.AddListener(() => {
-                buttons[0].enabled = false;
-                GameServer.rlogin(null, Application.systemLanguage.ToString(), new EleCellProfileCallback(delegate (string err, string message) {
 
-                    MainPanel.SetActive(false);
-                    //Debug.Log(GameServer.playerInfo.pass);
-                    CreatePanel.Init(GameServer.playerInfo.id.ToString(), GameServer.playerInfo.pass,message);
-
-                }));
-            });
-
-            //登入帳號
-            buttons[1].onClick.AddListener(() => {
+        //建立帳號
+        buttons[0].onClick.AddListener(() => {
+            buttons[0].enabled = false;
+            GameServer.rlogin(null, Application.systemLanguage.ToString(), new EleCellProfileCallback(delegate (string err, string message) {
 
                 MainPanel.SetActive(false);
-                LoginPanel.SetActive(true);
-                //if (RecoverPanel.instance.id.value.Length < 9) return;
-                //if (RecoverPanel.instance.pass.value.Length < 1) return;
+                //Debug.Log(GameServer.playerInfo.pass);
+                CreatePanel.Init(GameServer.playerInfo.id.ToString(), GameServer.playerInfo.pass,message);
 
-                //parentPanel.SetActive(false);
-                //Loading.Show();
-                //GameServer.rlogin(RecoverPanel.instance.id.value + RecoverPanel.instance.pass.value, SystemSettings.SettingData.instance.language, loginFinished);
-                //StartCoroutine(LoadScene("Menu"));
+            }));
+        });
+
+        //登入帳號
+        buttons[1].onClick.AddListener(() => {
+
+            MainPanel.SetActive(false);
+            LoginPanel.SetActive(true);
+
+        });
+
+        // google登入
+        buttons[2].onClick.AddListener(() => {
+
+            Debug.Log("google登入測試");
+            PlayGamesPlatform.Instance.ManuallyAuthenticate((SignInStatus status) => {
+                if (status == SignInStatus.Success)
+                {
+                    //NoticePanel.instance.Notic("連接成功"+ PlayGamesPlatform.Instance.GetUserId());
+                    GameServer.loginGoogle(Application.systemLanguage.ToString(), new EleCellProfileCallback(delegate (string err, string message) {
+
+                        MainPanel.SetActive(false);
+
+                        string[] nick = GameServer.playerInfo.nick.Split('|');
+
+                        MjSave.instance.playerName = nick[0];
+
+
+                        MjSave.instance.playerID = GameServer.playerInfo.pid;
+
+                        Debug.Log(MjSave.instance.playerName);
+                        Debug.Log(MjSave.instance.playerID);
+
+                        MjSave.instance.fbID = GameServer.playerInfo.fbID;
+                        MjSave.instance.googleID = GameServer.playerInfo.googleID;
+
+                        LoginManager.instance.StartGame(message);
+                        LoginManager.instance.interPanel.Init(MjSave.instance.playerID);
+
+                    }));
+                }
+                else
+                {
+                    NoticePanel.instance.Notic("連接失敗:" + status);
+                }
+
+
             });
-
-            // google登入
-            buttons[2].onClick.AddListener(() => {
-                Debug.Log("TEST");
-                //PlayGamesPlatform.Instance.ManuallyAuthenticate(ProcessAuthentication);
-
-                PlayGamesPlatform.Instance.Authenticate((SignInStatus status) => {
-                    if (status == SignInStatus.Success)
-                    {
-                        NoticePanel.instance.Notic("連接成功");
-                        // Continue with Play Games Services
-                    }
-                    else
-                    {
-                        NoticePanel.instance.Notic("連接失敗:" + status);
-
-                        // Disable your integration with Play Games Services or show a login button
-                        // to ask users to sign-in. Clicking it should call
-                    }
-
-
-                });
-            });
-        }
+        });
+        
 
 
 
@@ -180,7 +204,7 @@ public class LoginManager : LoadBase
 
     public void Load()
     {
-        StartCoroutine(LoadScene("Menu"));
+        SceneLoadManager.instance.Load(false,"Menu");
 
     }
 

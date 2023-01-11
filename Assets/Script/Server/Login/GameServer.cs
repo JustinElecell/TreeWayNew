@@ -8,6 +8,8 @@ using SimpleJSON;
 
 using GameSecurity;
 using UnityEngine.Events;
+using GooglePlayGames.BasicApi;
+using GooglePlayGames;
 
 namespace EleCellLogin
 {
@@ -475,44 +477,39 @@ namespace EleCellLogin
                 return;
             }
 
-            //_instance._choice = choice;
-            //lang = language;
-            //_instance.loginCB = callback;
+            _instance._choice = choice;
+            lang = language;
+            _instance.loginCB = callback;
 
-            //instance.loginInitiated = true;
+            instance.loginInitiated = true;
 
             //if (instance.gUserInfo!=null){
             //	instance.StartCoroutine(instance.loginWWW(null,instance.gUserInfo.playerId,instance.gUserInfo.name,language,choice, callback));
             //	return;
             //}
-#if Obsolete
-            if (!GoogleInit)
-            {
-                GoogleInit = true;
-                GooglePlayConnection.ActionConnectionResultReceived += instance.OnGoogleConnectionComplete;
-                GooglePlayManager.ActionFriendsListLoaded += instance.OnFriendListLoaded;
-                //	GooglePlayManager.ActionAchievementsLoaded +=  instance.OnAchievmentsLoaded; 
-            }
 
-            GooglePlayConnection.Instance.Connect();
-#endif
+            //#if Obsolete
+            //            if (!GoogleInit)
+            //            {
+            //                GoogleInit = true;
+            //                GooglePlayConnection.ActionConnectionResultReceived += instance.OnGoogleConnectionComplete;
+            //                GooglePlayManager.ActionFriendsListLoaded += instance.OnFriendListLoaded;
+            //                //	GooglePlayManager.ActionAchievementsLoaded +=  instance.OnAchievmentsLoaded; 
+            //            }
+
+            //            GooglePlayConnection.Instance.Connect();
+            //#endif
             //可以使用GMS系統
-            //if (AN_GoogleSignIn.GetLastSignedInAccount() != null)//已經成功登入過
-            //{
-            //    if (AN_GoogleSignIn.GetLastSignedInAccount().GetId() == "editor_id")
-            //        _instance.loginCB("GooglePlayerGameFail", null);
-            //    else
-            //    {
-            //        _instance._pGpgInfo = new PlayerGooglePlayGameInfo
-            //        {
-            //            id = AN_GoogleSignIn.GetLastSignedInAccount().GetId(),
-            //            name = AN_GoogleSignIn.GetLastSignedInAccount().GetDisplayName(),
-            //            avatarTexture = null
-            //        };
-            //        _instance.qloginWWW(null, _instance._pGpgInfo.id, _instance._pGpgInfo.name, language, null, _instance.loginCB);
-            //    }
-            //}
-            else _instance.OnGooglePlayGameInit();
+
+            _instance._pGpgInfo = new PlayerGooglePlayGameInfo
+            {
+                id = PlayGamesPlatform.Instance.GetUserId(),
+                name = PlayGamesPlatform.Instance.GetUserDisplayName(),
+                avatarTexture = null
+            };
+            
+            _instance.qloginWWW(null, _instance._pGpgInfo.id, _instance._pGpgInfo.name, language, null, _instance.loginCB);
+
         }
 
         //初始化GooglePlayGame

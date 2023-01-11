@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class ClassPlanel : LoadBase
+public class ClassPlanel : MonoBehaviour
 {
     public Button EnterButton;
 
@@ -16,7 +16,8 @@ public class ClassPlanel : LoadBase
             {
                 if(MainManager.instance.skillIteams[i]!=null)
                 {
-                    StartCoroutine(LoadScene("GamePlay"));
+                    SceneLoadManager.instance.Load(false,"GamePlay");
+
                     return;
                 }
             }

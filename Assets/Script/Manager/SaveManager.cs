@@ -16,9 +16,17 @@ public class SaveManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
-        DontDestroyOnLoad(this.gameObject);
-        Load();
+        if(instance==null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+            Load();
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
     }
     public SaveData saveData = new SaveData();
 
@@ -34,11 +42,6 @@ public class SaveManager : MonoBehaviour
             {
                 ES3.DeleteFile("./Save/TEST.es3");
             }
-            if (ES3.FileExists("./Save/HintsTEST.es3"))
-            {
-                ES3.DeleteFile("./Save/HintsTEST.es3");
-            }
-            PlayerPrefs.DeleteAll();
             //PlayerPrefs.HasKey("log")
                 
         }

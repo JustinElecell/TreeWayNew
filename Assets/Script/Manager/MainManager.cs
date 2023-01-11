@@ -39,10 +39,29 @@ public class MainManager : MonoBehaviour
     {
         if (instance == null)
         {
+            Debug.Log("mainManager初始化");
             instance = this;
 
-            DontDestroyOnLoad(this.gameObject);
+            Debug.Log(ID);
+            if(ID==null)
+            {
+                ID = transform.Find("ID_Text").gameObject.GetComponent<Text>();
+                Debug.Log(ID);
+            }
+            if(shopPanel==null)
+            {
+                shopPanel = FindObjectOfType<ShopPanel>();
+            }
 
+            if(itemPanel==null)
+            {
+                itemPanel = FindObjectOfType<IteamPanel>();
+            }
+
+            if(charaterPanel==null)
+            {
+                charaterPanel = FindObjectOfType<CharaterPanel>();
+            }
             GameServer.instance.LoadItem_Server("100000001", new EleCellJsonCallback(delegate (string err, JSONClass message)
             {
                 MainManager.instance.ServerData_Json.Add(MainManager.ServerData.Item, message);
@@ -55,10 +74,7 @@ public class MainManager : MonoBehaviour
             }));
 
         }
-        else
-        {
-            Destroy(this.gameObject);
-        }
+
     }
 
     private void Start()
